@@ -1,0 +1,53 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = cc386 /c
+ASM = nasm -fobj
+LINK = valx /PE /32 /con /nci /map
+
+.c.obj:
+  $(CC) $<
+#		*List Macros*
+
+EXE_dependencies = \
+ARGS.obj \
+cvtres.obj \
+ERROR.obj \
+EXT.obj \
+FATAL.obj \
+GETSYM.obj \
+intexpr.obj \
+PREPROC.obj \
+PSTR.obj \
+rc.obj \
+res.obj \
+searchkw.obj \
+SRCHPATH.obj \
+SYMBOL.obj \
+SYMCHAR.obj \
+USAGE.obj \
+xrc.obj
+
+#		*Explicit Rules*
+xrc.exe: upbuild $(EXE_dependencies) xrc.res
+  $(LINK)  @&&|
+c0xwin $(EXE_dependencies)
+xrc.exe
+xrc.map
+clwin climp
+xrc.res
+
+|
+
+xrc.res: xrc.rc ..\version.h
+        xrc -r xrc.rc
+
+upbuild:
+        ..\upbuild $(FULLBUILD) XRC
+#		*Individual File Dependencies*
+xrc.obj: xrc.c ..\version.h
+        $(CC) xrc.c

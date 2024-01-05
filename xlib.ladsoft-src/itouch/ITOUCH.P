@@ -1,0 +1,9 @@
+
+/* Protogen Version 1.07 Wednesday October 25, 1995  22:51:43 */
+
+                              /* Itouch.c */
+
+void boolargs(char select); /* PROTOTYPE */
+void boolargs( char select);                                      /* STATIC */
+void itouch(FILE *inf, FILE*outf, char *fname);
+int main(int argc, char *argv[]);

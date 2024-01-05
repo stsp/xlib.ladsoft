@@ -1,0 +1,12 @@
+Source: xlib.ladsoft
+Section: devel
+Priority: optional
+Maintainer: TK Chia <tkchia@users.noreply.github.com>
+Build-Depends: debhelper (>= 9), quilt, gcc (>= 4.5), libc6-dev (>= 2)
+Standards-Version: 3.9.6
+Homepage: https://codeberg.org/tkchia/cc386.ladsoft
+
+Package: xlib.ladsoft
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Simple port of David Lindauer's xlib MS-DOS code library manager

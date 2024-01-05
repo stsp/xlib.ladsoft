@@ -1,0 +1,11 @@
+C_DEPENDENCIES = $(wildcard *.c)
+EXCLUDE=AN68.c DBG68.c REG68.c CONF68.c intr68.c PEEP68.c GEXPR68.c GSTMT68.c INASM68.c OUTAS68.c outco68.c \
+    IBLOCK.c ICOM.c ICONF.c ICONST.c ICOPY.c IEXPR.c IFLOW.c IGCSE.c ILIVE.c iout.c IPEEP.c iplug.c IPOINTER.c ireach.c ISTMT.c outi.c version.c bzip2.c
+DEPENDENCIES = $(filter-out $(EXCLUDE), $(C_DEPENDENCIES))
+O_DEPENDENCIES = $(DEPENDENCIES:.c=.o)
+
+%.o: %.c
+	occ /9 /c /C+d /DUSE_LONGLONG /Di386 $^
+
+temp.exe: $(O_DEPENDENCIES)
+	olink -otemp.exe /T:CON32 /x /c c0xpe.o $(O_DEPENDENCIES) clwin.l climp.l	

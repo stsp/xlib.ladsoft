@@ -1,0 +1,8 @@
+
+/* Protogen Version 1.00 Wednesday April 17, 1996  16:42:26 */
+
+                              /* Module.c */
+
+void SetForRead(FILE *infile);
+void UnsetForRead(void);
+short *GetAutoDepends(short *name);

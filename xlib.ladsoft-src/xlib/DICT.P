@@ -1,0 +1,8 @@
+
+/* Protogen Version 1.05 Monday September 18, 1995  06:51:41 */
+
+                               /* Dict.c */
+
+void LibHash(const char * name, int blocks, HASH *h);             /* STATIC */
+void CalculateDictionary(void);
+void WriteDictionary(FILE *file);

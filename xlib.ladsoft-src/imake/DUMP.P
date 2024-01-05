@@ -1,0 +1,10 @@
+
+/* Protogen Version 1.07 Wednesday November 01, 1995  16:48:50 */
+
+                               /* Dump.c */
+
+void DumpMacro(REGISTRY *macro);                                  /* STATIC */
+void DumpRules(REGISTRY *target);                                 /* STATIC */
+void DisplayMacros(void);
+void DisplayRules(void);
+void DisplayDefs(void);

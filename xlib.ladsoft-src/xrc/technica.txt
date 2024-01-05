@@ -1,0 +1,27 @@
+The resource compiler is fairly simple in concept.  It parses the input
+RC file and makes a list of internal structures which describe the 
+resources.  Then it goes through the list, converting from the internal
+structure values to the resource data values and dumping the information
+to the file.  It patches length fields as necessary.  When it has done
+all this it is done.
+
+
+ARGS.C    - command line argument parsing
+CVTRES.C  - the routines to convert internal data structures to resource
+          - format
+ERROR.C   - simple error messages
+EXT.C     - simple file extension handling
+FATAL.C   - fatal error and exit
+GETSYM.C  - low level module to parse the input RC file
+INTEXPR.C - get a constant value
+PHITEXT.C - phitext module
+PREPROC.C - C style preprocessor
+PSTR.C    - word sized string functions
+RC.C      - RC file parser, creates internal format
+RES.C     - read/write resource files
+SEARCHKW.C- search for keywords
+SRCHPATH.C- search for a file on a path
+SYMBOL.C  - hash table functions
+SYMCHAR.C - ctype style arrays for phitext
+USAGE.C   - usage and banner
+XRC.C     - main line and command parsing

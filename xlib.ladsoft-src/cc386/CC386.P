@@ -1,0 +1,278 @@
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                             /* Gexpr386.c */
+
+AMODE *floatconvpos(void);
+int defseg(ENODE *node);
+AMODE *truncateFloat(AMODE *ap1, int size);
+int chksize(int lsize, int rsize);
+AMODE *fstack(void);
+AMODE *make_muldivval(AMODE *ap);
+void make_floatconst(AMODE *ap);
+AMODE *make_label(int lab);
+AMODE *makesegreg(int seg);
+AMODE *make_immed(long i);
+AMODE *make_immedt(long i, int size);
+AMODE *make_offset(ENODE *node);
+AMODE *make_stack(int number);
+AMODE *complexstore(ENODE *node, AMODE *apr, int novalue, int size);
+AMODE *floatstore(ENODE *node, AMODE *apr, int novalue, int size);
+void complexload(AMODE *ap, int flag);
+void floatload(AMODE *ap, int flag);
+int is_memory(AMODE *ap);
+AMODE *bit_load(AMODE *ap, int areg, int sreg, ENODE *node);
+void bit_store(AMODE *ap2, AMODE *ap1, int areg, int sreg, ENODE *node, int novalue);
+AMODE *aprtocx(AMODE *ap);
+void loadaxdx(AMODE *ap);
+AMODE *do_extend(AMODE *ap, int areg, int sreg, int osize, int flags);
+int isshort(ENODE *node);
+int isbyte(ENODE *node);
+AMODE *doindex(ENODE *node, int areg, int sreg, enum e_node type);
+AMODE *gen_index(ENODE *node, int areg, int sreg);
+AMODE *gen_deref(ENODE *node, int areg, int sreg);
+void get_size(AMODE *ap1, AMODE *ap2, int size, int flags);
+void small_size(AMODE *ap1, AMODE *ap2, int size, int flags);
+int resultsize(int n1, int n2);
+int assign_size(ENODE *node, int size);
+AMODE *gen_unary(ENODE *node, int areg, int sreg, int op, int fop);
+AMODE *gen_complexadd(ENODE *node, int areg, int sreg, int fop, int fopp, int fopr, int foppr, AMODE **apr);
+AMODE *gen_fbinary(ENODE *node, int areg, int sreg, int fop, int fopp, int fopr, int foppr, AMODE **apr);
+AMODE *gen_6bin(ENODE *node, int areg, int sreg, int op, int size);
+AMODE *gen_segadd(ENODE *node, int areg, int sreg);
+AMODE *gen_xbin(ENODE *node, int areg, int sreg, int op, int op2);
+AMODE *gen_binary(ENODE *node, int areg, int sreg, int op, int fopp, int fop, int foppr, int fopr);
+void doshift(AMODE *ap1, AMODE *ap2, int op, int div, int size);
+AMODE *gen_shift(ENODE *node, int areg, int sreg, int op, int div);
+AMODE *gen_complexdiv(ENODE *node, int areg, int sreg, int fop, int fopp, int fopr, int foppr, AMODE **apr);
+void divprepare(int op, int size);
+void divintoeax(AMODE *ap1, int size, int op, int modflag);
+void dodiv(AMODE *ap1, AMODE *ap2, int op, int modflag);
+AMODE *gen_modiv(ENODE *node, int areg, int sreg, int op, int fopp, int fop, int foppr, int fopr, int modflag);
+AMODE *gen_pdiv(ENODE *node, int areg, int sreg);
+AMODE *gen_complexmul(ENODE *node, int areg, int sreg, int fop, int fopp, int fopr, int foppr, AMODE **apr);
+int domul(AMODE *ap1, AMODE *ap2, int areg, int sreg, int op);
+AMODE *gen_pmul(ENODE *node, int areg, int sreg);
+AMODE *gen_mul(ENODE *node, int areg, int sreg, int op, int fopp, int fop, int foppr, int fopr);
+AMODE *gen_hook(ENODE *node, int areg, int sreg);
+AMODE *gen_asunary(ENODE *node, int areg, int sreg, int novalue, int op, int fop);
+AMODE *gen_asadd(ENODE *node, int areg, int sreg, int novalue, int op, int fopp, int fop, int foppr, int fopr);
+AMODE *gen_aslogic(ENODE *node, int areg, int sreg, int novalue, int op, int op2);
+AMODE *gen_asshift(ENODE *node, int areg, int sreg, int novalue, int op, int div);
+AMODE *gen_asmul(ENODE *node, int areg, int sreg, int novalue, int op, int foppr, int fopr, int fopp, int fop);
+AMODE *gen_asmodiv(ENODE *node, int areg, int sreg, int novalue, int op, int fopp, int fop, int
+    foppr, int fopr, int modflag);
+void mov1(int reg, AMODE *dst, AMODE *src, int size);
+void mov2(int reg, AMODE *dst, AMODE *src, int size1, int size2);
+void mov3(int reg, AMODE *dst, AMODE *src, int size1, int size2, int size3);
+AMODE *amode_moveblock(AMODE *ap1, AMODE *ap2, int areg, int sreg, int size);
+AMODE *gen_moveblock(ENODE *node, int areg, int sreg);
+AMODE *amode_clearblock(AMODE *ap1, int size);
+AMODE *gen_clearblock(ENODE *node, int areg, int sreg);
+AMODE *gen_assign(ENODE *node, int areg, int sreg, int novalue, int stdc);
+AMODE *gen_refassign(ENODE *node, int areg, int sreg, int novalue);
+AMODE *gen_aincdec(ENODE *node, int areg, int sreg, int novalue, int op);
+int pushfloatconst(int size, long double aa);
+int push_param(ENODE *ep, int areg, int sreg, int size);
+int push_stackblock(ENODE *ep, int areg, int sreg);
+int gen_parms(ENODE *plist, int areg, int sreg);
+int parmsize(ENODE *plist);
+AMODE *gen_tcall(ENODE *node, int areg, int sreg, int novalue);
+int natural_size(ENODE *node);
+AMODE *gen_relat(ENODE *node, int areg, int sreg);
+AMODE *gen_compare(ENODE *node, int areg, int sreg, int btype1, int btype2, int btype3, int btype4,
+    int fbtype1, int fbtype2, int label, int truecc);
+void truejp(ENODE *node, int areg, int sreg, int label);
+void falsejp(ENODE *node, int areg, int sreg, int label);
+AMODE *gen_expr_external(ENODE *node, int novalue, int adronly, int sz);
+void gen_void_external(ENODE *node);
+
+                             /* Gstmt386.c */
+
+AMODE *makedreg(int r);
+AMODE *makefreg(int r);
+AMODE *make_direct(int i);
+AMODE *make_strlab(char *s);
+void genwhile(SNODE *stmt);
+void gen_for(SNODE *stmt);
+void genif(SNODE *stmt);
+void gendo(SNODE *stmt);
+AMODE *set_symbol(char *name, int flag);
+void call_library(char *lib_name);
+void count_cases(SNODE *stmt, struct cases *cs);
+void gather_cases(SNODE *stmt, struct cases *cs, int compact);
+int analyzeswitch(SNODE *stmt, struct cases *cs);
+void bingen(int lower, int avg, int higher, AMODE *ap1, struct cases *cs, int size);
+int sortcmp(const void *one, const void *two);
+void genbinaryswitch(SNODE *stmt, struct cases *cs);
+void gencompactswitch(SNODE *stmt, struct cases *cs);
+void gensimpleswitch(SNODE *stmt, struct cases *cs);
+void genxswitch(SNODE *stmt);
+void AddProfilerData(void);
+void SubProfilerData(void);
+OCODE *ThunkAddPeep(OCODE *after, int op, AMODE *ap1, AMODE *ap2);
+void ThunkUncommittedStack(void);
+AMODE *genreturn(SNODE *stmt, int flag);
+void gen_tryblock(void *val);
+void genstmt(SNODE *stmt);
+void scppinit(void);
+SYM *gen_mp_virtual_thunk(SYM *vsp);
+SYM *gen_vsn_virtual_thunk(SYM *func, int ofs);
+void genfunc(SNODE *stmt);
+
+                             /* Outas386.c */
+
+void outcodeini(void);
+void nl(void);
+void outop(char *name);
+void putop(enum e_op op, AMODE *aps, AMODE *apd, int nooptx);
+char *dumpns(NAMESPACE *ns, char *buf, int *done);
+void putsym(char *buf, SYM *sp, char *p);
+void putconst(ENODE *offset, int doSign);
+void putlen(int l);
+void putsizedreg(char *string, int reg, int size);
+void pointersize(int size);
+void putseg(int seg, int usecolon);
+int islabeled(ENODE *n);
+void putamode(AMODE *ap);
+void put_code(OCODE *cd);
+void gen_strlab(SYM *sp);
+void put_label(int lab);
+void put_staticlabel(long label);
+void genfloat(FPF *val);
+void gendouble(FPF  *val);
+void genlongdouble(FPF *val);
+int genstring(char *str, int uselong, int len);
+void genbyte(long val);
+void genbool(int val);
+void genword(long val);
+void genlong(long val);
+void genlonglong(LLONG_TYPE val);
+void gensrref(SYM *sp, int val);
+void genref(SYM *sp, int offset);
+void genpcref(SYM *sp, int offset);
+void genstorage(int nbytes);
+void gen_labref(int n);
+void gen_labdifref(int n1, int n2);
+int stringlit(char *s, int uselong, int len);
+void dumplits(void);
+void exitseg(void);
+void cseg(void);
+void xconstseg(void);
+void xstringseg(void);
+void dseg(void);
+void bssseg(void);
+void startupseg(void);
+void rundownseg(void);
+void cppseg(void);
+void cpprdseg(void);
+void gen_virtual(SYM *sp, int data);
+void gen_endvirtual(SYM *sp);
+void align(int size);
+long queue_muldivval(long number);
+long queue_floatval(FPF *number, int size);
+void dump_muldivval(void);
+void dump_browsedata(unsigned char *data, int len);
+void asm_header(void);
+void globaldef(SYM *sp);
+void output_alias(char *name, char *alias);
+int put_exdata(SYM *sp, int notyet);
+int put_exfunc(SYM *sp, int notyet);
+int put_expfunc(SYM *sp, int notyet);
+void putexterns(void);
+
+                              /* Peep386.c */
+
+void peepini(void);
+AMODE *copy_addr(AMODE *ap);
+OCODE *gen_code(int op, AMODE *ap1, AMODE *ap2);
+OCODE *gen_code3(int op, AMODE *ap1, AMODE *ap2, AMODE *ap3);
+OCODE *gen_codes(int op, int len, AMODE *ap1, AMODE *ap2);
+void gen_coden(int op, int len, AMODE *ap1, AMODE *ap2);
+void gen_codefs(int op, int len, AMODE *ap1, AMODE *ap2);
+void gen_codef(int op, AMODE *ap1, AMODE *ap2);
+void gen_codes2(int op, int len, AMODE *ap1, AMODE *ap2);
+void gen_code2(int op, int len1, int len2, AMODE *ap1, AMODE *ap2);
+void gen_codelab(SYM *lab);
+void gen_branch(int op, AMODE *ap1);
+void gen_line(SNODE *stmt);
+void gen_comment(char *txt);
+void add_peep(OCODE *new);
+void gen_label(int labno);
+void flush_peep(void);
+void peep_add(OCODE *ip);
+void peep_sub(OCODE *ip);
+int makeshl(ENODE *node, int scale, int *rv);
+void peep_lea2(OCODE *ip, AMODE *ap);
+void peep_lea(OCODE *ip);
+void peep_lea3(OCODE *ip);
+void peep_signextend(OCODE *ip);
+void replacereg(AMODE *ap, int reg, int reg2);
+OCODE *peep_test(OCODE *ip);
+void peep_cmp(OCODE *ip);
+void peep_mov(OCODE *ip);
+void peep_and(OCODE *ip);
+void peep_neg(OCODE *ip);
+void peep_btr(OCODE *ip);
+OCODE *peep_jmp(OCODE *ip);
+void peep_uctran(OCODE *ip);
+void peep_label(OCODE *ip);
+int novalue(OCODE *ip);
+int equal_address(AMODE *ap1, AMODE *ap2);
+int single_bit(int val);
+void peep_prefixes(OCODE *ip);
+void peep_call(OCODE *ip);
+void peep_pop(OCODE *ip);
+void remove_peep_entry(OCODE *ip);
+void opt3(void);
+
+                              /* Reg386.c */
+
+void regini(void);
+void SetFuncMode(int mode);
+void GenPush(int reg, int rmode, int flag);                       /* STATIC */
+void GenPop(int reg, int rmode, int flag);                        /* STATIC */
+void PushRegs(unsigned mask);
+void PopRegs(unsigned mask);
+void InitRegs(void);
+void ChooseRegs(int *a, int *s);
+void MarkRegs(void);
+void ReleaseRegs(void);
+AMODE *temp_axdx(void);
+void RealizeSreg(int reg);
+AMODE * RealizeDreg(int reg);
+
+                               /* An386.c */
+
+void reserveregs(int *datareg, int *addreg, int *floatreg);
+void loadds(void);
+void allocate(int datareg, int addreg, int floatreg, SNODE *block);
+void loadregs(void);
+void asm_scannode(ENODE *node);
+void asm_scan1(AMODE *ap);
+void asm_scan(OCODE *cd);
+void asm_repnode(ENODE **node);
+int voidexpr(ENODE *node);
+void voidfloat(SNODE *block);
+void asm_repcse1(AMODE *ap);
+void asm_repcse(OCODE *cd);
+
+                              /* Conf386.c */
+
+int confcodegen(char s, int bool);
+void confsetup(void);
+int alignment(int type, TYP *tp);
+int getalign(int sc, TYP *tp);
+long getautoval(long val);
+int funcvaluesize(int size);
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                             /* Inasm386.c */
+
+void inasmini(void);
+int asm_enterauto(ENODE *node, int *reg1, int *reg2);
+int isrm(AMODE *ap, int dreg_allowed);
+AMODE *getimmed(void);
+enum e_op asm_op(void);
+SNODE *asm_statement(int shortfin);

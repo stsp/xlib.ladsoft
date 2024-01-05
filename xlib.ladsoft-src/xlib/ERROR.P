@@ -1,0 +1,6 @@
+
+/* Protogen Version 1.05 Monday September 18, 1995  06:51:45 */
+
+                               /* Error.c */
+
+void Error( char *fmt, ... );

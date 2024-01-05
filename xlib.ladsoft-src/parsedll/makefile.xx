@@ -1,0 +1,10 @@
+CC = cc386
+CFLAGS = /v -w-all
+
+all:
+	$(CC) $(CFLAGS) /Wdl -oparser c_parser.c c_lex.c alloc.c c_list.c c_preval.c c_preprc.c dllmain.c
+	$(CC) $(CFLAGS) /Wcl -otest test.c parser.lib
+	$(CC) $(CFLAGS) -occmp codecomp.c parser.lib
+
+clean:
+	rm -f parser

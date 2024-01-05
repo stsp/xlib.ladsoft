@@ -1,0 +1,16 @@
+
+/* Protogen Version 1.00 Sunday December 21, 1997  20:07:32 */
+
+                               /* Iflow.c */
+
+void flows_and_doms(void);
+
+                             /* Ipointer.c */
+
+void resbit(BYTE *bmask, int bit);
+void setbit(BYTE *bmask, int bit);
+void pointers(void);
+
+                               /* Igcse.c */
+
+void gcse(void);

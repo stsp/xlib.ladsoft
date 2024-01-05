@@ -1,0 +1,40 @@
+
+/* Protogen Version 1.06 Wednesday October 25, 1995  20:00:23 */
+
+                             /* Srchpath.c */
+
+char *parsepath(char *path, char *buffer);                        /* STATIC */
+FILE *SearchPath(char *string, char *searchpath, char *mode);
+
+                               /* Args.c */
+
+void remove_arg(int pos, int *count, char *list[]);               /* STATIC */
+BOOL cmatch(char t1, char t2);                                    /* STATIC */
+int scan_args(char *string, int index, char *arg);                /* STATIC */
+BOOL parse_args(int *argc, char *argv[], BOOL case_sensitive);
+
+                               /* Usage.c */
+
+void banner( char *fmt, ... );
+void usage( char *prog_name);
+
+                                /* Ext.c */
+
+void AddExt(char *buffer, char *ext);
+void StripExt(char *buffer);
+void EXEPath(char *buffer, char*filename);
+
+                               /* Fatal.c */
+
+void fatal( char *fmt, ... );
+
+                               /* File.c */
+
+BOOL SetDir(char *dir);
+BOOL SetDrive(int drive);
+void ParseDir(char *spec, int *drive, char **dir, char **file);
+char *FirstFile(char *spec);
+char *NextFile(void);
+char *NewName( char *spec);
+int FileRecurse( int count , char *FileNames[],
+		char *Text, FILEFUNC routine, char *ext, BOOL backup );

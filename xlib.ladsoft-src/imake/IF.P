@@ -1,0 +1,13 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:09 */
+
+                                /* If.c */
+
+BOOL definedmacro(void);                                          /* STATIC */
+void BadIf(void);                                                 /* STATIC */
+void ifpush(BOOL flag);                                           /* STATIC */
+void ifpop(void);                                                 /* STATIC */
+void ifdef(void);
+void ifndef(void);
+void ifelse (void);
+void ifendif(void);

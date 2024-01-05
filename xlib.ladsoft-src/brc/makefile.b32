@@ -1,0 +1,50 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = bcc32 -c -v
+ASM = TASM /zi /ml /m2
+LIB = tlib
+LINK = ilink32
+INCLUDEPATH = C:\bc5\INCLUDE;..\include
+
+.c.obj:
+  $(CC) $<
+#		*List Macros*
+
+EXE_dependencies = \
+ALLOCATE.obj \
+ARGS.obj \
+BRC.obj \
+dict.obj \
+EXT.obj \
+FATAL.obj \
+hash.obj \
+list.obj \
+MODULE.obj \
+output.obj \
+parser.obj \
+USAGE.obj 
+
+
+#		*Explicit Rules*
+brc.exe: upbuild $(EXE_dependencies) brc.res
+  $(LINK) /Gi/Gn/c/v/s/L\bcc55\lib @&&|
+        c0x32.obj $(EXE_dependencies)
+        brc.exe
+        brc.map
+        import32.lib cw32.lib
+        #
+        brc.res
+|
+brc.res: brc.rc ..\version.h
+        brc32 -I\bc5\include -r brc.rc
+
+upbuild:
+        ..\upbuild $(FULLBUILD) BRC
+#		*Individual File Dependencies*
+brc.obj: brc.c ..\version.h
+        $(CC) brc.c

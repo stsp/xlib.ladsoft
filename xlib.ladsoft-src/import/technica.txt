@@ -1,0 +1,28 @@
+IMPORT is a simple librarian for the old DOS library format.  The difference
+between IMPORT and XLIB is that IMPORT works primarily with import definitions,
+whereas XLIB works primarily with object code.  The basic
+functionality is to read in the target library, if it exists, into a list
+of its component object files.  Then object files are extracted, deleted,
+and inserted as per commands on the command line.  Finally, the dictionary
+is recalculated, and the library is written back to itself.
+
+
+This is made up of the following files:
+
+ALLOCATE.C  - memory allocation
+ARGS.C      - argument parsing
+DICT.C      - dictionary creation
+DLL.C       - functions to read the export table from a DLL
+ERROR.C     - error messages
+EXT.C       - simple file extension handling
+FATAL.C     - fatal error and exit
+HASH.C      - hash tables for internal symbol names storage
+IMPORT.C    - import declaration module, declare from a file
+LIB.C       - library i/o utils
+LIST.C      - list functions
+MODULE.C    - object file reader
+USAGE.C     - usage and banner functions
+ximport.c   - main line and command line parsing
+
+the related .h and .p files declare various things that need to be
+declared, and prototypes

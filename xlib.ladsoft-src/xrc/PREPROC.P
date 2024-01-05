@@ -1,0 +1,115 @@
+
+/* Protogen Version 1.00 Monday June 04, 2001  18:41:05 */
+
+                              /* Getsym.c */
+
+void initsym(void);
+void lineToCpp(void);
+void stripcomment (short *line);                                  /* STATIC */
+void striptrigraph(short *buf);
+int     getline(int listflag);
+int     getch(void);
+void     getid(void);
+int     getsch(void)        ;
+int     radix36(char c);
+void getbase(int b,char **ptr);
+void getfrac(char **ptr);
+void getexp(char **ptr);
+void getnum(void);
+int getsym2(void) ;
+void     getsym(void);
+int needpunc(enum e_sym p, int *skimlist);
+int needpuncexp(enum e_sym p, int *skimlist);
+void skip_comma(void) ;
+void need_eol(void) ;
+void need_begin(void) ;
+void need_end(void) ;
+void backup(int st);
+
+                               /* Error.c */
+
+void initerr(void);
+void diag(char *s);
+int printerr(char *buf, ERRORS *err);
+void     lferror(void);
+void basicskim(int *skimlist);
+BALANCE *newbalance(BALANCE *bal);
+void setbalance(BALANCE **bal);
+void expskim(int *skimlist);
+void basicerror(int n, void *data);
+void Error(char *string);
+void generror(int n,int data, int *skimlist);
+void gensymerror(int n, char *data);
+void genfuncerror(int n, char*func, char *data);
+void genfunc2error(int n, char*func, char *func2);
+void genclasserror(int n, char *name);
+void genclass2error(int n, char *struc, char *elem);
+void expecttoken(int n, int *skimlist);
+void generrorexp(int n, int data, int *skimlist);
+void gensymerrorexp(int n, char *data);
+void expecttokenexp(int n, int *skimlist);
+
+                              /* Preproc.c */
+
+void filemac(short *string); /* PROTOTYPE */
+void datemac(short *string); /* PROTOTYPE */
+void timemac(short *string); /* PROTOTYPE */
+void linemac(short *string); /* PROTOTYPE */
+void repdefines(short *lptr); /* PROTOTYPE */                    /* STATIC */
+void pushif(void); /* PROTOTYPE */
+void preprocini(void);
+int preprocess(void);
+int doerror(void);
+int pragerror(int errno);                                         /* STATIC */
+int dopragma(void);
+int doline(void);
+int doinclude(int unquoted);
+short *plitlate(short *string);
+void glbdefine(char *name, char*value);
+int dodefine(void);
+int doundef(void);
+int undef2(void);
+void getdefsym(void);
+int defid(short *name, short **p, char *q);
+int definsert(short *end, short *begin, short * text, int len, int replen);
+int defreplace(short *macro, int count, short **oldargs, short **newargs);
+void cnvt(short *out,char *in);
+void filemac(short *string);
+void datemac(short *string);
+void timemac(short *string);
+void linemac(short *string);
+void defmacroreplace(short *macro, short *name);
+void nodefines(void);
+int indefine(SYM *sp);
+void enterdefine(SYM *sp);
+void exitdefine(void);
+int replacesegment(short *start, short *end, int *inbuffer, int totallen, int *changed);
+int defcheck(short *line);
+void repdefines(short *lptr);                                     /* STATIC */
+void pushif(void);
+void popif(void);
+void ansieol(void);
+int doifdef (int flag);
+int doif(int flag);
+int doelif(void);
+int doelse(void);
+int doendif(void);
+
+/* Protogen Version 1.00 Wednesday June 06, 2001  19:27:55 */
+
+                              /* Intexpr.c */
+
+long ieprimary(void)   ;                                          /* STATIC */
+long ieunary(void);                                               /* STATIC */
+long iemultops(void);                                             /* STATIC */
+long ieaddops(void);                                              /* STATIC */
+long ieshiftops(void);                                            /* STATIC */
+long ierelation(void);                                            /* STATIC */
+long ieequalops(void);                                            /* STATIC */
+long ieandop(void);                                               /* STATIC */
+long iexorop(void);                                               /* STATIC */
+long ieorop(void);                                                /* STATIC */
+long ielandop(void);                                              /* STATIC */
+long ielorop(void);                                               /* STATIC */
+long iecondop(void);                                              /* STATIC */
+long intexpr(void);

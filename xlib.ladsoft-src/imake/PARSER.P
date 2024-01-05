@@ -1,0 +1,13 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:24 */
+
+                              /* Parser.c */
+
+void Extraneous(void);
+void NewInputFile(void);
+void HandleExclamation(void);
+void escape(int);
+short **ReadCommands(int *count );
+void Implicit(void);
+void Explicit(void);
+BOOL ReadMakeFile(char *path, char *string);

@@ -1,0 +1,26 @@
+
+/* Protogen Version 1.00 Sunday December 21, 1997  20:07:32 */
+
+                              /* Iblock.c */
+
+int equalnode(ENODE *node1, ENODE *node2);
+int equalimode(IMODE *ap1, IMODE *ap2);
+QUAD *LookupNVHash(BYTE *key, int size, DAGLIST **table);
+void ReplaceHash(QUAD *rv, BYTE *key, int size, DAGLIST **table);
+QUAD *liveout(QUAD *q);
+void addblock(int val);
+void gen_label(int labno);
+void gen_icode(int op,IMODE *res,IMODE *left,IMODE *right);
+void gen_iiconst(IMODE *res,long val);
+void gen_ifconst(IMODE *res,long double val);
+void gen_igoto(long label);
+void gen_idc(long label);
+void gen_icgoto(int op,long label,IMODE *left, IMODE *right);
+void gen_igosub(int op,IMODE *left);
+void gen_icode2(int op,IMODE *res,IMODE *left,IMODE *right,int label);
+void gen_line(SNODE *stmt);
+void gen_asm(SNODE *stmt);
+
+                               /* Icom.c */
+
+void commondelete(QUAD *quad);

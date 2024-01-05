@@ -1,0 +1,70 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = bcc32 -w+all -c -v -DBORLANDC
+ASM = \bc5\bin\TASM32 /zi /ml /m2
+LIB = tlib
+LINK = ilink32
+#SOURCE = ..\source
+INCLUDEPATH = C:\bc5\INCLUDE;..\include
+
+.c.obj:
+  $(CC) $<
+#		*List Macros*
+
+EXE_dependencies = \
+asmsubs.obj \
+cv.obj \
+def.obj \
+dictary.obj \
+endlink.obj \
+execfile.obj \
+files.obj \
+fixup.obj \
+globals.obj \
+initlink.obj \
+library.obj \
+linkerio.obj \
+list.obj \
+lx.obj \
+main.obj \
+map.obj \
+memory.obj \
+object.obj \
+order.obj \
+pe.obj \
+resource.obj \
+srchpath.obj \
+string.obj \
+timer.obj \
+tmodule.obj \
+token.obj \
+unmangle.obj \
+userinp.obj 
+
+
+#		*Explicit Rules*
+valx.exe: upbuild $(EXE_dependencies) valx.res
+  del valx.exe
+  $(LINK) /c/v/s /Gn/Gi /L\bc5\lib @&&|
+c0x32.obj $(EXE_dependencies)
+valx.exe
+valx.map
+import32.lib cw32.lib
+
+valx.res
+|
+
+valx.res: valx.rc
+  brc32 -r -i\bc5\include valx.rc
+upbuild:
+        ..\upbuild $(FULLBUILD) VALX
+
+#		*Individual File Dependencies*
+asmsubs.obj:
+        bcc32 -S asmsubs.c
+        \bc5\bin\tasm32 -ml asmsubs.asm

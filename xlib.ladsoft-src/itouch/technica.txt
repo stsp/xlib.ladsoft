@@ -1,0 +1,13 @@
+Itouch basically takes a list of files, and one at a time it stamps them
+with the current time and date.  This is a little more convoluted than
+using the wildargs functionality, since it was done long before the wildargs
+was created.
+
+ARGS.C    - parameter parsing
+EXT.C     - file extension handlers
+FATAL.C   - fatal error and exit
+FILE.C    - generic routines to run a function for each file in the command
+          - line list
+ITOUCH.C  - main line, command line parsing,
+          - and function to do the touch operation
+USAGE.C   - usage and banner

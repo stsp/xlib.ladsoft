@@ -1,0 +1,15 @@
+
+/* Protogen Version 1.07 Wednesday November 01, 1995  17:42:53 */
+
+                              /* Spawner.c */
+
+FILE *CreateFile(void);
+void CloseFile(FILE *fh);
+void DeleteFiles(void);
+int SpawnOne(short *command);
+void InsertString(short *buffer, short *new , short len);
+void us(char *string, char data);
+short *ExpandFiles(short **obuf, short **ibuf, int *len, short **files, int flags, short **implicit, BOOL onlyone);
+void InsertFiles(short *obuf, short *ibuf, short **files,short *itarget,BOOL oneatatime, BOOL implicit, BOOL toerr);
+int SpawnTarget(short *target, short *files, BOOL implicit);
+void DoTargets(FILEREC *list);

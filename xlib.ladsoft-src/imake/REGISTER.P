@@ -1,0 +1,15 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:30 */
+
+                             /* Register.c */
+
+short *stripspaces(short *buf);                                   /* STATIC */
+void Redef(REGISTRY **r, int type, BOOL erronchange);              /* STATIC */
+void RegisterPath(short *buf,short *bufptr);
+void RegisterTarget(short *name, BOOL infile);
+void RegisterDest(short *name);
+void RegisterMacro(short *name, short *value, BOOL def, BOOL canchange);
+void RegisterImplicit(short *name, short **commands);
+void RegisterExplicitName(short *name, short *value);
+void RegisterExplicitCommands(short *name, short **commands);
+void RegisterInit(void);

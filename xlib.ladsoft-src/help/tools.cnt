@@ -1,0 +1,81 @@
+;This help file was created with HelpScribble 7.6.1
+;Licensed to: LADSoft
+
+:BASE TOOLS.hlp
+:TITLE 
+1 Welcome
+2 Index=Scribble10
+2 Copyright=Scribble12
+1 CC386
+2 CC386 compiler=Scribble15
+2 Command Line
+3 CC386 Command Line=Scribble110
+3 CC386 Output Control=Scribble235
+3 CC386 Warning control=Scribble240
+3 CC386 List file control=Scribble250
+3 CC386 preprocesor control=Scribble260
+3 CC386 command line files=Scribble270
+3 CC386 environment variables=Scribble280
+3 CC386 Debug information=Scribble290
+3 CC386 Compilation modes=Scribble300
+3 CC386 Defining macros=Scribble310
+3 CC386 Specifying include path=Scribble320
+3 CC386Translating trigraphs=Scribble330
+3 CC386 Codegen params=Scribble340
+3 CC386 Optimizer Params=Scribble350
+2 Keyword Extensions
+3 CC386 Extended Keywords=Scribble120
+3 _absolute=Scribble360
+3 alloca=Scribble363
+3 far and near=Scribble365
+3 _pascal=Scribble370
+3 _cdecl=Scribble380
+3 _stdcall=Scribble390
+3 _import=Scribble400
+3 _interrupt=Scribble410
+3 _genbyte=Scribble420
+3 _intrinsic=Scribble430
+3 _loadds=Scribble440
+3 _indirect=Scribble450
+3 _export=Scribble460
+3 typeof=Scribble465
+2 Pragma directives
+3 CC386 #pragma directives=Scribble130
+3 #pragma error=Scribble470
+3 #pragma farkeyword=Scribble475
+3 #pragma warning=Scribble480
+3 #pragma startup=Scribble490
+3 #pragma library=Scribble500
+3 #pragma pack=Scribble510
+3 #pragma aux=Scribble530
+1 CL386
+2 CL386=Scribble60
+2 CL386 Command Line=Scribble190
+1 GREP
+2 GREP=Scribble90
+2 Grep Command Line=Scribble230
+1 IMAKE
+2 IMAKE make utility=Scribble70
+2 IMAKE Command Line=Scribble200
+1 IMPORT
+2 IMPORT Librarian=Scribble42
+2 IMPORT Command Line=Scribble172
+2 Using the created definition file=Scribble175
+1 ITOUCH
+2 ITOUCH=Scribble80
+2 ITOUCH Command Line=Scribble220
+1 MKLIBLST
+2 MKLIBLST Library Utility=Scribble45
+2 MKLIBLST Command Line=Scribble170
+1 NASM
+2 NASM assembler=Scribble20
+2 NASM Command Line=Scribble140
+1 VALX
+2 VALX Linker=Scribble30
+2 VALX Command Line=Scribble150
+1 XLIB
+2 XLIB Librarian=Scribble40
+2 XLIB Command Line=Scribble160
+1 XRC
+2 XRC Resource compiler=Scribble50
+2 XRC Command Line=Scribble180

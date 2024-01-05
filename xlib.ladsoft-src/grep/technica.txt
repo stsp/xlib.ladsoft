@@ -1,0 +1,23 @@
+GREP has two main parts: file wildcards/directory recursion and regular expression
+matching.
+
+First the search string is parsed into a linked list of 'MATCH' structures.  Each
+entry in the list gives a character or list of characters that the current input
+stream should match.
+
+Next the file/directory recursion uses findfirst/findnext to create a list of 
+files that GREP should process.  
+
+Once the list is created, GREP loads in a line at a time and matches the 
+linked list of 'MATCH' structures against each position in the line.  Matching
+is done on a line-by-line basis; once a match is found the line is marked as
+matching and no further comparisons are done on that line.
+
+following is a list of the source files
+
+grep.c : main program
+files.c : handler for file and directory recursion
+regexp.c : handler for regular expression matching
+argv.c : command line arguments
+usage.c : usage
+fatal.c : fatal errors

@@ -1,0 +1,10 @@
+C_DEPENDENCIES = $(wildcard *.c)
+EXCLUDE= ndisasm.c disasm.c sync.c insnsd.c insnsn.c names.c regdis.c regflags.c SRCHPATH.c XLT.c bzip2.c
+DEPENDENCIES = $(filter-out $(EXCLUDE), $(C_DEPENDENCIES))
+O_DEPENDENCIES = $(DEPENDENCIES:.c=.o)
+
+%.o: %.c
+	occ /9 /c /C+d $^
+
+temp.exe: $(O_DEPENDENCIES)
+	olink -otemp.exe /T:CON32 /mx /c c0xpe.o $(O_DEPENDENCIES) clwin.l climp.l	

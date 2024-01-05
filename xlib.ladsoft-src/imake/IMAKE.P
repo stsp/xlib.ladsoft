@@ -1,0 +1,13 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:12 */
+
+                               /* Imake.c */
+
+void InputSetup(char select, char *string); /* PROTOTYPE */
+void DefineSetup(char select, char *string); /* PROTOTYPE */
+void BoolSetup(char select, char *string); /* PROTOTYPE */
+void BoolSetup(char select, char *string);
+void InputSetup(char select, char *string);                       /* STATIC */
+void IncludeSetup(char select, char *string);                     /* STATIC */
+void DefineSetup(char select, char *string);
+int main(int argc, char *argv[]);

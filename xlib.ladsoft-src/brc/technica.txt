@@ -1,0 +1,25 @@
+The browse compiler is an internal tool used to create browse information
+for use with the IDE.  The browse information is initially created by the
+CC386 compiler, and consists of symbol name and line number information.
+BRC gets rid of duplicates and dumps the information to the browse file
+linearly; then it creates a simple dictionary.  The dictionary is a tree
+structure.  At the top level we have a list of all the first characters
+encountered in each word of the source files.  Each first character points
+to a list of second characters for that first character... each second
+character likewise points to a list of third characters.  Eventually
+the end of a word is reached and there is a pointer to the browse information
+record associated with that word.
+
+
+ALLOCATE.C  - memory allocation
+ARGS.C      - command line argument parsing
+brc.c       - main line and command line parsing
+DICT.C      - dictionary creation
+EXT.C       - simple file extension handling
+FATAL.C     - fatal error and exit
+HASH.C      - hash tables
+LIST.C      - list functions
+MODULE.C    - object module reader; reads browse info into internal tables
+OUTPUT.C    - creates the output browse information file
+parser.c    - parses the browse information records
+USAGE.C     - usage and banner text

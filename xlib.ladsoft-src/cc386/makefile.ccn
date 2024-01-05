@@ -1,0 +1,85 @@
+# 
+#   Copyright 1994-2003 Free Software Foundation, Inc.
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+#   02111-1307, USA.  
+#
+#   This program is derived from the cc68k complier by 
+#   Matthew Brandt (mattb@walkingdog.net) 
+#
+#   You may contact the author of this derivative at:
+#
+#
+#   mailto::camille@bluegrass.net
+#
+#   or by snail mail at:
+#
+#   David Lindauer
+#   850 Washburn Ave Apt 99
+#   Louisville, KY 40222
+#
+# This makefile is for Borland make (IBM PC/80386+)
+#.AUTODEPEND
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+!ifndef CC68
+i386 = -Di386
+b386 = 1
+!else
+i386 = -DC68K
+!endif
+
+CC = ccn /S /9 $(i386) -DCPLUSPLUS -DWIN32
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx
+SOURCE = .
+
+.c.obj:
+	$(CC) $&
+	@$(ASM) $&.asm
+
+#		*List Macros*
+libfiles =  args.obj ext.obj fatal.obj \
+        pstr.obj srchpath.obj usage.obj
+miscfiles = cmain.obj symbol.obj memmgt.obj error.obj list.obj \
+        mangle.obj browse.obj cppbltin.obj float.obj
+lexfiles = getsym.obj preproc.obj searchkw.obj
+parsefiles = floatexp.obj func.obj expr.obj init.obj einit.obj intexpr.obj \
+        stmt.obj decl.obj declass.obj types.obj friend.obj template.obj
+optfiles = optimize.obj analyze.obj inline.obj
+
+
+!ifdef b386
+miscfiles = $(miscfiles) invoke.obj
+codegenfiles =  inasm386.obj conf386.obj an386.obj reg386.obj gexpr386.obj peep386.obj gstmt386.obj intr386.obj rtti.obj
+outputfiles = outas386.obj outco386.obj obj386.obj dbg386.obj output.obj
+RCFILE=cc386
+!else
+codegenfiles = inasm68.obj conf68.obj an68.obj reg68.obj gexpr68.obj peep68.obj  gstmt68.obj intr68.obj rtti.obj
+outputfiles = outas68.obj dbg68.obj outco68.obj objieee.obj output.obj
+RCFILE=cc68k
+!endif
+
+EXE_dependencies = $(libfiles) $(miscfiles) $(lexfiles) $(parsefiles) \
+	$(optfiles) $(codegenfiles) $(outputfiles)
+
+#		*Explicit Rules*
+cc.exe: $(EXE_dependencies)
+ $(LINK) -use32 -nocaseignore -Map -PE -CON -DEB @&&|
+c0xwin.obj $(EXE_dependencies),cc.exe,cc.map,clwin.lib climp.lib,$(RCFILE).res,
+|
+

@@ -1,0 +1,33 @@
+#include "..\version.h"
+#include <windows.h>
+Language LANG_ENGLISH,SUBLANG_ENGLISH_US
+1 ICON "import.ico"
+1 VERSIONINFO 
+FILEVERSION IMPORT_VERSION
+PRODUCTVERSION PRODUCT_VERSION
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN 
+                BLOCK "040904E4"
+                BEGIN
+                        VALUE "CompanyName", "LADSoft\0"
+                        VALUE "FileDescription","Import Utility\0"
+                        VALUE "FileVersion", IMPORT_STRING_VERSION "\0"
+                        VALUE "InternalName","import.exe\0"
+                        VALUE "OriginalFilename","import.exe\0"
+                        VALUE "ProductName",PRODUCT_NAME "\0"
+                        VALUE "ProductVersion",PRODUCT_STRING_VERSION "\0"
+#ifdef PRIVATE_BUILD
+                        Value "PrivateBuild",PRIVATE_BUILD "\0"
+#endif
+                        VALUE "LegalCopyright",PRODUCT_COPYRIGHT "\0"
+                END
+        END
+        BLOCK "VarFileInfo"
+        BEGIN 
+			VALUE "Translation", 0x0409,0x04e4
+		END
+END

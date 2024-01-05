@@ -1,0 +1,10 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:03 */
+
+                             /* Allocate.c */
+
+void MemoryInit(uint size);
+void MemoryRundown(void);
+void *ReallocateMemory(void *buf, uint size);
+void *AllocateMemory(uint size);
+void DeallocateMemory(void *pos);

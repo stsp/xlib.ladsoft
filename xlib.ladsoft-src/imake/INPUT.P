@@ -1,0 +1,11 @@
+
+/* Protogen Version 1.07 Tuesday October 31, 1995  21:29:15 */
+
+                               /* Input.c */
+
+BOOL openFile(char *string, char *path, char *mode);
+void closeFile(void);
+BOOL nextLine(char *buf, int len);
+void NewLine(void);
+int skipSpace(short **buf);
+void Error(char *fmt,...);

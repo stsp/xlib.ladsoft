@@ -1,0 +1,4 @@
+mkliblst is used to append file names to a description file.  The description
+file is later used by XLIB to create a library.  There is really nothing
+to this, it just opens a file for append and appends the file names
+in the proper format.

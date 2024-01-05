@@ -1,0 +1,7 @@
+
+/* Protogen Version 1.05 Saturday March 18, 1995  13:09:03 */
+
+                               /* List.c */
+
+void AppendToList(LIST **list, void *data);
+void *UnlinkFromList(LIST **list, LIST *loc);

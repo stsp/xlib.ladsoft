@@ -1,0 +1,22 @@
+
+/* MKLibHead 1.00 Tuesday October 31, 1995  21:29:36 */
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+                              /* Pstr.asm */
+
+   int pstrcmp(short *a, short *b);
+   int pstrncmp(short *a, short *b, int size);
+   void pstrcpy(short *a, short *b);
+   void pstrcat(short *a, short *b);
+   void pstrncpy(short *a, short *b,int len);
+   short *pstrchr(short *a, short b);
+   short *pstrrchr(short *a, short b);
+   int pstrlen(short *a);
+   short *pstrstr(short *a, short *b);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */

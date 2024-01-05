@@ -1,0 +1,36 @@
+
+/* Protogen Version 1.00 Monday September 16, 1996  10:36:23 */
+
+                              /* Phitext.c */
+
+void PhiInit(void);
+void BadString(void);
+BOOL phichar(BYTE *ch, FILE *file);                               /* STATIC */
+BOOL philine(BYTE *buf, int len, FILE *file);
+short parsechar(BYTE **buf);
+void putphiback(short ch);
+BOOL isstartchar(short val);
+BOOL issymchar(short val);
+BOOL iswhitespacechar(short val);
+BOOL iscommentchar(short val);
+BYTE *getstringchar(BYTE *rv,BYTE *bufptr);                       /* STATIC */
+short getphistring(BYTE *obuf, BYTE **ibuf, short endchar);
+long getphichar(BYTE **ibuf);
+void phifg(int color, BYTE *file);
+short phiupper(short val);
+int installphichar(short curchar, BYTE *buf, int i);
+short phistreamtoflat(BYTE *out, BYTE *in, int size, BOOL useparms);
+int phicmp(BYTE *str1, BYTE *str2);
+
+                               /* Pstr.c */
+
+short *pstrupr(short *str);
+int pstrncmp(short *str1, short *str2,int n);
+int pstrcmp(short *str1, short *str2);
+void pstrcpy(short *str1, short *str2);
+void pstrncpy(short *str1, short *str2, int len);
+void pstrcat(short *str1,short *str2);
+short *pstrchr(short *str, short ch);
+short *pstrrchr(short *str, short ch);
+int pstrlen(short *s);
+short *pstrstr(short *str1, short *str2);

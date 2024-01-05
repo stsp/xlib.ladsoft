@@ -1,0 +1,8 @@
+I've never really dealt with this so I don't know what the algorithms are
+
+CONFIG.C  - high level param parsing
+FILE.C    - file functions
+GENER.C   - generic functions for creating make file
+LIST.C    - list handling functions
+MAIN.C    - main line
+PARAM.C   - parameter parsing, help text

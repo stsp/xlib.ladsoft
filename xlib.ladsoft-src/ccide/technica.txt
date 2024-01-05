@@ -1,0 +1,98 @@
+A lot of the functionality in CCIDE, such as compiling and linking and
+grep functionality, is actually performed by spawning one of the other
+utilities to perform the action.  CCIDE primarily provides a windowing
+interface to the utilities.  However, in addition to providing the interface
+it has an editor, and has routines to debug code and to interface to the
+debug symbol table output by the linker.  It also has an integrated make
+utility.
+
+So much of the code herein deals directly with creating and maintaining 
+windows.  A lot of that is detail work, just dealing with the WINDOWS API in
+the correct manner to display and maintain display of the windows.
+
+It is difficult to describe the code because so much of it is driven
+directly by events coming from the windows system.  However usually once
+an event occurs, the code is reasonably straightforward as to what to
+do about it.  Except for the cases where data from one event interacts
+with data from another.
+
+Generally, each window has its own file.  Here are the files with windows
+in them:
+
+asmwnd.c    - the assembly listing
+DUMPWND.C   - the memory dump
+EDITOR.C    - the editor window.  It superclasses XEDIT.C, which provides
+            - the user interface functionality
+error.c     - the error window.  This is the tabbed window at the bottom;
+            - it is similar to the tabwnd, except instead of containing 
+            - custom controls it contains 4 rich edit controls.
+filedlg.c   - dialog handlers for the file dialogs
+HISTCOMB.C  - extended combo box which allows history
+lsctrl.c    - the container for 'docked' windows.  Has a couple of bars at
+            - the top and close and expand buttons
+lsframe.c   - the sizebar code
+lsgrip.c    - the container for 'docked' toolbars
+lstool.c    - a container for toolbars which extends the functionality so
+            - the toolbar can be contained in a FRAME or CTRL container
+LSTREE.C    - an extended tree function that has two columns.  The right
+            - column is editable.  Subview used in the watch and register
+            - windows
+MAKE.C      - has the project dialog, also has the various routines needed
+            - to perform the make build and compile menu items
+project.c   - this is one of the two panes that make up the project window
+            - this pane has th actual project configuration.  It is
+            - contained by 'tabwnd'
+regwnd.c    - the other of the two panes that make up the project window.
+            - it shows register information.  It is contained by tabwnd.
+Splash.c    - splash screen functionality
+stackwnd.c  - stacked function call list
+stdprop.c   - the main properties dialog
+TABWND.C    - container for the project and register windows.  Provides the
+            - tab functionality.  As with the other dockable windows
+            - that are not toolbars, it Is itself contained by a 
+            - lsctrl or lsframe.
+thredwnd.c  - the thread window
+watchwnd.c  - the watch window,
+XEDIT.C     - an extended edit control.  Designed to give enough of the
+            - rich edit functionality to be useful, without the bugs.
+
+DOCKMGR.C   - this doesn't provide windows directly, but does provide all
+            - the functionality required to dock and undock windows,
+            - and move dockable windows around on the screen.  It relies
+            - on structures declared for lsctrl, lsframe, and lsgrip
+            - containers to know how to handle these windows.
+
+
+The remaining files are as follows:
+
+browse.c    - parses the browse file looking for the declaration for
+            - something
+ccide.C     - main program, startup routines and window handler for the
+            - frame.  All the menu messages go through here (except for
+            - right click menus) but some are dispatched to other window
+            - handlers
+dbgmain.c   - this is the debugger core.  It provides the debugger functionality
+            - it does not provide the interface to the debug info file.
+dialog.c    - various utils for use with standard controls
+effect.c    - some effects to get background colors on bitmaps right in
+            - a cross-platform way
+eval.c      - will later be the dynamic expression evaluator.  Right now
+            - it is a work in progress.
+FIF.C       - find in files functionality
+help.c      - help files
+MAKEGEN.C   - create make files for command line processing
+MRU.C       - handle the mru lists
+OPCODES.C   - disassembler- list of opcode tables
+OPERANDS.C  - disassembler- list of operand parsers
+PEFILE.C    - utils for parsing the pe file and its memory image
+POPUP.C     - util for right-click menus
+print.c     - printer functionality
+PROFILE.C   - low-level registry functionality
+SIMOPS.C    - assembler: display of operands
+SRCHPATH.C  - searches a path for a file
+SYMTAB.C    - routines for dealing with the debug info file, and
+            - some formatting for hints
+TAGS.C      - routines for dealing with breakpoint tags, bookmarks,
+            - and find in file tags
+UZ.C        - simple unzip utility, used to unpack the splash screen
+wargs.c     - setup for argc & argv from a GUI program

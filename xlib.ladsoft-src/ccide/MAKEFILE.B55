@@ -1,0 +1,115 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = \bcc55\bin\bcc32 -c -v -DBORLANDC -w-
+ASM = TASM /zi /ml /m2
+LIB = tlib
+LINK = \bcc55\bin\ilink32 -Gn -Gi
+INCLUDEPATH = C:\bc45\INCLUDE;..\include
+
+.c.obj:
+  $(CC) $<
+.cpp.obj:
+  $(CC) $<
+
+#		*List Macros*
+
+EXE_dependencies = \
+ccide.obj \
+alloc.obj \
+autodepend.obj \
+brfold.obj \
+brkcode.obj \
+brkdata.obj \
+brkhdwe.obj \
+brkstep.obj \
+browse.obj \
+buildrul.obj \
+codecomp.obj \
+dbgasm.obj \
+dbgmain.obj \
+dbgmem.obj \
+dbgreg.obj \
+dbgstack.obj \
+dbgthread.obj \
+dbgwatch.obj \
+dialog.obj \
+dockmgr.obj \
+doswind.obj \
+editor.obj \
+effect.obj \
+eval.obj \
+extools.obj \
+filedlg.obj \
+filebrowse.obj \
+find.obj \
+help.obj \
+histcomb.obj \
+infownd.obj \
+instance.obj \
+jumplist.obj \
+lsblank.obj \
+lscont.obj \
+lsctrl.obj \
+lsframe.obj \
+lsgrip.obj \
+lstab.obj \
+lstool.obj \
+lstree.obj \
+lstt.obj \
+make.obj \
+makecommon.obj \
+makegen.obj \
+menu.obj \
+mru.obj \
+opcodes.obj \
+operands.obj \
+pefile.obj \
+print.obj \
+profile.obj \
+progress.obj \
+project.obj \
+props.obj \
+regexp.obj \
+simops.obj \
+slprefs.obj \
+slwa.obj \
+slproj.obj \
+slrule.obj \
+splash.obj \
+srchpath.obj \
+symtab.obj \
+tabwnd.obj \
+tags.obj \
+toolbar.obj \
+uz.obj \
+version.obj \
+wargs.obj \
+window.obj \
+xedit.obj \
+xml.obj
+
+#		*Explicit Rules*
+
+ccide.exe: upbuild $(EXE_dependencies) ccide.res
+  $(LINK) /Tpe/aa/c/v/s/L\bcc55\lib;\bcc55\lib\psdk @&&|
+c0w32.obj wildargs.obj $(EXE_dependencies)
+ccide.exe
+ccide.map
+..\parsedll\parser.lib import32.lib cw32mt.lib msimg32.lib shell32.lib
+ccide.def
+ccide.res
+|
+
+#		*Individual File Dependencies*
+ccide.res: ccide.rc ..\version.h
+        xrc ccide.rc
+upbuild:
+        ..\upbuild $(FULLBUILD) CCIDE
+
+ccide.obj: ..\version.h
+  $(CC) ccide.c

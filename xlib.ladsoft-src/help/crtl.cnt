@@ -1,0 +1,300 @@
+;This help file was created with HelpScribble 7.5.2
+;Licensed to: LADSoft
+
+:BASE crtl.hlp
+:TITLE 
+1 The C Run-Time Library=PAGE_286
+1 Welcome
+2 Introduction=PAGE_305
+2 Getting Started=PAGE_251
+2 Standards
+3 ISO C=PAGE_309
+2 General Considerations
+3 Header Files=PAGE_262
+3 Macro Definitions=PAGE_353
+3 Reserved Names=PAGE_507
+2 Roadmap to the Manual=PAGE_512
+1 Errors
+2 Error Reporting=PAGE_173
+2 Checking for Errors=PAGE_91
+2 Error Codes=PAGE_170
+2 Error Messages=PAGE_171
+1 Memory
+2 Memory=PAGE_368
+2 Memory Allocation
+3 Memory Allocation=PAGE_364
+3 Memory Allocation and C=PAGE_363
+3 C Language Allocation
+4 Unconstrained Allocation=PAGE_656
+4 Basic Allocation=PAGE_60
+4 Malloc Examples=PAGE_356
+4 Freeing after Malloc=PAGE_235
+4 Changing Block Size=PAGE_85
+4 Allocating Cleared Space=PAGE_19
+3 Automatic Allocation
+4 Variable Size Automatic=PAGE_675
+4 Alloca Example=PAGE_18
+4 Advantages of Alloca=PAGE_15
+4 Disadvantages of Alloca=PAGE_155
+4 Variable-Size Arrays=PAGE_254
+1 Character Handling
+2 Character Handling=PAGE_86
+2 Classification of Characters=PAGE_94
+2 Case Conversion=PAGE_84
+2 Classification of Wide Characters=PAGE_95
+2 Using Wide Char Classes=PAGE_669
+2 Wide Character Case Conversion=PAGE_689
+1 Strings
+2 String and Array Utilities=PAGE_589
+2 Representation of Strings=PAGE_506
+2 String/Array Conventions=PAGE_595
+2 String Length=PAGE_591
+2 Copying and Concatenation=PAGE_126
+2 String/Array Comparison=PAGE_594
+2 Collation Functions=PAGE_101
+2 Search Functions=PAGE_521
+2 Finding Tokens in a String=PAGE_206
+1 Character Sets
+2 Character Set Handling=PAGE_88
+2 Extended Char Intro=PAGE_184
+2 Charset Function Overview=PAGE_90
+2 Multibyte Conversion
+3 Restartable multibyte conversion=PAGE_511
+3 Selecting the Conversion=PAGE_524
+3 Keeping the state=PAGE_319
+3 Converting a Character=PAGE_124
+3 Converting Strings=PAGE_125
+3 Multibyte Conversion Example=PAGE_385
+2 Non-reentrant Conversion
+3 Non-reentrant Conversion=PAGE_400
+3 Non-reentrant Character Conversion=PAGE_399
+3 Non-reentrant String Conversion=PAGE_401
+3 Shift State=PAGE_539
+1 Locales
+2 Locales=PAGE_341
+2 Effects of Locale=PAGE_161
+2 Choosing Locale=PAGE_93
+2 Locale Categories=PAGE_339
+2 Setting the Locale=PAGE_536
+2 Standard Locales=PAGE_571
+2 Basic Locale Information
+3 Locale Information=PAGE_340
+3 Specific Locale Information
+4 The Lame Way to Locale Data=PAGE_635
+4 General Numeric=PAGE_241
+4 Currency Symbol=PAGE_136
+4 Sign of Money Amount=PAGE_541
+2 Yes-or-No Questions=PAGE_699
+1 Searching And Sorting
+2 Searching and Sorting=PAGE_522
+2 Comparison Functions=PAGE_104
+2 Array Search Function=PAGE_50
+2 Array Sort Function=PAGE_51
+2 Search/Sort Example=PAGE_523
+1 I/0
+2 I/O Overview=PAGE_313
+2 I/O Concepts
+3 I/O Concepts=PAGE_311
+3 Streams and File Descriptors=PAGE_583
+3 File Position=PAGE_199
+2 Files
+3 File Names=PAGE_196
+3 Directories=PAGE_153
+3 File Name Resolution=PAGE_195
+3 File Name Errors=PAGE_193
+1 Streamed I/O
+2 I/O on Streams=PAGE_312
+2 Streams=PAGE_586
+2 Standard Streams=PAGE_573
+2 Opening Streams=PAGE_421
+2 Closing Streams=PAGE_100
+2 Streams and I18N=PAGE_584
+2 Simple Output=PAGE_557
+2 Character Input=PAGE_87
+2 Unreading
+3 Unreading=PAGE_658
+3 Unreading Idea=PAGE_657
+3 How Unread=PAGE_277
+2 Block Input/Output=PAGE_65
+2 Formatted Output
+3 Formatted Output=PAGE_227
+3 Formatted Output Basics=PAGE_225
+3 Output Conversion Syntax=PAGE_436
+3 Table of Output Conversions=PAGE_622
+3 Integer Conversions=PAGE_296
+3 Floating-Point Conversions=PAGE_217
+3 Other Output Conversions=PAGE_434
+3 Formatted Output Functions=PAGE_226
+3 Variable Arguments Output=PAGE_673
+2 Formatted Input
+3 Formatted Input=PAGE_223
+3 Formatted Input Basics=PAGE_221
+3 Input Conversion Syntax=PAGE_293
+3 Table of Input Conversions=PAGE_621
+3 Numeric Input Conversions=PAGE_412
+3 String Input Conversions=PAGE_590
+3 Other Input Conversions=PAGE_431
+3 Formatted Input Functions=PAGE_222
+3 Variable Arguments Input=PAGE_672
+2 EOF and Errors=PAGE_169
+2 Error Recovery=PAGE_172
+2 Binary Streams=PAGE_64
+2 File Positioning=PAGE_200
+2 Portable Positioning=PAGE_456
+2 Buffering
+3 Stream Buffering=PAGE_581
+3 Buffering Concepts=PAGE_75
+3 Flushing Buffers=PAGE_218
+3 Controlling Buffering=PAGE_121
+1 Descriptor I/O
+2 Low-Level I/O=PAGE_350
+2 Opening and Closing Files=PAGE_420
+2 I/O Primitives=PAGE_314
+2 File Position Primitive=PAGE_198
+2 Descriptors and Streams=PAGE_152
+2 Duplicating Descriptors=PAGE_157
+2 File Status
+3 File Status Flags=PAGE_202
+3 Access Modes=PAGE_5
+3 Open-time Flags=PAGE_423
+3 Operating Modes=PAGE_425
+1 File System
+2 File System Interface=PAGE_203
+2 Working Directory=PAGE_694
+2 Deleting Files=PAGE_148
+2 Renaming Files=PAGE_504
+2 Creating Directories=PAGE_132
+2 File System Attributes
+3 Attribute Meanings=PAGE_58
+3 Reading Attributes=PAGE_491
+3 File Size=PAGE_201
+2 Temporary Files=PAGE_623
+1 Mathematics
+2 Mathematics=PAGE_362
+2 Mathematical Constants=PAGE_361
+2 Trig Functions=PAGE_652
+2 Inverse Trig Functions=PAGE_306
+2 Exponents and Logarithms=PAGE_183
+2 Hyperbolic Functions=PAGE_279
+2 Special Functions=PAGE_569
+2 Random Numbers
+3 Pseudo-Random Numbers=PAGE_484
+3 ISO Random=PAGE_310
+1 Arithmetic
+2 Arithmetic=PAGE_49
+2 Integers=PAGE_298
+2 Integer Division=PAGE_297
+2 Floating Point Numbers=PAGE_214
+2 Floating Point Classes=PAGE_211
+2 Floating Point
+3 Floating Point Errors=PAGE_213
+3 FP Exceptions=PAGE_232
+3 Infinity and NaN=PAGE_290
+3 Status bit operations=PAGE_577
+3 Math Error Reporting=PAGE_360
+2 Rounding=PAGE_514
+2 Control Functions=PAGE_118
+2 Arithmetic Functions
+3 Arithmetic Functions=PAGE_48
+3 Absolute Value=PAGE_2
+3 Normalization Functions=PAGE_403
+3 Rounding Functions=PAGE_513
+3 Remainder Functions=PAGE_502
+3 FP Bit Twiddling=PAGE_230
+3 FP Comparison Functions=PAGE_231
+3 Misc FP Arithmetic=PAGE_375
+2 Complex Numbers=PAGE_105
+2 Operations on Complex=PAGE_427
+2 Parsing Of Numbers
+3 Parsing of Numbers=PAGE_445
+3 Parsing of Integers=PAGE_444
+3 Parsing of Floats=PAGE_443
+1 Date And Time
+2 Date and Time=PAGE_144
+2 Time Basics=PAGE_639
+2 Elapsed Time=PAGE_163
+2 CPU Time=PAGE_128
+3 Calendar Time=PAGE_78
+3 Simple Calendar Time=PAGE_554
+3 Broken-down Time=PAGE_69
+3 Formatting Calendar Time=PAGE_228
+3 TZ Variable=PAGE_655
+3 Time Zone Functions=PAGE_641
+3 Time Functions Example=PAGE_640
+2 Sleeping=PAGE_558
+1 Non-Local Exits
+2 Non-Local Exits=PAGE_397
+2 Non-Local Intro=PAGE_398
+2 Non-Local Details=PAGE_395
+1 Signals
+2 Signal Handling=PAGE_546
+2 Concepts
+3 Concepts of Signals=PAGE_108
+3 Kinds of Signals=PAGE_321
+3 Signal Generation=PAGE_545
+2 Signal Types
+3 Standard Signals=PAGE_572
+3 Program Error Signals=PAGE_481
+3 Miscellaneous Signals=PAGE_377
+2 Signal Actions
+3 Signal Actions=PAGE_542
+3 Basic Signal Handling=PAGE_62
+2 Signal Handlers
+3 Defining Handlers=PAGE_146
+3 Handler Returns=PAGE_259
+3 Termination in Handler=PAGE_626
+3 Longjmp in Handler=PAGE_346
+3 Signals in Handler=PAGE_552
+3 Nonreentrancy=PAGE_393
+3 Atomic Data
+4 Atomic Data Access=PAGE_55
+4 Non-atomic Example=PAGE_394
+4 Atomic Types=PAGE_56
+4 Atomic Usage=PAGE_57
+2 Generating Signals
+3 Generating Signals=PAGE_243
+3 Signaling Yourself=PAGE_551
+1 Basics
+2 Program Basics=PAGE_480
+2 EMPTY
+3 Program Arguments=PAGE_479
+2 Environment Variables
+3 Environment Variables=PAGE_167
+3 Environment Access=PAGE_166
+2 Program Termination
+3 Program Termination=PAGE_482
+3 Normal Termination=PAGE_402
+3 Exit Status=PAGE_181
+3 Cleanups on Exit=PAGE_97
+3 Aborting a Program=PAGE_0
+1 Executing Programs
+2 Running a Command=PAGE_515
+2 Executing a File=PAGE_180
+1 Language Features
+2 Language Features=PAGE_322
+2 Consistency Checking=PAGE_114
+2 Variadic Functions
+3 Variadic Functions=PAGE_678
+3 Why Variadic=PAGE_688
+3 How Variadic=PAGE_278
+3 Variadic Prototypes=PAGE_679
+3 Receiving Arguments=PAGE_495
+3 How Many Arguments=PAGE_276
+3 Calling Variadics=PAGE_80
+3 Argument Macros=PAGE_44
+3 Variadic Example=PAGE_677
+2 Null Pointer Constant=PAGE_411
+2 Important Data Types=PAGE_284
+2 Data Types
+3 Data Type Measurements=PAGE_140
+3 Width of Type=PAGE_690
+3 Range of Type=PAGE_489
+3 Floating Point
+4 Floating Type Macros=PAGE_216
+4 Floating Point Concepts=PAGE_212
+4 Floating Point Parameters=PAGE_215
+4 IEEE Floating Point=PAGE_282
+3 Structure Measurement=PAGE_596
+1 Free Manuals=PAGE_234
+1 Copying=PAGE_127
+1 Documentation License=PAGE_156

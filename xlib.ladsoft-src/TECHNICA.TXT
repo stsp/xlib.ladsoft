@@ -1,0 +1,63 @@
+you can read the technica.text files in each of the source directorties
+for general information on how the various programs work, how the source
+modules are organized, and so forth.
+
+This file describes the build process and the subtrees the source files
+are in.
+
+In each directory there are several makefiles; three of them are of 
+direct interest.
+
+MAKEFILE.B32 is the make file for building the tool with Borland C Version
+4.5.  I used this extensively in debugging the package.
+
+MAKEFILE.OMF is the make file to use for building the WIN32 version of
+the tool with the toolchain itself.  The toolchain must be on the path.
+
+MAKEFILE.DOS is the make file to use for building the DOS version of the
+tool with the toolchain (using tran's pmode).
+
+MAKEFILE.lx is the make file to use for building the DOS version of the
+tool with the toolchain (using DOS32A).
+
+In this, the root directory for the source code are three corresponding
+make files.
+
+B32.MAK is a global make file which will make ALL the tools with borland C
+4.5 and put them into a directory '\tools\bin\win32'.
+
+WIN.MAK is a global make file which will make the win32 version of
+ALL the tools with the tools themselves.
+
+DOS.MAK is a global make file which will make the DOS version of ALL the
+tools with the tools themselves.
+
+The makefiles in the source directories use a file 'upbuild.exe'.  This
+increments the compile number of each EXE file in VERSION.H, which is then
+imported as part of the build for the tool.  I use this as a sanity check
+so I know what version of things I am running.  This is disabled when
+one of the global make files is being run through use of the FULLBUILD
+flag.
+
+Following is a description of the directory tree
+
+directory   program
+-------------------------------------------
+include     include (.h) files for cc386 compiler
+source      source (.C) files for cc386 compiler
+object      directory object/make files for the CC386 compiler are in
+cl_51       source for CL386 command line wrapper
+mk_49       source for MK386 make file generator
+mkliblst    source for mkliblst: used to combine object file names into
+            a declaration file for use with the librarian
+itouch      source for a simple touch utility
+valx        source for the VALX linker
+XLIB        source for the XLIB librarian
+XRC         source for the XRC resource compiler
+grep        source for the grep program
+imake       source for the imake make utility
+nasm9825    source for the NASM assembler
+CCIDE       source for the IDE
+brc         source for the browse compiler (used only by the IDE)
+import      source for the import librarian
+gnu_regex   source for the regular expression dll

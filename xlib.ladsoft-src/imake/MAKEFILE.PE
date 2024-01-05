@@ -1,0 +1,56 @@
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = cc386 /c
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx
+SOURCE = ..\source
+OBJ = obj
+
+		.autodepend
+.c.obj:
+  &$(CC) $*
+#		*List Macros*
+
+EXE_dependencies = \
+ALLOCATE.obj \
+ARGS.obj \
+DUMP.obj \
+ENV.obj \
+ext.obj \
+fatal.obj \
+IF.obj \
+IMAKE.obj \
+INPUT.obj \
+MACROS.obj \
+MAKER.obj \
+MODULE.obj \
+PARSER.obj \
+PHASH.obj \
+phitext.obj \
+PSTR.obj \
+REGISTER.obj \
+srchpath.obj \
+SPAWNER.obj \
+SYMCHAR.obj \
+usage.obj
+
+#		*Explicit Rules*
+imake.exe: upbuild $(EXE_dependencies) imake.res
+  del imake.exe
+  $(LINK) -use32 -nci -pe -con -Map @&&|
+c0xwin.obj $(EXE_dependencies),imake.exe,imake.map,clwin.lib climp.lib,imake.res,
+|
+
+imake.res: imake.rc ..\version.h
+        xrc -r imake.rc > q
+
+upbuild:
+        ..\upbuild $(FULLBUILD) IMAKE
+
+imake.obj: imake.c ..\version.h
+        $(CC) imake.c

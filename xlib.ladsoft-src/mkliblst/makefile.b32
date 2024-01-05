@@ -1,0 +1,51 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = bcc32 -c -v -DBORLANDC
+ASM = TASM32 /zi /ml /m2
+LIB = tlib
+LINK = tlink32
+INCLUDEPATH = C:\bc5\INCLUDE;..\include
+
+.c.obj:
+  $(CC) $<
+#		*List Macros*
+
+LIB_dependencies = \
+mkliblst.obj
+
+DLL_dependencies = \
+mkliblst.obj
+
+all: mkliblst.exe mkdlllst.exe
+
+#		*Explicit Rules*
+mkliblst.exe: $(LIB_dependencies) mkliblst.res
+  $(LINK) /c/v/s/L\bc5\lib @&&|
+        c0x32.obj $(LIB_dependencies)
+        mkliblst.exe
+        mkliblst.map
+        import32.lib cw32.lib
+        #
+        mkliblst.res
+|
+mkliblst.res: ..\version.h mkliblst.rc
+        brc32 -I\bc5\include -r mkliblst.rc
+
+mkdlllst.exe: $(DLL_dependencies) mkdlllst.res
+  $(LINK) /c/v/s/L\bc5\lib @&&|
+        c0x32.obj $(DLL_dependencies)
+        mkdlllst.exe
+        mkdlllst.map
+        import32.lib cw32.lib
+        #
+        mkdlllst.res
+|
+mkdlllst.res: ..\version.h mkdlllst.rc
+        brc32 -I\bc5\include -r mkdlllst.rc
+
+#		*Individual File Dependencies*

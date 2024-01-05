@@ -1,0 +1,82 @@
+<CC386RULE>
+    <PROPGROUP VERSION="10" CLASS="EXTENEDED" SELECT="LINK" NAME="Linker Settings" ORDER="21">
+    	<COMMAND>
+  			<ITEM NAME="Command Line" ID="__COMMAND_LINE" TYPE="TEXT">
+   				"$$(LSINSTALLBIN)\valx.exe" "@&amp;&amp;|
+/NCI $$(LFLAGS) $$(LSTARTUP) "%.obj","$(OUTPUTFILE)","%.map","%.lib" $$(LLIBS),"%.res","%.def"
+|"
+   			</ITEM>
+            <ITEM NAME="Make Banner" ID="__MAKEBANNER" TYPE="TEXT">Linking</ITEM>
+            <ASSIGNMENTS>
+				<CHOOSE ID="__DEBUG" SELECT="1">
+					<ASSIGN ID="__LDEBUG">/DEB</ASSIGN>
+				</CHOOSE>
+                <CHOOSE ID="__PROJECTTYPE" SELECT="0">
+                    <ASSIGN ID="__FLAGS">/PE /CON</ASSIGN>
+                    <ASSIGN ID="__STARTUP">c0xwin.obj</ASSIGN>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="1">
+                        <ASSIGN ID="__LIBS">clwin.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="2">
+                        <ASSIGN ID="__LIBS">lscrtl.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="3">
+                        <ASSIGN ID="__LIBS">crtdll.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="4">
+                        <ASSIGN ID="__LIBS">msvcrt.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                </CHOOSE>
+                <CHOOSE ID="__PROJECTTYPE" SELECT="1">
+                    <ASSIGN ID="__FLAGS">/PE /WIN</ASSIGN>
+                    <ASSIGN ID="__STARTUP">c0win.obj</ASSIGN>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="1">
+                        <ASSIGN ID="__LIBS">clwin.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="2">
+                        <ASSIGN ID="__LIBS">lscrtl.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="3">
+                        <ASSIGN ID="__LIBS">crtdll.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="4">
+                        <ASSIGN ID="__LIBS">msvcrt.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                </CHOOSE>
+                <CHOOSE ID="__PROJECTTYPE" SELECT="2">
+                    <ASSIGN ID="__FLAGS">/PE /WIN /BDL</ASSIGN>
+                    <ASSIGN ID="__STARTUP">c0dwin.obj</ASSIGN>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="1">
+                        <ASSIGN ID="__LIBS">clwin.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="2">
+                        <ASSIGN ID="__LIBS">lscrtl.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="3">
+                        <ASSIGN ID="__LIBS">crtdll.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                    <CHOOSE ID="__LIBRARYTYPE" SELECT="4">
+                        <ASSIGN ID="__LIBS">msvcrt.lib climp.lib</ASSIGN>
+                    </CHOOSE>
+                </CHOOSE>
+                <CHOOSE ID="__PROJECTTYPE" SELECT="4">
+                    <ASSIGN ID="__FLAGS">/32 /LE</ASSIGN>
+                    <ASSIGN ID="__STARTUP">c0dosw.obj</ASSIGN>
+                    <ASSIGN ID="__LIBS">cldos.lib</ASSIGN>
+                </CHOOSE>
+                <CHOOSE ID="__PROJECTTYPE" SELECT="5">
+                    <ASSIGN ID="__FLAGS">/32 /SYS</ASSIGN>
+                    <ASSIGN ID="__STARTUP"></ASSIGN>
+                </CHOOSE>
+                <ASSIGN ID="LFLAGS">$(__LDEBUG) $(__FLAGS) $(__LFLAGS)</ASSIGN>
+                <ASSIGN ID="LSTARTUP">$(__STARTUP)</ASSIGN>
+                <ASSIGN ID="LLIBS">$(__LIBS) $(__LLIBS)</ASSIGN>
+            </ASSIGNMENTS>
+    	</COMMAND>	
+		<PROPS NAME="Linker Settings" HELPID="620">
+			<ITEM NAME="Additional Libraries" TYPE="TEXT" ID="__LLIBS"/>
+			<ITEM NAME="Additional Switches" TYPE="TEXT" ID="__LFLAGS"/>
+		</PROPS>
+	</PROPGROUP>
+</CC386RULE>
+

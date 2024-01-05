@@ -1,0 +1,79 @@
+
+/* Protogen Version 1.00 Thursday June 07, 2001  17:40:26 */
+
+                                /* Res.c */
+
+int compare_type(RES_ID *id1, RES_ID *id2);                       /* STATIC */
+void AddResource (RES_DIR **dir, RES_RES *r, RES_ID *type, RES_ID *id, 
+			int language, int dupok);
+void ierror(void);                                                /* STATIC */
+void data_read (void *data, size_t size, int count, FILE *fil);   /* STATIC */
+CHARACTER *read_string (int *len, FILE *fil);                     /* STATIC */
+void read_id (RES_ID *id,FILE *fil);                              /* STATIC */
+int entry_read (FILE *fil);                                       /* STATIC */
+RES_DIR * resource_file_read (const char *fn);
+void oerror(void);                                                /* STATIC */
+void data_write (void *data, size_t size, int count, FILE *fil);  /* STATIC */
+void write_id (RES_ID *id, FILE *fil);                            /* STATIC */
+unsigned long id_size (RES_ID *id);                               /* STATIC */
+void header_write (int datasize, RES_ID *type, RES_ID *name, RES_INFO *info, FILE *fil);/* STATIC */
+void bin_write (RES_DIR *res, FILE *fil);                         /* STATIC */
+void write_resource (const char *fn, RES_DIR *res);
+
+                              /* Cvtres.c */
+
+int get_16(int be, unsigned char *s) ;                            /* STATIC */
+long get_32(int be, unsigned char *s) ;                           /* STATIC */
+void checksize (int left, int size) ;                             /* STATIC */
+CHARACTER *to_string (unsigned char *data, int length, 
+															 int be, int *retlen);                             /* STATIC */
+int to_resid (RES_ID *id, unsigned char *data, 
+											int length, int be);                                   /* STATIC */
+RES_RES * to_accelerators (unsigned char *data, int length, 
+																	int be);                                         /* STATIC */
+RES_RES *to_cursor (unsigned char *data, int length, int be);     /* STATIC */
+RES_RES *to_generic (enum res_type type, unsigned char *data, int length);/* STATIC */
+RES_RES * to_dialog (unsigned char *data, 
+																					int length, int be);                         /* STATIC */
+RES_RES *to_fontdir (unsigned char *data, int length, 
+																		int be);                                        /* STATIC */
+RES_RES *to_group_cursor (unsigned char *data, int length, 
+																				int be);                                      /* STATIC */
+RES_RES *to_group_icon (unsigned char *data, 
+															int length, int be);                               /* STATIC */
+struct menuitem *to_menuitems (unsigned char *data, 
+										int length, int be, int *read);                         /* STATIC */
+struct menuitem *to_menuexitems (unsigned char *data, 
+										int length, int be, int *read);                         /* STATIC */
+RES_RES *to_menu (unsigned char *data, int length, 
+																			int be);                                       /* STATIC */
+RES_RES *to_rcdata (unsigned char *data, int length, 
+																	int be);                                         /* STATIC */
+RES_RES *to_stringtable (unsigned char *data, int length, int be);/* STATIC */
+RES_RES *to_userdata (unsigned char *data, int length, int be);   /* STATIC */
+void get_version_header (unsigned char *data, int length, 
+																int be, char *key, CHARACTER **pkey, 
+																int *len, int *vallen, int *type, int *off) ;     /* STATIC */
+RES_RES *to_version (unsigned char *data, int length, int be);    /* STATIC */
+RES_RES * convert_to_internal (RES_ID *type, unsigned char *data, 
+																	 int length, int be);
+void put_16(int be, int v, unsigned char *s) ;                    /* STATIC */
+long put_32(int be, int v, unsigned char *s) ;                    /* STATIC */
+BINDATA *from_resid (RES_ID id, int be);                          /* STATIC */
+BINDATA *from_string (CHARACTER * str, int be);                   /* STATIC */
+BINDATA *ascii_to_string (char *s, int be);                       /* STATIC */
+BINDATA *from_rcdata (struct rcdata_item *items, int be);         /* STATIC */
+BINDATA *from_accelerator (struct accelerator *acc, int be);      /* STATIC */
+BINDATA *from_cursor (struct cursor *c, int be);                  /* STATIC */
+BINDATA *from_dialog (struct dialog *dialog, int be);             /* STATIC */
+BINDATA *from_fontdir (struct fontdir *fontdirs, int be);         /* STATIC */
+BINDATA *from_generic (unsigned long length, unsigned char *data);/* STATIC */
+BINDATA *from_group_cursor (struct group_cursor *gcs, int be);    /* STATIC */
+BINDATA *from_group_icon (struct group_icon *group_icons, int be);/* STATIC */
+BINDATA *from_menuitems (struct menuitem *items, int be);         /* STATIC */
+BINDATA *from_menuexitems (struct menuitem *items, int be);       /* STATIC */
+BINDATA *from_menu (struct menu *menu, int be);                   /* STATIC */
+BINDATA *from_stringtable (struct stringtable *st, int be);       /* STATIC */
+BINDATA *from_versioninfo (struct versioninfo *versioninfo, int be);/* STATIC */
+BINDATA *convert_from_internal (RES_RES *res, int be);
+/* Protogen Version 1.00 Thursday June 07, 2001  19:54:01 */

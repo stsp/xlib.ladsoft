@@ -1,0 +1,65 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = cc386 /c -DMSDOS
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx /DEBUG
+SOURCE = ..\source
+
+.c.obj:
+  $(CC) $< 
+#		*List Macros*
+
+EXE_dependencies = \
+asmsubs.obj \
+cv.obj \
+def.obj \
+dictary.obj \
+endlink.obj \
+execfile.obj \
+files.obj \
+fixup.obj \
+globals.obj \
+initlink.obj \
+library.obj \
+linkerio.obj \
+list.obj \
+lx.obj \
+main.obj \
+map.obj \
+memory.obj \
+object.obj \
+order.obj \
+pe.obj \
+resource.obj \
+srchpath.obj \
+string.obj \
+timer.obj \
+tmodule.obj \
+token.obj \
+unmangle.obj \
+userinp.obj \
+
+#		*Explicit Rules*
+valx.exe: upbuild $(EXE_dependencies) valx.res
+  del valx.exe
+  $(LINK) -nci -le -use32 -map -STB:(..\..\..\cc386\bin\dos32a.exe) @&&|
+c0dosw.obj $(EXE_dependencies),valx.exe,valx.map,cldos.lib,,
+|
+q.exe: $(EXE_dependencies)
+  td32 $(LINK) -nci -lx -map @&&|
+c0dosw.obj $(EXE_dependencies),q.exe,q.map,cldos.lib,,
+|
+valx.res: valx.rc
+  xrc -r valx.rc
+upbuild:
+        ..\upbuild $(FULLBUILD) VALX
+
+profile.obj: profile.c
+	cc386 -C+N profile
+	NASM -fobj profile.asm

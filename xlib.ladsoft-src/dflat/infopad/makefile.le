@@ -1,0 +1,44 @@
+#-------------------------------------------------------------------
+#        D - F L A T   M A K E F I L E  -  Borland C++ 3.1 and 4.0
+#-------------------------------------------------------------------
+
+all : infopad.exe infopad.hlp
+
+#-------------------------------------------------------------------
+#  Delete the TESTING macro to eliminate the Reload
+#  Help file selection on the Help menu.
+#-------------------------------------------------------------------
+TESTING = TESTING_DFLAT
+#-------------------------------------------------------------------
+#  This macro builds the full D-Flat system with all options enabled.
+#  Comment it out for a minimum system or selectively
+#  comment out the #defines at the top of dflat.h.
+#-------------------------------------------------------------------
+FULL = BUILD_FULL_DFLAT
+#-------------------------------------------------------------------
+
+#------------------------------------------------
+# NOTE: Delete the DEBUG and LINKDEBUG macros to 
+# build without debugging information in the .EXE
+#------------------------------------------------
+DEBUG = -v
+LINKDEBUG = /DEB /Map
+#------------------------------------------------
+COMPILE = cc386 $(DEBUG) -D$(TESTING) -D$(FULL) -DBCPP +c /C+R /I..\dflatlib
+LINK= valx -le -nci $(LINKDEBUG)
+#------------------------------------------------
+
+.c.obj:
+    $(COMPILE) $*.c
+
+infopad.exe : infopad.obj imenus.obj iedit.obj print.obj editfunc.obj
+    $(LINK) @&&|
+c0dosw.obj infopad imenus iedit editfunc print
+infopad
+infopad
+..\dflatlib\dflat.lib doslea.lib cldos.lib
+|
+
+infopad.hlp : infopad.txt
+    ..\dflatlib\huffc infopad.txt infopad.hlp
+    ..\dflatlib\fixhelp infopad

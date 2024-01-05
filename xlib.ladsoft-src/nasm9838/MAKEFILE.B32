@@ -1,0 +1,145 @@
+# Makefile for the Netwide Assembler under 32 bit NT console
+#
+# The Netwide Assembler is copyright (C) 1996 Simon Tatham and
+# Julian Hall. All rights reserved. The software is
+# redistributable under the licence given in the file "Licence"
+# distributed in the NASM archive.
+#
+# This Makefile is designed to build NASM with the latest
+# version of Borland C++Builder and has been tested with 
+# Borland C++ 5.3 (Borland C++Builder 3.0) and Borland C++ 5.4
+# (Borland C++Builder 4.0) in combination with
+# Borland MAKE versions 5.1 and 5.2
+#
+# MAKEFILE is maintained by Stefan.Hoffmeister@Econos.de
+#
+
+
+# If "BINDIR=C:\...." has not been defined on the command line
+# assume that the binary files are in the same directory as the
+# MAKE utility
+!message ****************************************************
+!message Note:
+!message -----
+!if $d(BINDIR)
+  !message Path to tools set to $(BINDIR)
+!else
+  BINDIR=$(MAKEDIR)
+  !message Assuming path to tools to be $(BINDIR)
+  !message
+  !message You can change this assumption by specifying
+  !message   -DBINDIR=C:\my_path
+  !message as a command line paramter for MAKE
+!endif
+!message ****************************************************
+
+
+CC=$(BINDIR)\bcc32
+CCFLAGS=-tWC -c -O2 -A -v -I\bc5\include
+CCFLAGS2=-tWC -c -O2 -v -I\bc5\include
+  # /-tWC: Windows console mode application
+  # /c:    Compile, do not link
+  # /O2:   Optimize for speed
+  # /A:    ANSI compatible code only
+
+LINK=$(BINDIR)\tlink32
+LINKFLAGS=/x /c /v /L$(BINDIR)\..\LIB     # /L -> default LIB directory
+  # /V4.0: marked as Win95 / NT application in PE header
+  # /x:    no map file
+  # /c:    case sensitive link
+  # /ap:   link for 32-bit console application
+  # /L...: path to .lib directory
+
+
+# default libraries for Win32 console applications
+LIBRARIES=cw32.lib import32.lib
+# default startup code for Win32 console applications
+STARTUP=c0x32.obj
+
+# default extension for our EXE
+EXE=.exe
+# default extension for OBJ files
+OBJ=obj
+
+
+SUFFIX= w#       # by default, this makefile produces nasmw.exe and ndisasmw.exe
+
+
+# Builds C files to OBJ
+.c.obj:
+  $(CC) $(CCFLAGS) $&.c
+
+
+NASMOBJS = nasm.obj nasmlib.obj float.obj insnsa.obj \
+	   assemble.obj labels.obj parser.obj outform.obj \
+		  outbin.obj outaout.obj outcoff.obj outelf.obj \
+		  outobj.obj outas86.obj outrdf.obj outdbg.obj \
+                  outrdf2.obj outieee.obj \
+		  preproc.obj listing.obj eval.obj
+
+NDISASMOBJS = ndisasm.obj disasm.obj sync.obj nasmlib.obj \
+	      insnsd.obj
+
+
+BuildAll: nasm.exe ndisasm.exe
+
+
+# NASM
+nasm.exe: upbuild $(NASMOBJS) nasm.res
+  $(LINK) $(LINKFLAGS) @&&|     #open temp response file
+    $(STARTUP) $(NASMOBJS)
+    nasm.exe
+    # default def file
+    $(LIBRARIES)
+    # no def file
+    nasm.res
+|                                # close temp file, first column!
+nasm.res: nasm.rc ..\version.h
+        brc32 -r -i\bc5\include nasm.rc
+
+upbuild:
+        ..\upbuild $(FULLBUILD) NASM
+
+# NDISASM
+ndisasm.exe: $(NDISASMOBJS)
+  $(LINK) $(LINKFLAGS) @&&|     #open temp response file
+    $(STARTUP) $**
+    ndisasm.exe
+    # default MAP file name for EXE
+    $(LIBRARIES)
+|                                # close temp file, first column!
+
+
+# OBJs with dependencies
+assemble.obj: assemble.c nasm.h insnsi.h assemble.h insns.h
+disasm.obj: disasm.c nasm.h insnsi.h disasm.h sync.h insns.h names.c insnsn.c
+eval.obj: eval.c nasm.h insnsi.h nasmlib.h eval.h
+float.obj: float.c nasm.h insnsi.h
+insnsa.obj: insnsa.c nasm.h insnsi.h insns.h
+insnsd.obj: insnsd.c nasm.h insnsi.h insns.h
+labels.obj: labels.c nasm.h insnsi.h nasmlib.h
+listing.obj: listing.c nasm.h insnsi.h nasmlib.h listing.h
+nasm.obj: nasm.c nasm.h insnsi.h nasmlib.h parser.h assemble.h labels.h \
+             listing.h outform.h
+nasmlib.obj: nasmlib.c nasm.h insnsi.h nasmlib.h names.c insnsn.c
+ndisasm.obj: ndisasm.c nasm.h insnsi.h sync.h disasm.h
+outas86.obj: outas86.c nasm.h insnsi.h nasmlib.h
+outaout.obj: outaout.c nasm.h insnsi.h nasmlib.h
+outbin.obj: outbin.c nasm.h insnsi.h nasmlib.h
+outcoff.obj: outcoff.c nasm.h insnsi.h nasmlib.h
+outdbg.obj: outdbg.c nasm.h insnsi.h nasmlib.h
+outelf.obj: outelf.c nasm.h insnsi.h nasmlib.h
+outobj.obj: outobj.c nasm.h insnsi.h nasmlib.h
+  $(CC) $(CCFLAGS2) outobj.c
+outrdf.obj: outrdf.c nasm.h insnsi.h nasmlib.h
+outrdf2.obj: outrdf2.c nasm.h insnsi.h nasmlib.h
+outieee.obj: outieee.c nasm.h insnsi.h nasmlib.h
+outform.obj: outform.c outform.h nasm.h insnsi.h
+parser.obj: parser.c nasm.h insnsi.h nasmlib.h parser.h float.h names.c insnsn.c
+preproc.obj: preproc.c macros.c preproc.h nasm.h insnsi.h nasmlib.h
+sync.obj: sync.c sync.h
+
+clean:
+  del *.obj
+  del nasm.exe
+  del ndisasm.exe

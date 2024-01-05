@@ -1,0 +1,35 @@
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = cc386 /c
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx
+SOURCE = ..\source
+LIBPATH = C:\bc5\LIB
+INCLUDEPATH = C:\bc5\INCLUDE;..\include
+
+.c.obj:
+  @$(CC) $< 
+#		*List Macros*
+
+LIB_dependencies = \
+mkliblst.obj 
+
+DLL_dependencies = \
+mkdlllst.obj
+
+all: mkliblst.exe mkdlllst.exe
+
+#		*Explicit Rules*
+mkliblst.exe: $(LIB_dependencies)
+  $(LINK) -nci -le -map -STB:(pmodew.exe) @&&|
+\cc386\lib\c0dosw.obj $(LIB_dependencies),mkliblst.exe,mkliblst.map,\cc386\lib\cldos.lib,,
+|
+mkdlllst.exe: $(DLL_dependencies)
+  $(LINK) -nci -le -map @&&|
+\cc386\lib\c0dosw.obj $(DLL_dependencies),mkdlllst.exe,mkdlllst.map,\cc386\lib\cldos.lib,,
+|

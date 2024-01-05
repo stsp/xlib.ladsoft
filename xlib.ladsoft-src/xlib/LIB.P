@@ -1,0 +1,10 @@
+
+/* Protogen Version 1.05 Monday September 18, 1995  06:51:52 */
+
+                                /* Lib.c */
+
+void ReadLib(int maxmode,char *libname);
+void Extract(int maxmode, char *libname);
+void Insert(int maxmode, char *libname);
+void Delete(int maxmode, char *libname);
+void OutputLibrary(char *libname);

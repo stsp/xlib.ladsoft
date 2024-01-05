@@ -1,0 +1,193 @@
+tthis text outlines the general design of the compiler.
+
+C is basically made up of declarations.  DECL.C is responsible
+for parsing all declarations.  There are two basic types of
+declarations, data declarations and function declarations.
+
+---------------------------------------------------------------------
+data declarations are parsed and each results in a structure of type SYM
+which completely determines all information about the symbol being
+declared.  Symbols are generally put in either a hash table or a linked
+list depending on whether it is at file scope or function scope.  
+Symbol management is mostly done in SYMBOL.C
+
+Because typing is very important
+each symbol is accompanied by a linked list of TYP structures which
+determines the type of the symbol.  This information is used for
+type compatability and auto-casting purposes.  This is all
+fairly straightforward, the most confusing part of the TYP structure
+is the 'val_flag' field.  In general this will be zero, which indicates
+that to get the value of the variable you must load it out of the
+corresponding address.  When this is set for one (which it is for
+example for arrays and structs) it means that the address of the
+variable is its value.
+
+a variable may optionally be assigned an initial value.  If
+the value is outside all functions the procedures in INIT.C
+will be called to grab the initial values.  Initial values will
+be put in a linked list of type 'struct decldata' which is also
+part of the SYM structure.  When the program has been completely
+parsed the symbol table will be traveresed and all this initial
+data will be dumped to the file.
+
+When a non-static variable inside a function receives an initial value, it
+will be treated very similarly to any other kind of assignment
+statement.
+
+
+---------------------------------------------------------------------
+function declaration is done in several stages.  When a function declaration
+is located control is transfered to FUNC.C which does the
+entire function declaration.  FUNC.C calls DECL.C to parse
+arguments and it calls STMT.C to parse the function body.
+
+In the first stage the input is parsed by STMT.C and put into a 
+list of SNODE structures.  The SNODE list
+is basically an internal representation of the program flow.
+
+Expressions are a kind of statment.  In addition they may be
+evaluated in conjunction with a more complex statement, for
+example the 'for' statment has three expressions which control
+the looping.  Each expression is parsed into a binary tree of type
+ENODE and then placed in an appropriate field of the SNODE of the
+corresponding statement.
+
+The basic unit of compilation is a function.  When the SNODE/ENODE
+structs have been created for a function, then OPTIMIZE.C is
+called to fold constants and get rid of algebraic identies like
+adds of zero or multiplies of zero or 1. Then ANALYZE.C is called to 
+determine what values should be stuffed into registers.  Basically, 
+the more you use it the more likely it is to get a register.
+
+Once these stages of optimization are done, the root node of the
+SNODE list is passed to GSTMT386.C.  GSTMT386.C follows
+the SNODE links and generates code in the form of a list of ICODE 
+structures.
+
+When an expression is to be evalutated control is transfered to
+GEXPR386.C which generates the code for the expression.  In this
+stage individual variables get the intermediate form of an AMODE
+structure, which describes the processor addressing mode required
+to access the variable.  The
+result of this stage is a doubly-linked list of ICODE structures
+which define the assembly statements.  At this point  PEEP386.C
+is called to do very basic optimizations like turning compares into
+tests or move immediates of zero into subtractions.  Once
+the routines in peep386.C have completed their job the ICODE
+structure is then processed to generate the assembler output.  The
+main loop for this is also in PEEP386.C, but the actual output of
+code is done by OUTAS386.C
+---------------------------------------------------------------------
+
+At the bottom of the compiler is a backbone made up of PREPROC.C
+and GETSYM.C.  GETSYM.C reads in successive lines, then calls PREPROC.C
+to evaluate any and all preprocessor directives and to do macro
+substitutions.  After this GETSYM.C breaks thinks up into
+tokens of various types such as identifiers, strings and numbers.  
+GETSYM.C will call SEARCHKW.C any time it locates an identifier;
+SEARCHKW.C will turn the identifier into a token denoting a reserved
+word if it matches one of the reserved words.
+
+One other important thing is MEMMGT.C, which implements a fairly
+simple memory management scheme.  There are basically two groups
+of memory 'global heap' and 'local heap'.  The global heap is
+resident for the entire compile but the local heap is flushed
+at the end of code generation for every function.  This somewhat
+cuts down on memory needed by the compiler.  Because by the time
+we hit the actual MALLOC and FREE routines we are dealing with
+fairly constant size blocks, we don't have to worry about whether
+the compiler used to compile this code has an adequate memory
+management algorithm.  
+
+The following source files make up this program:
+
+AN68.C      - register allocation, 68K specific
+AN386.C     - register allocation, 386 specific
+ANALYZE.C   - generic register allocation routines
+ARGS.C      - command line argument parser
+BROWSE.C    - add browse information to the object file
+CMAIN.C     - main routine, command line parsing and wrapper around high
+            - level compiler routines
+CONF68.C    - configuration file for 68K compiler
+CONF386.C   - configuration file for 386 compiler
+DBG68.C     - stubs to declare debug routines for 68K, null for now
+DBG386.C    - outputs debug information for the 386
+DECL.C      - Main parsing for the program, parses all declarations.
+            - functions are a kind of declaration
+DECLASS.C   - general parsing for the minimal C++ support
+
+ERROR.C     - routines to display errors
+EXPR.C      - parsing for expressions
+EXT.C       - small routines to deal with file extensions
+FATAL.C     - routine to say a 'fatal' message to the console and exit
+floatexp.c  - input a floating point constant expression
+FRIEND.C    - handle C++ friend functiosn
+FUNC.C      - parse function arguments, high level function declarations
+GETSYM.C    - low level routine gets input
+GEXPR68.C   - low level routine to turn the high level expression lists
+            - into a sequence of processor instruction specifiers
+            - (68k version)
+GEXPR386.C  - low level routine to turn the high level expression lists
+            - into a sequence of processor instruction specifiers
+            - (386 version)
+GSTMT68.C   - low level routines to turn the statement lists into
+            - instruction specifiers. (68k version)
+GSTMT386.C  - low level routines to turn the statement lists into
+            - instruction specifiers. (386 version)
+INASM68.C   - inline assembly handlers (68K version)
+INASM386.C  - inline assembly handlers (386 version)
+INIT.C      - initialization of file level declared variables
+INLINE.C    - 'inline' keyword handler
+intexpr.c   - input a fixed point constant expression
+intr68.c    - intrinsic handlers, 68k (does nothing)
+intr386.c   - intrinsic handlers, 386
+INVOKE.C    - Code for the 386 to spawn the assembler, linker, resource
+            - compiler, and so forth
+LIST.C      - handle the listing file
+mangle.c    - handle name mangling for C++
+MEMMGT.C    - memory management
+OBJ386.C    - Output an OMF object file (386 version)
+objieee.c   - output an IEEE object file (68K version)
+OPTIMIZE.C  - constant folding optimizations
+OUTAS68.C   - output assembly language (68K)
+OUTAS386.C  - output assembly language (386)
+outco68.c   - create the machine language code that will go in the object file
+            - (68K)
+outco386.c  - create the machine language code that will go in the object file
+            - (386)
+PEEP68.C    - do simple transformations of the assembly code to optimize things
+            - (68K)
+Peep386.c   - do simple transformations of the assembly code to optimize things
+            - (386)
+PHITEXT.C   - input parser for PHITEXT (phitext will be off for standard
+            - text files)
+PREPROC.C   - handle preprocessor statements
+PSTR.C      - string functiosn for SHORT arrays
+REG68.C     - temp register allocation during expression creation, 68K
+REG386.C    - temp register allocation during expression creation, 386
+SEARCHKW.C  - search the keyword tables to try to find a match
+SRCHPATH.C  - search a path for a file
+STMT.C      - parse the statements in a function into internal representation
+SYMBOL.C    - symbol handling
+SYMCHAR.C   - 'ctype' style tables for phitext
+TEMPLATE.C  - much of the template code generation.  most of the parsing
+            - is in decl.c and getsym.c
+TYPES.C     - type checking routines
+USAGE.C     - usage and banner routines
+BROWSE.H    - header for browse compiler compatability
+C.H         - main header, symtab declaration, general declarations
+CMDLINE.H   - declarations for some of the command line routines
+Cvinfo.h    - declarations for the codeview-like debug info
+DIAG.H      - declarations for the DIAG function, used for internal errors
+ERRORS.H    - declarations to define error constants
+EXPR.H      - declarations related to ENODEs and SNODES
+GEN68.H     - backend declarations for 68k
+GEN386.H    - backend declarations for 386
+HASH.H      - hash declarations
+INTERP.H    - declarations for phitext
+LISTS.H     - lists declarations
+UTYPE.H     - basic types
+WINMODE.H   - declarations for the INVOKE functionality
+cc.p        - prototypes for main program
+cc68.p      - prototypes for 68K backend
+cc386.p     - prototypes for 386 backend

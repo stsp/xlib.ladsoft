@@ -1,0 +1,27 @@
+CC = cc386 /c
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx
+
+.c.obj:
+  $(CC) $< 
+#		*List Macros*
+
+EXE_dependencies = \
+itouch.obj \
+usage.obj \
+args.obj \
+ext.obj \
+file.obj \
+fatal.obj
+
+#		*Explicit Rules*
+itouch.exe: upbuild $(EXE_dependencies)
+  $(LINK) -use32 -nci -Map @&&|
+c0dos.obj  $(EXE_dependencies),itouch.exe,itouch.map,cldos.lib,,
+|
+upbuild:
+        ..\upbuild $(FULLBUILD) ITOUCH
+
+itouch.obj: itouch.c ..\version.h
+        $(CC) itouch.c

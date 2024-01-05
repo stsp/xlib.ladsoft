@@ -1,0 +1,15 @@
+
+/* Protogen Version 1.07 Wednesday November 01, 1995  17:39:49 */
+
+                               /* Maker.c */
+
+void nxtarget(short *target);                                     /* STATIC */
+void CompressFile(char *out, short*in);                           /* STATIC */
+void ExpandFile(short *out, char *in);                            /* STATIC */
+unsigned long getfiletime(short *file);                           /* STATIC */
+FILEREC *FileData(short *string);
+FILEREC *RecurseTarget(short *target);
+BOOL matches(short *string, short *wild);
+void Stamp(FILEREC *rec, char *string);
+FILEREC *Weed(FILEREC *list);
+FILEREC *RecurseAllTargets(void);

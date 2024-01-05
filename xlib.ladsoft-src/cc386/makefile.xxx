@@ -1,0 +1,448 @@
+#
+#  Generated make file for workspace C:\tools\cc\cc386\makefile.xxx
+#
+all: cc.exe 
+
+#
+# Tools Definitions
+#
+
+CC=CC386
+LINK=VALX
+ASM=NASM
+RC=XRC
+LIB=XLIB
+
+#
+# Default paths
+#
+INSTALLDIR=c:\program files (x86)\cc386
+PROJECTDIR=C:\tools\cc\cc386
+SYSTEMDIR=C:\Windows\system32
+WINDIR=C:\Windows
+#
+# Build rules for target cc.exe
+#
+#
+# Options
+#
+
+CFLAGS_CC_EXE =  /c +v /9   /w-all /Wc
+AFLAGS_CC_EXE = -fobj -Fls -g
+RCFLAGS_CC_EXE = -r
+LFLAGS_CC_EXE =  /32 /nci /PE /CON  /DEB
+LIBFLAGS_CC_EXE = 
+
+INCLUDE_CC_EXE = .\
+LIBS_CC_EXE = "$(INSTALLDIR)\lib\climp.lib" "$(INSTALLDIR)\lib\clwin.lib" 
+START_CC_EXE = "$(INSTALLDIR)\lib\c0xwin.obj" 
+OUTPUTDIR_CC_EXE=.\
+#
+# Rules
+#
+
+CC_EXE =  \
+	an386.obj  \
+	analyze.obj  \
+	args.obj  \
+	browse.obj  \
+	cmain.obj  \
+	conf386.obj  \
+	cppbltin.obj  \
+	dbg386.obj  \
+	decl.obj  \
+	declass.obj  \
+	einit.obj  \
+	error.obj  \
+	expr.obj  \
+	ext.obj  \
+	fatal.obj  \
+	float.obj  \
+	floatexp.obj  \
+	friend.obj  \
+	func.obj  \
+	getsym.obj  \
+	gexpr386.obj  \
+	gstmt386.obj  \
+	inasm386.obj  \
+	init.obj  \
+	inline.obj  \
+	intexpr.obj  \
+	intr386.obj  \
+	invoke.obj  \
+	list.obj  \
+	mangle.obj  \
+	memmgt.obj  \
+	obj386.obj  \
+	optimize.obj  \
+	outas386.obj  \
+	outco386.obj  \
+	output.obj  \
+	peep386.obj  \
+	preproc.obj  \
+	pstr.obj  \
+	reg386.obj  \
+	rtti.obj  \
+	searchkw.obj  \
+	srchpath.obj  \
+	stmt.obj  \
+	symbol.obj  \
+	template.obj  \
+	types.obj  \
+	usage.obj 
+
+#
+# User defines
+#
+
+DEFINES_CC_EXE = 	-Di386 \
+	-DCPLUSPLUS \
+	-DWIN32
+
+
+cc.exe : $(CC_EXE) cc386.res 
+	$(LINK) $(LFLAGS_CC_EXE) @&&|
+$(START_CC_EXE) $(CC_EXE),cc.exe,cc,$(LIBS_CC_EXE),cc386.res ,,
+|
+
+an386.obj : an386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oAN386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "AN386.c"
+|
+
+analyze.obj : analyze.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oANALYZE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "ANALYZE.c"
+|
+
+args.obj : args.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oARGS.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "ARGS.c"
+|
+
+browse.obj : browse.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oBROWSE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "BROWSE.c"
+|
+
+cmain.obj : cmain.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oCMAIN.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "CMAIN.c"
+|
+
+conf386.obj : conf386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oCONF386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "CONF386.c"
+|
+
+cppbltin.obj : cppbltin.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ocppbltin.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "cppbltin.c"
+|
+
+dbg386.obj : dbg386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oDBG386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "DBG386.c"
+|
+
+decl.obj : decl.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oDECL.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "DECL.c"
+|
+
+declass.obj : declass.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oDECLASS.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "DECLASS.c"
+|
+
+einit.obj : einit.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oeinit.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "einit.c"
+|
+
+error.obj : error.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oERROR.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "ERROR.c"
+|
+
+expr.obj : expr.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oEXPR.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "EXPR.c"
+|
+
+ext.obj : ext.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oEXT.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "EXT.c"
+|
+
+fatal.obj : fatal.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oFATAL.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "FATAL.c"
+|
+
+float.obj : float.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ofloat.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "float.c"
+|
+
+floatexp.obj : floatexp.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ofloatexp.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "floatexp.c"
+|
+
+friend.obj : friend.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oFRIEND.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "FRIEND.c"
+|
+
+func.obj : func.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oFUNC.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "FUNC.c"
+|
+
+getsym.obj : getsym.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oGETSYM.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "GETSYM.c"
+|
+
+gexpr386.obj : gexpr386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oGEXPR386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "GEXPR386.c"
+|
+
+gstmt386.obj : gstmt386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oGSTMT386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "GSTMT386.c"
+|
+
+inasm386.obj : inasm386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oINASM386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "INASM386.c"
+|
+
+init.obj : init.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oINIT.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "INIT.c"
+|
+
+inline.obj : inline.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oINLINE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "INLINE.c"
+|
+
+intexpr.obj : intexpr.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ointexpr.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "intexpr.c"
+|
+
+intr386.obj : intr386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ointr386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "intr386.c"
+|
+
+invoke.obj : invoke.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oINVOKE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "INVOKE.c"
+|
+
+list.obj : list.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oLIST.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "LIST.c"
+|
+
+mangle.obj : mangle.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-omangle.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "mangle.c"
+|
+
+memmgt.obj : memmgt.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oMEMMGT.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "MEMMGT.c"
+|
+
+obj386.obj : obj386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oOBJ386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "OBJ386.c"
+|
+
+optimize.obj : optimize.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oOPTIMIZE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "OPTIMIZE.c"
+|
+
+outas386.obj : outas386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oOUTAS386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "OUTAS386.c"
+|
+
+outco386.obj : outco386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ooutco386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "outco386.c"
+|
+
+output.obj : output.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ooutput.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "output.c"
+|
+
+peep386.obj : peep386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oPeep386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "Peep386.c"
+|
+
+preproc.obj : preproc.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oPREPROC.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "PREPROC.c"
+|
+
+pstr.obj : pstr.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oPSTR.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "PSTR.c"
+|
+
+reg386.obj : reg386.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oREG386.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "REG386.c"
+|
+
+rtti.obj : rtti.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-ortti.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "rtti.c"
+|
+
+searchkw.obj : searchkw.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oSEARCHKW.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "SEARCHKW.c"
+|
+
+srchpath.obj : srchpath.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oSRCHPATH.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "SRCHPATH.c"
+|
+
+stmt.obj : stmt.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oSTMT.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "STMT.c"
+|
+
+symbol.obj : symbol.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oSYMBOL.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "SYMBOL.c"
+|
+
+template.obj : template.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oTEMPLATE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "TEMPLATE.c"
+|
+
+types.obj : types.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oTYPES.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "TYPES.c"
+|
+
+usage.obj : usage.c 
+	$(CC) -f&&|
+$(CFLAGS_CC_EXE) "-oUSAGE.obj" -I$(INCLUDE_CC_EXE)
+ $(DEFINES_CC_EXE)
+ "USAGE.c"
+|
+
+cc386.res : cc386.rc 
+	$(RC) $(RCFLAGS_CC_EXE) "-focc386.res" -i$(INCLUDE_CC_EXE) @&&|
+$(DEFINES_CC_EXE)
+|
+

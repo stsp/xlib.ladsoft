@@ -1,0 +1,64 @@
+VALX is fairly simple in concept.  First it loads in all the object 
+files, seperating them into things like name declarations, data declarations,
+and information relating to relocations of data.  After that it looks
+to see if any external references still remain unresolved.  If so,
+it starts reading the library files in an attempt to find modules in the
+libraries that match the unresolved names.  Once that succeeds it starts
+building the executable, using either defaults or switches set on the command
+line to determine base addresses, executable mode, and such.  If no
+segment ordering was specified, it uses a default ordering to determine
+placement of everything in memory.  Then it loads the data, resolving
+all the relocation items as it goes.  Unresolved relocation items
+will eventually make it into the relocation section of the executable.
+Next it loads in the resource files and parses them, creating the resource
+section of the executable.  Finally it parses the debug information if there
+was any, relocating the per-file information into global tables.
+
+Another type of information found in the object files, browse information,
+is simply discarded.
+
+The one thing about valx is that the original author more or less created
+his own language by using #define liberally to create aliased names for
+most of the C language statements.  It should be fairly simple to read
+what he wrote, although making changes takes some effort in learning the
+technique.  I've made extensive modifications to the original code,
+sticking with is extensions when possible.  The extensions are all 
+defined in LANGEXT.H
+
+The following source files make up this distribution:
+
+ASMSUBS.C   - simple utility routines written in assembly
+CV.C        - debug information module
+DICTARY.C   - internal dictionary handlers
+ENDLINK.C   - rundown for the linker (statistics)
+EXECFILE.C  - main routine for generating DOS 16 bit images.  Calls the
+            - PE file image creator if WIN32 file selected
+FILES.C     - utilities for file handling
+FIXUP.C     - handles relocation information
+GLOBALS.C   - declares all variables as global
+INITLINK.C  - initialization for the linker
+LIBRARY.C   - library handlers
+LINKERIO.C  - console I/O functions
+LIST.C      - list manipulation
+MAIN.C      - the main routine.  Just calls a bunch of other routines
+MAP.C       - map file output
+MEMORY.C    - memory allocation
+OBJECT.C    - main line for processing the list of object modules
+ORDER.C     - figures out how to place the data in memory
+PE.C        - main routine for generating the PE image (except resource info)
+            - also dumps the debug info to a file
+RESOURCE.C  - process the resource files
+SRCHPATH.C  - search for files on a path
+STRING.C    - string functions
+TIMER.C     - timer functions (statistics)
+TMODULE.C   - main routines to parse an object file
+TOKEN.C     - parse tokens on the command line
+USERINP.C   - high level command line parsing
+Cvexefmt.h  - pefile format
+Cvinfo.h    - debug file format
+DEFINES.H   - general constant macros
+GLOBALS.H   - interface to find all the global variables
+INITLINK.H  - linker initialization.  There is source code herein!
+LANGEXT.H   - language extensions used wriing valx
+SUBS.H      - declare prototypes
+TYPES.H     - declare structures and other extended types

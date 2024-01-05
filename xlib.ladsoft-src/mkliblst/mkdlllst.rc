@@ -1,0 +1,26 @@
+#include "..\version.h"
+#include <windows.h>
+Language LANG_ENGLISH,SUBLANG_ENGLISH_US
+1 ICON "xlib.ico"
+1 VERSIONINFO 
+FILEVERSION XLIB_VERSION
+PRODUCTVERSION PRODUCT_VERSION
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN 
+                BLOCK "040904E4"
+                BEGIN
+                        VALUE "CompanyName", "LADSoft\0"
+                        VALUE "FileDescription","MKLIBLST librarian helper\0"
+                        VALUE "FileVersion", XLIB_STRING_VERSION "\0"
+                        VALUE "InternalName","mkliblst.exe\0"
+                        VALUE "OriginalFilename","mkliblst.exe\0"
+                        VALUE "ProductName",PRODUCT_NAME "\0"
+                        VALUE "ProductVersion",PRODUCT_STRING_VERSION "\0"
+                        VALUE "LegalCopyright",PRODUCT_COPYRIGHT "\0"
+                END
+        END
+END

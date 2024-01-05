@@ -1,0 +1,9 @@
+
+/* Protogen Version 1.05 Saturday March 18, 1995  13:08:38 */
+
+                               /* Hash.c */
+
+HASHREC *AddHash(HASHREC **table, HASHREC *item, char *key, int size);
+HASHREC **LookupHash(HASHREC **table, char *key, int size);
+HASHREC **CreateHashTable(int size);
+void DumpHashTable(HASHREC **t, char *string);

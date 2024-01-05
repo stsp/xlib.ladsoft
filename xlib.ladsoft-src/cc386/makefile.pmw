@@ -1,0 +1,221 @@
+# 
+#   Copyright 1994-2003 Free Software Foundation, Inc.
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License as published by
+#   the Free Software Foundation; either version 2 of the License, or
+#   (at your option) any later version.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public License
+#   along with this program; if not, write to the Free Software
+#   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+#   02111-1307, USA.  
+#
+#   This program is derived from the cc68k complier by 
+#   Matthew Brandt (mattb@walkingdog.net) 
+#
+#   You may contact the author of this derivative at:
+#
+#
+#   mailto::camille@bluegrass.net
+#
+#   or by snail mail at:
+#
+#   David Lindauer
+#   850 Washburn Ave Apt 99
+#   Louisville, KY 40222
+#
+# This makefile is for Borland make (IBM PC/80386+)
+#.AUTODEPEND
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+i386 = 1
+!ifdef i386
+i386 = -Di386
+!endif
+
+CC = cc386 /c /9 $(i386) -DCPLUSPLUS /DMSDOS /O-i
+ASM = nasm -fobj
+LIB = xlib
+LINK = valx
+SOURCE = .
+
+.c.obj:
+	$(CC) $&
+#        @$(ASM) $&.asm
+
+#		*List Macros*
+libfiles =  args.obj ext.obj fatal.obj \
+        pstr.obj srchpath.obj usage.obj
+miscfiles = cmain.obj symbol.obj memmgt.obj error.obj list.obj \
+        mangle.obj browse.obj cppbltin.obj float.obj
+lexfiles = getsym.obj preproc.obj searchkw.obj
+parsefiles = floatexp.obj func.obj expr.obj init.obj einit.obj intexpr.obj \
+        stmt.obj decl.obj declass.obj types.obj friend.obj template.obj
+optfiles = optimize.obj analyze.obj inline.obj
+
+
+!ifdef i386
+miscfiles = $(miscfiles) invoke.obj
+codegenfiles =  inasm386.obj conf386.obj an386.obj reg386.obj gexpr386.obj peep386.obj gstmt386.obj intr386.obj rtti.obj
+outputfiles = outas386.obj outco386.obj obj386.obj dbg386.obj output.obj
+RCFILE=cc386
+!else
+codegenfiles = inasm68.obj conf68.obj an68.obj reg68.obj gexpr68.obj peep68.obj  gstmt68.obj rtti.obj  
+outputfiles = outas68.obj dbg68.obj outco68.obj objieee.obj output.obj
+RCFILE=cc68k
+!endif
+
+EXE_dependencies = $(libfiles) $(miscfiles) $(lexfiles) $(parsefiles) \
+	$(optfiles) $(codegenfiles) $(outputfiles)
+
+#		*Explicit Rules*
+cc.exe: upbuild $(EXE_dependencies)
+  $(LINK) -le -STB:(pmodew.exe) -nocaseignore -Map @&&|
+c0dosw.obj $(EXE_dependencies),cc.exe,cc.map,cldos.lib,,
+|
+
+upbuild:
+        ..\upbuild $(FULLBUILD) CC
+
+#		*Individual File Dependencies*
+proftime.obj: proftime.c
+	$(CC) /C+N proftime
+profile.obj: profile.c
+	$(CC) /C+N profile
+inasm68.obj: $(SOURCE)\inasm68.c
+	$(CC) $(SOURCE)\inasm68.c
+inasm386.obj: $(SOURCE)\inasm386.c
+	$(CC) $(SOURCE)\inasm386.c
+intr386.obj: $(SOURCE)\intr386.c
+	$(CC) $(SOURCE)\intr386.c
+outas68.obj: $(SOURCE)\outas68.c
+	$(CC) $(SOURCE)\outas68.c
+outda68.obj: $(SOURCE)\outda68.c
+	$(CC) $(SOURCE)\outda68.c
+ieee695.obj: $(SOURCE)\ieee695.c
+	$(CC) $(SOURCE)\ieee695.c
+outas386.obj: $(SOURCE)\outas386.c
+	$(CC) $(SOURCE)\outas386.c
+srchpath.obj: $(SOURCE)\srchpath.c
+	$(CC) $(SOURCE)\srchpath.c
+usage.obj: $(SOURCE)\usage.c
+	$(CC) $(SOURCE)\usage.c
+args.obj: $(SOURCE)\args.c
+	$(CC) $(SOURCE)\args.c
+ext.obj: $(SOURCE)\ext.c
+	$(CC) $(SOURCE)\ext.c
+fatal.obj: $(SOURCE)\fatal.c
+	$(CC) $(SOURCE)\fatal.c
+phitext.obj: $(SOURCE)\phitext.c
+	$(CC) $(SOURCE)\phitext.c
+pstr.obj: $(SOURCE)\pstr.c
+	$(CC) $(SOURCE)\pstr.c
+floatexp.obj: $(SOURCE)\floatexp.c
+	$(CC) $(SOURCE)\floatexp.c
+analyze.obj: $(SOURCE)\analyze.c
+	$(CC) $(SOURCE)\analyze.c
+error.obj: $(SOURCE)\error.c
+	$(CC) $(SOURCE)\error.c
+expr.obj: $(SOURCE)\expr.c
+	$(CC) $(SOURCE)\expr.c
+init.obj: $(SOURCE)\init.c
+	$(CC) $(SOURCE)\init.c
+einit.obj: $(SOURCE)\einit.c
+	$(CC) $(SOURCE)\einit.c
+optimize.obj: $(SOURCE)\optimize.c
+	$(CC) $(SOURCE)\optimize.c
+register.obj: $(SOURCE)\register.c
+	$(CC) $(SOURCE)\register.c
+func.obj: $(SOURCE)\func.c
+	$(CC) $(SOURCE)\func.c
+intexpr.obj: $(SOURCE)\intexpr.c
+	$(CC) $(SOURCE)\intexpr.c
+searchkw.obj: $(SOURCE)\searchkw.c
+	$(CC) $(SOURCE)\searchkw.c
+outco68.obj: $(SOURCE)\outco68.c
+	$(CC) $(SOURCE)\outco68.c
+an68.obj: $(SOURCE)\an68.c
+	$(CC) $(SOURCE)\an68.c
+conf68.obj: $(SOURCE)\conf68.c
+	$(CC) $(SOURCE)\conf68.c
+reg68.obj: $(SOURCE)\reg68.c
+	$(CC) $(SOURCE)\reg68.c
+gexpr68.obj: $(SOURCE)\gexpr68.c
+	$(CC) $(SOURCE)\gexpr68.c
+peep68.obj: $(SOURCE)\peep68.c
+	$(CC) $(SOURCE)\peep68.c
+gstmt68.obj: $(SOURCE)\gstmt68.c
+	$(CC) $(SOURCE)\gstmt68.c
+outco386.obj: $(SOURCE)\outco386.c
+        $(CC) $(SOURCE)\outco386.c
+reg386.obj: $(SOURCE)\reg386.c
+	$(CC) $(SOURCE)\reg386.c
+conf386.obj: $(SOURCE)\conf386.c
+	$(CC) $(SOURCE)\conf386.c
+an386.obj: $(SOURCE)\an386.c
+	$(CC) $(SOURCE)\an386.c
+gexpr386.obj: $(SOURCE)\gexpr386.c
+	$(CC) $(SOURCE)\gexpr386.c
+peep386.obj: $(SOURCE)\peep386.c
+	$(CC) $(SOURCE)\peep386.c
+gstmt386.obj: $(SOURCE)\gstmt386.c
+	$(CC) $(SOURCE)\gstmt386.c
+obj386.obj: $(SOURCE)\obj386.c
+	$(CC) $(SOURCE)\obj386.c
+dbg386.obj: $(SOURCE)\dbg386.c
+        $(CC) $(SOURCE)\dbg386.c
+list.obj: $(SOURCE)\list.c
+	$(CC) $(SOURCE)\list.c
+stmt.obj: $(SOURCE)\stmt.c
+	$(CC) $(SOURCE)\stmt.c
+cmain.obj: $(SOURCE)\cmain.c ..\version.h
+	$(CC) $(SOURCE)\cmain.c
+memmgt.obj: $(SOURCE)\memmgt.c
+	$(CC) $(SOURCE)\memmgt.c
+preproc.obj: $(SOURCE)\preproc.c
+	$(CC) $(SOURCE)\preproc.c
+symbol.obj: $(SOURCE)\symbol.c
+	$(CC) $(SOURCE)\symbol.c
+mangle.obj: $(SOURCE)\mangle.c
+	$(CC) $(SOURCE)\mangle.c
+decl.obj: $(SOURCE)\decl.c
+	$(CC) $(SOURCE)\decl.c
+declass.obj: $(SOURCE)\declass.c
+	$(CC) $(SOURCE)\declass.c
+getsym.obj: $(SOURCE)\getsym.c
+	$(CC) $(SOURCE)\getsym.c
+types.obj: $(SOURCE)\types.c
+	$(CC) $(SOURCE)\types.c
+symchar.obj: $(SOURCE)\symchar.c
+	$(CC) $(SOURCE)\symchar.c
+inline.obj: $(SOURCE)\inline.c
+	$(CC) $(SOURCE)\inline.c
+version.obj: $(SOURCE)\version.c
+        $(CC) $(SOURCE)\version.c
+invoke.obj: $(SOURCE)\invoke.c
+        $(CC) $(SOURCE)\invoke.c
+browse.obj: $(SOURCE)\browse.c
+        $(CC) $(SOURCE)\browse.c                  
+friend.obj: $(SOURCE)\friend.c
+        $(CC) $(SOURCE)\friend.c                  
+dbg68.obj: $(SOURCE)\dbg68.c
+        $(CC) $(SOURCE)\dbg68.c
+objieee.obj: $(SOURCE)\objieee.c
+        $(CC) $(SOURCE)\objieee.c
+template.obj: $(SOURCE)\template.c
+        $(CC) $(SOURCE)\template.c                  
+cppbltin.obj: $(SOURCE)\cppbltin.c
+        $(CC) $(SOURCE)\cppbltin.c                  
+rtti.obj: $(SOURCE)\rtti.c
+        $(CC) $(SOURCE)\rtti.c                  
+output.obj: $(SOURCE)\output.c
+        $(CC) $(SOURCE)\output.c
+float.obj: $(SOURCE)\float.c
+		$(CC) $(SOURCE)\float.c

@@ -1,0 +1,92 @@
+# This makefile is for Borland make (IBM PC/80386+)
+
+#		*Translator Definitions*
+# Comment this next line out to generate the 68k compiler
+# leave it in to generate the 386 compiler
+#i386 = -Di386
+
+CC = bcc32 -c -v -DBORLANDC -w-
+ASM = TASM /zi /ml /m2
+LIB = tlib
+LINK = tlink32
+INCLUDEPATH = C:\bc5\INCLUDE;..\include
+
+.c.obj:
+  $(CC) $<
+#		*List Macros*
+
+EXE_dependencies = \
+printwm.obj \
+ccide.obj \
+alloc.obj \
+asmwnd.obj \
+brfold.obj \
+browse.obj \
+codecomp.obj \
+databreak.obj \
+dbgmain.obj \
+dialog.obj \
+dockmgr.obj \
+dumpwnd.obj \
+editor.obj \
+effect.obj \
+error.obj \
+eval.obj \
+fif.obj \
+filedlg.obj \
+hbreak.obj \
+help.obj \
+histcomb.obj \
+instance.obj \
+lsctrl.obj \
+lsframe.obj \
+lsgrip.obj \
+lstool.obj \
+lstree.obj \
+make.obj \
+makegen.obj \
+mru.obj \
+opcodes.obj \
+operands.obj \
+pefile.obj \
+print.obj \
+profile.obj \
+progress.obj \
+project.obj \
+regexp.obj \
+regwnd.obj \
+saveload.obj \
+simops.obj \
+splash.obj \
+srchpath.obj \
+srctab.obj \
+stackwnd.obj \
+stdprop.obj \
+symtab.obj \
+tabwnd.obj \
+tags.obj \
+thredwnd.obj \
+uz.obj \
+version.obj \
+wargs.obj \
+watchwnd.obj \
+xedit.obj \
+xml.obj
+#		*Explicit Rules*
+ccide.exe: upbuild $(EXE_dependencies) ccide.res
+  $(LINK) /Tpe/aa/c/v/s/L\bc5\lib @&&|
+c0w32.obj $(EXE_dependencies)
+ccide.exe
+ccide.map
+..\parsedll\parser.lib import32.lib cw32.lib
+ccide.def
+ccide.res
+|
+
+#		*Individual File Dependencies*
+ccide.res: ccide.rc ..\version.h
+        brc32 -r -I\bc5\include ccide
+upbuild:
+        ..\upbuild $(FULLBUILD) CCIDE
+
+ccide.c: ..\version.h

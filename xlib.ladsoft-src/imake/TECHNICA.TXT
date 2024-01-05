@@ -1,0 +1,61 @@
+IMAKE basically parses the declarations in the make file and makes an
+internal database describing them.  Some macros are expanded as soon
+as they are encountered (such as recursive definitions) while others
+are expanded when they are used - so the last definition counts.
+
+After making the internal database imake starts processing the targets 
+specified on the command line, or if there are none it processes the first
+explicit target in the file.  For each target it processes it first
+recursively processes all dependent targets, then if it finds that any
+of those targets changed it executes the commands associated with the 
+target.  At the lowest level the determination as to whether a target
+changed is based on a comparison of time stamps between the target and
+its source files.
+
+The following source files make up this project:
+
+ALLOCATE.C  - allocate memory
+ARGS.C      - argument parsing
+DUMP.C      - functionality for dumping the database to the console
+ENV.C       - read environment into database
+EXT.C       - simple file extension utilities
+FATAL.C     - print a fatal error and exit
+IF.C        - handle conditional processing
+IMAKE.C     - main routine, command line parsing
+INPUT.C     - basic routines for file level handling of the make files
+MACROS.C    - macro handling
+MAKER.C     - determination of what commands need to be executed to
+            - bring the target(s) up to date
+MODULE.C    - IEEE695 object file parser (not used by 386 tool chain)
+PARSER.C    - make file parsing routines
+PHASH.C     - hash table functions
+PHITEXT.C   - phi text functions
+PSTR.C      - wide character functions
+REGISTER.C  - register a rule in the database
+SPAWNER.C   - execute those commands that need to be executed to 
+            - bring the targets up to date
+SRCHPATH.C  - search for a file along a path spec
+SYMCHAR.C   - phitext - ctype style arrays
+USAGE.C     - usage and banner routines
+ALLOCATE.H  - declarations for memory allocation
+CMDLINE.H   - declarations for command line utils
+DUMP.H      - declarations for database dump
+ENV.H       - declarations for environment read
+IF.H        - declarations for conditional processing
+IMAKE.H     - declarations for main program
+INPUT.H     - declarations for file level handling of make files
+INTERP.H    - declarations for phitext
+MACROS.H    - declarations for macros
+MAKER.H     - declarations for rule validation
+MODULE.H    - declarations for obj file reading
+PARSER.H    - declarations for make file parsing
+PHASH.H     - declarations for hash table
+REGISTER.H  - declarations for registering rules
+SPAWNER.H   - declarations for command execution
+UTYPE.H     - generic type declaratiosn
+
+
+There are also a number of '.p' files that get included by the various
+h files to declare prototypes
+
+

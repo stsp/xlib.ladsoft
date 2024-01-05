@@ -1,0 +1,12 @@
+
+/* Protogen Version 1.05 Monday September 18, 1995  06:51:50 */
+
+                               /* Lb68k.c */
+
+void BoolSetup(char select, char *string); /* PROTOTYPE */
+void BoolSetup(char select, char *string);                        /* STATIC */
+void InsertAnyFile(char *filename, int attribs);                  /* STATIC */
+BOOL ReadArgs(int *argc, char **argv, int *mode, int *maxmode, BOOL uselib);/* STATIC */
+void ReadLine(char *buffer, int count, FILE *file, char *name);   /* STATIC */
+BOOL ReadResponse(char *filename, int *mode, int *maxmode);       /* STATIC */
+int main(int argc, char *argv[]);

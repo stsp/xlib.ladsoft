@@ -1,0 +1,122 @@
+/* Protogen Version 1.00 Sunday December 21, 1997  20:07:32 */
+			       /* Iflow.c */
+
+void flows_and_doms(void);
+
+                               /* Iexpr.c */
+
+int chksize(int lsize, int rsize);
+IMODE *make_imaddress(ENODE *node, int size);
+IMODE *make_imval(enum e_node type, SYM *sp);
+ENODE		 *makeenimode(SYM *sp);
+IMODE    *make_bf(ENODE *node, IMODE *ap, int size);
+IMODE    *make_immed(long i);
+IMODE    *make_offset(ENODE *node);
+IMODE	*genasn(ENODE *node, int size);
+IMODE *indnode(IMODE *ap1, int size);
+IMODE    *gen_deref(ENODE *node, int flags,int size);
+IMODE    *gen_unary( ENODE *node,int flags,int size,int op);
+IMODE    *gen_binary( ENODE *node,int flags,int size,int op);
+IMODE * gen_pdiv( ENODE *node, int flags, int size);
+IMODE * gen_pmul( ENODE *node, int flags, int size);
+IMODE    *gen_hook( ENODE *node, int flags, int size);
+IMODE    *gen_asbin(ENODE *node, int flags, int size, int op);
+IMODE *gen_moveblock(ENODE *node, int flags, int size);
+IMODE    *gen_assign( ENODE *node, int flags, int size,int ref);
+IMODE    *gen_aincdec( ENODE *node, int flags, int size, int op);
+int push_param(ENODE *ep,int size);
+int push_stackblock(ENODE *ep);
+int     gen_parms(ENODE *plist,int size);
+IMODE    *gen_fcall( ENODE *node,int flags, int size);
+IMODE    *gen_pfcall( ENODE *node,int flags, int size);
+IMODE    *gen_expr(ENODE *node, int flags, int size);
+IMODE    *gen_void(ENODE *node) ;
+int     natural_size(ENODE *node);
+void gen_compare(ENODE *node, int btype, int label);
+IMODE *gen_relat(ENODE *node) ;
+void truejp(ENODE *node, int label);
+void falsejp(ENODE *node, int label);
+
+                               /* Iout.c */
+
+void outcodeini(void);
+void putconst(ENODE *offset);
+void putlen(int l);
+void putamode(IMODE *ap);
+void put_code(QUAD *q);
+void rewrite_icode(void);
+void gen_strlab(SYM *sp);
+void put_label(int lab);
+void put_staticlabel(long label);
+void genfloat(float val);
+void gendouble(double val);
+void genlongdouble(long double val);
+void genbyte(long val);
+void genword(long val);
+void genlong(long val);
+void genaddress(char *string);
+void gensrref(char *name,int val);
+void genref(SYM *sp,int offset);
+void genpcref(SYM *sp,int offset);
+void genstorage(int nbytes);
+void gen_labref(int n);
+int     stringlit(char *s, int uselong,int len);
+void dumplits(void);
+void nl(void);
+void cseg(void);
+void dseg(void);
+void bssseg(void);
+void startupseg(void);
+void rundownseg(void);
+void cppseg(void);
+void xstringseg(void);
+void xconstseg(void);
+void gen_virtual(SYM *sp, int data);
+void gen_endvirtual(SYM *sp);
+void asm_header(char *name, char*version);
+void globaldef(SYM *sp);
+void putexterns(void);
+
+                               /* Istmt.c */
+
+void genstmtini(void);
+IMODE		*tempreg(int size, int mode);
+IMODE    *make_direct(int i);
+IMODE    *make_strlab(char *s);
+void genwhile(SNODE *stmt);
+void gen_for(SNODE *stmt);
+void genif(SNODE *stmt);
+void gendo(SNODE *stmt);
+void gen_genword(SNODE *stmt);
+IMODE *set_symbol(char *name, int isproc);
+IMODE *call_library(char *lib_name,int size);
+int analyzeswitch(SNODE *stmt);
+void gencompactswitch(SNODE *stmt, struct cases *cs) ;
+void genxswitch(SNODE *stmt);
+void genreturn(SNODE *stmt,int flag);
+void genstmt(SNODE *stmt);
+void genfunc(SNODE *stmt);
+
+                               /* Iconf.c */
+
+void confsetup(void);
+int confcodegen(char s, int bool);
+int confcg(char ch, int bool);
+int     alignment(int sc, TYP *tp);
+int getalign(int sc, TYP *tp);
+long getautoval(long val);
+funcvaluesize(int size);
+
+                               /* Ipeep.c */
+
+void peepini(void);
+void kill_labeledgoto(QUAD *head);
+void kill_jumpover(QUAD *head);
+void peep_icode(QUAD *head);
+
+                              /* Iconst.c */
+
+void badconst(void);
+int     calshift(LLONG_TYPE i);
+LLONG_TYPE     calmod(int i);
+void ConstantFold(QUAD *d);

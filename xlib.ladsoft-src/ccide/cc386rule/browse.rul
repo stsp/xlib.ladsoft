@@ -1,0 +1,13 @@
+<CC386RULE>
+	<PROPGROUP CLASS="BROWSE" SELECT="BROWSE" ORDER = "100" NAME="Custom Build">	
+		<COMMAND>
+  			<ITEM NAME="Command Line" ID="__COMMAND_LINE" TYPE="TEXT">
+				"$(LSINSTALLBIN)\brc.exe" "$(OUTPUTDIR)\$(OUTPUTNAME)" "@&amp;&amp;|
+"%.obj"
+|"
+			</ITEM>
+            <ITEM NAME="Make Banner" ID="__MAKEBANNER" TYPE="TEXT">Creating Browse information</ITEM>
+		</COMMAND>
+	</PROPGROUP>
+</CC386RULE>
+

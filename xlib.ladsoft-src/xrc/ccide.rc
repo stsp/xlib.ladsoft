@@ -1,0 +1,888 @@
+#include "winconst.h"
+#include "..\version.h"
+#include <windows.h>
+#include <commctrl.h>
+Language LANG_ENGLISH,SUBLANG_ENGLISH_US
+1 VERSIONINFO 
+FILEVERSION CCIDE_VERSION
+PRODUCTVERSION PRODUCT_VERSION
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+        BLOCK "StringFileInfo"
+        BEGIN 
+                BLOCK "040904E4"
+                BEGIN
+                        VALUE "CompanyName", "LADSoft\0"
+                        VALUE "FileDescription","CCIDE Compiler IDE\0"
+                        VALUE "FileVersion", CCIDE_STRING_VERSION "\0"
+                        VALUE "InternalName","ccide.exe\0"
+                        VALUE "OriginalFilename","ccide.exe\0"
+                        VALUE "ProductName",PRODUCT_NAME "\0"
+                        VALUE "ProductVersion",PRODUCT_STRING_VERSION "\0"
+                        VALUE "LegalCopyright",PRODUCT_COPYRIGHT "\0"
+                END
+        END
+        BLOCK "VarFileInfo"
+        BEGIN 
+			VALUE "Translation", 0x0409,0x04e4
+		END
+END
+
+BUILDMENU MENU
+     {
+     POPUP "build"
+        {
+        MENUITEM "&Make...\tF7",                       IDM_MAKE
+        MENUITEM "Build &All...",                  IDM_BUILDALL
+		MENUITEM "Build &Selected\tShift+F7",	   IDM_BUILDSELECTED
+        }
+     }
+WATCHMENU MENU
+     {
+     POPUP "watch"
+        {
+        MENUITEM "Add to Watch..."                 IDM_ADDWATCH
+        MENUITEM "Remove from Watch"            IDM_DELETEWATCH
+		MENUITEM "Clear Watch Window"				IDM_DELETEALLWATCH
+        }
+     }
+
+EDITMENU MENU
+     {
+     POPUP "edit"
+        {
+        MENUITEM "Save File\tCtl+S",                   IDM_SAVE
+        MENUITEM SEPARATOR
+        MENUITEM "Cut\tCtl+X"                          IDM_CUT
+        MENUITEM "Copy\tCtl+C"                         IDM_COPY
+        MENUITEM "Paste\tCtl-V"                        IDM_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Toggle Bookmark\tAlt+F2"      IDM_BOOKMARK
+        MENUITEM "Goto Line\tAlt+F8"                    IDM_GOTO
+        MENUITEM "Browse To\tCtl+F12"            IDM_BROWSETO
+        MENUITEM SEPARATOR
+        MENUITEM "Toggle Breakpoint\tF9"        IDM_BREAKPOINT
+		MENUITEM "Return to origin\tCtl+P"				IDM_SCROLLTOBP
+        MENUITEM "Run to Cursor\tCtl+F5"                IDM_RUNTO
+        MENUITEM "Add to Watch"                 IDM_ADDWATCHINDIRECT
+        }
+     }
+
+PROJECTMENU MENU
+     {
+     POPUP "proj"
+	{
+	MENUITEM "&Insert Files...",			IDM_ADDFILES
+	MENUITEM "&Remove File",		IDM_REMOVEFILES
+	MENUITEM SEPARATOR
+	MENUITEM "&New Target",			IDM_NEWPROJECT
+	MENUITEM "Insert &Target",			IDM_INSERTPROJECT
+	MENUITEM "&Remove Target",		IDM_REMOVETARGET
+    MENUITEM "C&lose Workspace...",        	     	IDM_CLOSEWS
+	MENUITEM SEPARATOR
+	MENUITEM "&Calculate Dependencies...",	IDM_CALCDEPENDS
+	MENUITEM SEPARATOR
+    MENUITEM "&Compile File\tCtl-F7",   IDM_COMPILEVIAPROJ
+        MENUITEM "&Make...\tF7",                       IDM_MAKE
+        MENUITEM "Build &All...",                  IDM_BUILDALL
+        MENUITEM "Build &Selected...\tShift+F7",                  IDM_BUILDSELECTED
+	  MENUITEM  "&Make window...",				IDM_MAKEWINDOW
+	MENUITEM SEPARATOR
+        MENUITEM "&Debug Selected\tF5"             IDM_STARTDEBUGGING
+	MENUITEM SEPARATOR
+	MENUITEM "&Open Selected",			IDM_OPENFILES
+	MENUITEM SEPARATOR
+	MENUITEM "&Properties...",			IDM_PROJECTPROPERTIES
+	}
+     }
+WINDOWMENU MENU
+     {
+     POPUP "Window"
+	{
+          MENUITEM "C&lose",     				IDM_CLOSEWINDOW
+		  MENUITEM "Close &All",				IDM_CLOSEALLWINDOWS
+		  MENUITEM "&New Window",				IDM_NEWWINDOW
+		  MENUITEM SEPARATOR
+          MENUITEM "Save All Files",                IDM_SAVEALL
+          MENUITEM SEPARATOR
+          MENUITEM "&Cascade\tShift+F5",     	IDM_CASCADE
+          MENUITEM "Tile &Horizontally\tShift+F4",IDM_TILEHORIZ
+          MENUITEM "Tile &Vertically\tCtl+F4",   IDM_TILEVERT
+          MENUITEM "Arrange &Icons",         	IDM_ARRANGE
+		  MENUITEM "More Windows...",			IDM_WINDOW_MORE
+	}
+	 }
+MAINMENU MENU
+     {
+// MRU.C may have to change if you add things to the file menu
+     POPUP "&File"
+          {
+          POPUP "New"
+          {
+            MENUITEM "&File...",        	     	IDM_NEWDRAW
+            MENUITEM "&Target...",        	     	IDM_NEWPROJECT
+            MENUITEM "&Workspace...",        	     	IDM_NEWWS
+          }
+          MENUITEM "&Open Files...",        	     	IDM_OPEN
+          POPUP "Reopen &File..."
+          { // placeholder
+          MENUITEM "-",               0
+          }
+          MENUITEM "&Save File",        	     	IDM_SAVE
+          MENUITEM "Save File &As...",        	     	IDM_SAVEAS
+          MENUITEM "&Close File",                 	IDM_CLOSE
+          MENUITEM SEPARATOR
+          MENUITEM "Save All Files",                IDM_SAVEALL
+          MENUITEM SEPARATOR
+          MENUITEM "Open &Workspace...",        	     	IDM_OPENWS
+          POPUP "&Reopen Workspace..."
+          { // placeholder
+          MENUITEM "-",               0
+          }
+          MENUITEM "&Insert Target in Workspace...",           IDM_INSERTPROJECT
+          MENUITEM "Save Wor&kspace...",        	     	IDM_SAVEWS
+          MENUITEM "C&lose Workspace...",        	     	IDM_CLOSEWS
+          MENUITEM SEPARATOR
+          MENUITEM "Printer Format",                    IDM_PRINTPROPERTIES
+          MENUITEM "&Print...",                    IDM_PRINT
+		  MENUITEM SEPARATOR
+		  MENUITEM  "Comman&d window...",			IDM_DOSWINDOW
+		  MENUITEM  "&Make window...",				IDM_MAKEWINDOW
+          POPUP "External tools..."
+          { // placeholder
+		  MENUITEM SEPARATOR
+		  MENUITEM "Customize",			IDM_EDITEXTERNALTOOLS
+          }
+          MENUITEM SEPARATOR
+          MENUITEM "Proper&ties...",               IDM_GENERALPROPERTIES
+          MENUITEM SEPARATOR
+          MENUITEM "E&xit",                  	IDM_EXIT
+          }
+     POPUP "&Edit"
+	{
+        MENUITEM "&Undo\tCtl+Z",                       IDM_UNDO
+        MENUITEM "&Redo\tCtl+Y",                       IDM_REDO
+          MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtl+X",                        IDM_CUT
+        MENUITEM "&Copy\tCtl+C",                       IDM_COPY
+        MENUITEM "&Paste\tCtl+V",                      IDM_PASTE
+          MENUITEM SEPARATOR
+        MENUITEM "&Find...\tCtl+F",                       IDM_FIND
+        MENUITEM "&Replace...\tCtl+H",                    IDM_REPLACE
+        MENUITEM "Find &Next\tF3",                  IDM_FINDNEXT
+        MENUITEM "Find &In Files...",              IDM_FINDINFILES
+          MENUITEM SEPARATOR
+	MENUITEM "&Select All",			IDM_SELECTALL
+        POPUP "&Edit Tools"
+        {
+          MENUITEM "To &Uppercase",                     IDM_TOUPPER
+          MENUITEM "To &Lowercase",                     IDM_TOLOWER
+          MENUITEM "&Indent Selection\tTab",          IDM_INDENT
+          MENUITEM "&Outdent Selection\tShift+Tab",   IDM_UNINDENT
+        }
+        MENUITEM SEPARATOR
+        MENUITEM "&Goto line...\tCtl+G",                  IDM_GOTO
+	}
+     POPUP "&View"
+	{
+	MENUITEM "&Workspace",			IDM_VIEWPROJECT
+	MENUITEM "&Information Window",			IDM_VIEWERROR
+	MENUITEM SEPARATOR
+        POPUP "&Bookmarks"
+        {
+                MENUITEM "Toggle &Bookmark\tAlt+F2"     IDM_BOOKMARK
+                MENUITEM "&Next Bookmark\tF2"       IDM_NEXTBOOKMARK
+                MENUITEM "&Previous Bookmark\tAlt+F2"   IDM_PREVBOOKMARK
+                MENUITEM SEPARATOR
+                MENUITEM "&Show Bookmarks...\tCtl+F2"      IDM_BOOKMARKWINDOW
+                MENUITEM "&Remove All Bookmarks"    IDM_REMOVEBOOKMARKS
+        }        
+        POPUP "B&rowse"
+        {
+                MENUITEM "Browse &To...\tCtl+F12"     IDM_BROWSETO
+                MENUITEM "&Browse\tF12"           IDM_BROWSE
+                MENUITEM "Browse Bac&k\tShift+F12"         IDM_BROWSEBACK
+        }
+        POPUP "&Toolbars"
+        {
+                MENUITEM "&Edit Toolbar",               IDM_VIEWEDITBAR
+                MENUITEM "Buil&d Toolbar",              IDM_VIEWBUILDBAR
+                MENUITEM "&Debug Toolbar",              IDM_VIEWDEBUGBAR
+        }
+	}
+     POPUP "&Build"
+	{
+    	MENUITEM "&Compile file\tCtl-F7",		IDM_COMPILEFILE
+	    MENUITEM SEPARATOR
+        MENUITEM "&Make...\tF7"                        IDM_MAKE
+        MENUITEM "Build &All..."                   IDM_BUILDALL
+        MENUITEM "Build &Selected...\tShift+F7"                   IDM_BUILDSELECTED
+        MENUITEM "S&top Build"              IDM_STOPBUILD
+        MENUITEM SEPARATOR
+        MENUITEM "&Generate Make File..."              IDM_GENMAKE
+
+	}
+     POPUP "&Debug"
+	{
+        POPUP "&Debug Windows"
+        {
+                MENUITEM "&Disassembly",                IDM_VIEWASM
+                MENUITEM "&Memory",                     IDM_VIEWDUMP
+                MENUITEM "&Registers",                  IDM_VIEWREGISTER
+                MENUITEM "&Call Stack",                 IDM_VIEWSTACK
+                MENUITEM "&Threads",                    IDM_VIEWTHREAD
+                MENUITEM "&Watch",                      IDM_VIEWWATCH
+        }
+        MENUITEM SEPARATOR
+        MENUITEM "&Start Debugging\tF5"             IDM_STARTDEBUGGING
+        MENUITEM "S&top Debugging\tShift+F5"              IDM_STOPDEBUGGING
+        MENUITEM "&Run\tF5"                         IDM_RUN
+        MENUITEM "Run to &Cursor\tCtl+F5"                IDM_RUNTO
+        MENUITEM "Sto&p\tAlt+F5"                        IDM_STOP
+		MENUITEM "Run &without Debugger"				IDM_RUNNODEBUG
+        MENUITEM SEPARATOR
+        MENUITEM "Add to &Watch..."                    IDM_ADDWATCH
+        MENUITEM SEPARATOR
+        MENUITEM "Hardware Breakpoints..."              IDM_HBREAK
+
+        MENUITEM "Toggle &Breakpoint\tF9"           IDM_BREAKPOINT
+        MENUITEM "&Remove All Breakpoints..."          IDM_REMOVEALLBREAKPOINTS
+		MENUITEM "Return to &origin\tCtl+P"				IDM_SCROLLTOBP
+	}
+     POPUP "&Window"
+          {
+          MENUITEM "C&lose",     				IDM_CLOSEWINDOW
+		  MENUITEM "Close &All",				IDM_CLOSEALLWINDOWS
+		  MENUITEM "&New Window",				IDM_NEWWINDOW
+		  MENUITEM SEPARATOR
+          MENUITEM "Save All Files",                IDM_SAVEALL
+		  MENUITEM SEPARATOR
+          MENUITEM "&Cascade\tShift+F5",     	IDM_CASCADE
+          MENUITEM "Tile &Horizontally\tShift+F4",IDM_TILEHORIZ
+          MENUITEM "Tile &Vertically\tCtl+F4",   IDM_TILEVERT
+          MENUITEM "Arrange &Icons",         	IDM_ARRANGE
+          }
+     POPUP "&Help"
+        {
+          MENUITEM "&IDE help...\tF1"              IDM_CCIDEHELP
+          MENUITEM "&Language help..."             IDM_LANGUAGEHELP
+          MENUITEM "&RTL help..."             	   IDM_RTLHELP
+          MENUITEM "&Tools help..."                IDM_TOOLSHELP
+          MENUITEM "&Context help..."              IDM_SPECIFIEDHELP
+
+          MENUITEM SEPARATOR
+	  MENUITEM "A&bout...",			IDM_ABOUT
+        }
+     }
+MEMORYBYTESIZEMENU MENU
+{
+        POPUP "size"
+        {
+                MENUITEM "BYTE",                                        IDM_BYTE
+                MENUITEM "WORD",                                        IDM_WORD
+                MENUITEM "DWORD",                                       IDM_DWORD
+        }
+}
+MEMORYREGISTERMENU MENU
+{
+        POPUP "regs"
+        {
+                MENUITEM "EAX",                                         IDM_EAX
+                MENUITEM "EBX",                                         IDM_EBX
+                MENUITEM "ECX",                                         IDM_ECX
+                MENUITEM "EDX",                                         IDM_EDX
+                MENUITEM "ESP",                                         IDM_ESP
+                MENUITEM "EBP",                                         IDM_EBP
+                MENUITEM "ESI",                                         IDM_ESI
+                MENUITEM "EDI",                                         IDM_EDI
+        }
+}
+PRINTFORMATMENU MENU 
+	{
+     POPUP "format"
+		{
+          MENUITEM "HH:MM 12 Hr",                IDM_PF12HR
+          MENUITEM "HH:MM 24 Hr",                IDM_PF24HR
+          MENUITEM "MM/DD/YYYY",                IDM_PFUSADATE
+          MENUITEM "DD/MM/YYYY",                IDM_PFEURODATE
+          MENUITEM "Current Page Number",                IDM_PFCURPAGE
+          MENUITEM "Number Of Pages",                IDM_PFNUMPAGE
+          MENUITEM "File Name",                IDM_PFFILENAME
+
+		  MENUITEM SEPARATOR
+		  MENUITEM "Left",				IDM_PFLEFT
+		  MENUITEM "Right",				IDM_PFRIGHT
+		  MENUITEM "Center",				IDM_PFCENTER
+		}
+	}
+MAINACCELERATORS ACCELERATORS
+     {
+     VK_F2, IDM_BOOKMARK, VIRTKEY, ALT
+     VK_F2, IDM_NEXTBOOKMARK, VIRTKEY
+     VK_F2, IDM_PREVBOOKMARK, VIRTKEY, SHIFT
+     VK_F2, IDM_BOOKMARKWINDOW, VIRTKEY, CONTROL
+     VK_F3,  IDM_FINDNEXT, VIRTKEY
+     VK_F4, IDM_TILEHORIZ,    VIRTKEY, SHIFT
+     VK_F4, IDM_TILEVERT,    VIRTKEY, CONTROL
+     VK_F5, IDM_RUNF5,    VIRTKEY
+     VK_F5, IDM_RUNTO,    VIRTKEY, CONTROL
+     VK_F5, IDM_STOP ,  VIRTKEY, ALT
+     VK_F5, IDM_STOPDEBUGGING,    VIRTKEY, SHIFT
+     VK_F7, IDM_MAKE, VIRTKEY
+     VK_F7, IDM_BUILDSELECTED, VIRTKEY, SHIFT
+	 VK_F7, IDM_COMPILEFILE, VIRTKEY, CONTROL
+     VK_F8, IDM_GOTO,    VIRTKEY, ALT
+     VK_F9, IDM_BREAKPOINT, VIRTKEY
+     VK_F10, IDM_STEPOVER, VIRTKEY
+     VK_F10, IDM_RUNTO, VIRTKEY, SHIFT
+     VK_F11, IDM_STEPIN,  VIRTKEY
+     VK_F11, IDM_STEPOUT, VIRTKEY, ALT
+     VK_F12, IDM_BROWSE, VIRTKEY
+     VK_F12, IDM_BROWSEBACK, VIRTKEY,SHIFT
+     VK_F12, IDM_BROWSETO, VIRTKEY,CONTROL
+	 VK_A,  IDM_SELECTALL, VIRTKEY, CONTROL
+     VK_F,  IDM_FIND,    VIRTKEY, CONTROL
+     VK_G,  IDM_GOTO,    VIRTKEY, CONTROL
+     VK_H,  IDM_REPLACE,  VIRTKEY, CONTROL
+	 VK_P,  IDM_SCROLLTOBP, VIRTKEY, CONTROL
+     }
+
+1 ICON "res\prj.ico"
+2 ICON "res\prj.ico" /* CWS */
+3 ICON "res\ccide.ico" /* CTG */
+4 ICON "res\c.ico" /*.c, .h */
+BITMAP_SPLASH   SPLASH  DISCARDABLE     "res/splash.zip"
+ID_TOOLBAR BITMAP "res\toolbar.bmp"
+ID_FLASM BITMAP "res\asm.bmp"
+ID_FLFILES BITMAP "res\files.bmp"
+ID_FLC BITMAP "res\c.bmp"
+ID_FLRES BITMAP "res\res.bmp"
+ID_FLH BITMAP "res\h.bmp"
+ID_FLLIB BITMAP "res\fllib.bmp"
+ID_FLEXE BITMAP "res\flexe.bmp"
+ID_FLCWS BITMAP "res\flcws.bmp"
+ID_FLDLL BITMAP "res\fldll.bmp"
+ID_FOLDEROPEN BITMAP "res\foldop.bmp"
+ID_FOLDERCLOSE BITMAP "res\foldcl.bmp"
+ID_PCBMP BITMAP "res\pc.bmp"
+ID_STOPBMP BITMAP "res\stop.bmp"
+ID_STOPPCBMP BITMAP "res\stoppc.bmp"
+ID_STOPDISBMP BITMAP "res\stopdis.bmp"
+ID_FIF1BMP BITMAP "res\fif1.bmp"
+ID_FIF2BMP BITMAP "res\fif2.bmp"
+ID_BOOKMARKBMP BITMAP "res\bookmark.bmp"
+ID_PROJBMP BITMAP "res\projtab.bmp"
+ID_REGSBMP BITMAP "res\regtab.bmp"
+ID_ITEMBMP BITMAP "res\item.bmp"
+ID_VALUEBMP BITMAP "res\value.bmp"
+IDB_VLINE BITMAP "res\vline.bmp"
+ID_CLOSEBMP BITMAP "res\close.bmp"
+ID_UPARR BITMAP "res\uparr.bmp"
+ID_DOWNARR BITMAP "res\downarr.bmp"
+ID_LEFTARR BITMAP "res\leftarr.bmp"
+ID_RIGHTARR BITMAP "res\rightarr.bmp"
+ID_UPARRDIS BITMAP "res\uparrdis.bmp"
+ID_LEFTARRDIS BITMAP "res\leftarrdis.bmp"
+ID_EDITTB BITMAP "res\edittb.bmp"
+ID_BUILDTB BITMAP "res\maketb.bmp"
+ID_DEBUGTB BITMAP "res\debugtb.bmp"
+ID_EXTRA BITMAP "res\extra.bmp"
+ID_SIZEHCUR CURSOR "res\size3_r.cur"
+ID_SIZEVCUR CURSOR "res\size4_r.cur"
+ID_SIZELCUR CURSOR "res\size2_r.cur"
+ID_SIZERCUR CURSOR "res\size1_r.cur"
+ID_MOVECUR CURSOR "res\move_r.cur"
+ID_BRFOCUS BITMAP "res\brfocus.bmp"
+ID_MENUBM BITMAP "res\menubm.bmp"
+
+PRINTABORTDLG DIALOG 0, 0, 116, 48
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | DS_CENTERMOUSE | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Abort Printout"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "&Cancel", IDCANCEL, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 28, 24, 50, 14
+ CONTROL "Press Cancel to abort the print job", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 8, 120, 8, 0
+}
+GOTODIALOG DIALOG 105, 57, 137, 51
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | DS_CENTERMOUSE | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Goto line"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_GOTO, "edit", ES_LEFT | ES_NUMBER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 84, 6, 48, 12, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 28, 50, 14
+ CONTROL "Enter line to position to:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 8, 80, 9, 0
+ CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 76, 28, 50, 14, 0
+}
+BROWSETODIALOG DIALOG 105, 57, 137, 65
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | DS_CENTERMOUSE | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Browse To Definition"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_BROWSETO, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 20, 128, 12, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 40, 50, 14
+ CONTROL "Enter name of definition to position to:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 8, 116, 9, 0
+ CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 76, 40, 50, 14, 0
+}
+GOTODIALOG2 DIALOG 103, 54, 233, 55
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CENTER | DS_CENTERMOUSE | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Goto address"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_GOTO, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 104, 12, 124, 12, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 56, 32, 50, 14
+ CONTROL "Cancel", IDCANCEL, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 128, 32, 50, 14, 0
+ CONTROL "Enter Address to position to:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 12, 100, 7, 0
+}
+EDITPROPDLG DIALOG 0, 0, 240, 120
+EXSTYLE WS_EX_CONTEXTHELP
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Editor"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Tabs", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 18, 13, 60, 8, 0
+ CONTROL "", IDC_TABSTOPS, "edit", ES_LEFT | ES_NUMBER | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 58, 13, 20, 12, 0
+ CONTROL "Keyword", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 26, 65, 60, 8, 0
+ CONTROL "", IDC_KEYWORDCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 58, 65, 20, 12, 0
+ CONTROL "Comment", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 22, 81, 60, 8, 0
+ CONTROL "", IDC_COMMENTCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 58, 81, 20, 12, 0
+ CONTROL "Number", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 64, 60, 8, 0
+ CONTROL "", IDC_NUMBERCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 116, 64, 20, 12, 0
+ CONTROL "Highlight", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 81, 60, 8, 0
+ CONTROL "", IDC_HIGHLIGHTCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 116, 81, 20, 12, 0
+ CONTROL "String", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 92, 32, 60, 8, 0
+ CONTROL "", IDC_STRINGCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 116, 32, 20, 12, 0
+ CONTROL "Escape", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 88, 48, 60, 8, 0
+ CONTROL "", IDC_ESCAPECOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 116, 48, 20, 12, 0
+ CONTROL "Backup Files", IDC_BACKUPFILE, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 32, 64, 14, 0
+ CONTROL "Backup Workspace", IDC_BACKUPPROJ, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 44, 83, 13, 0
+ CONTROL "Auto-Indent", IDC_AUTOINDENT, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 56, 64, 14, 0
+ CONTROL "Auto-Formatting", IDC_AUTOFORMAT, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 68, 64, 13, 0
+ CONTROL "", IDC_BACKGROUNDCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 58, 33, 20, 12, 0
+ CONTROL "Background", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 14, 33, 40, 8, 0
+ CONTROL "", IDC_TEXTCOLOR, "xccColorClass", WS_CHILD | WS_VISIBLE | WS_BORDER, 58, 49, 20, 12, 0
+ CONTROL "Text", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 38, 49, 16, 8, 0
+ CONTROL "Use spaces for tabs", IDC_TABSASSPACES, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 88, 16, 100, 9, 0
+ CONTROL "Select Font", IDC_SELECTFONT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 182, 100, 56, 16, 0
+ CONTROL "Show Line Numbers", IDC_LINENUMBERS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 152, 82, 80, 9, 0
+}
+INSTALLPROPDLG DIALOG 0, 0, 240, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Install"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Help Path", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 9, 87, 101, 10, 0
+ CONTROL "", IDC_HELPPATH, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 96, 183, 12, 0
+// CONTROL "Compiler path", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 87, 60, 8, 0
+// CONTROL "", IDC_INSTALLPATH, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 96, 184, 12, 0
+}
+TARGETPROPDLG DIALOG 0, 0, 263, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "General"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Build type", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 12, 60, 8, 0
+ CONTROL "", IDC_BUILDTYPE, "combobox", CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 8, 20, 80, 47, 0
+ CONTROL "Library type", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 37, 57, 9, 0
+ CONTROL "ComboBox2", IDC_LIBTYPE, "combobox", CBS_DROPDOWN | CBS_HASSTRINGS | WS_CHILD | WS_VISIBLE | WS_TABSTOP | WS_VSCROLL, 8, 47, 79, 48, 0
+ CONTROL "C99 Mode", IDC_C99, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 91, 21, 76, 9, 0
+ CONTROL "Ansi Compliance", IDC_ANSI, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 91, 29, 70, 10, 0
+ CONTROL "Map File", IDC_MAPFILE, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 20, 76, 9, 0
+ CONTROL "Debug Information", IDC_DEBUGINFO, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 28, 76, 9, 0
+ CONTROL "Compile Via ASM", IDC_COMPILEVIAASM, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 36, 76, 9, 0
+ CONTROL "Show Warnings", IDC_SHOWWARNINGS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 44, 73, 9, 0
+ CONTROL "Include path", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 64, 60, 8, 0
+ CONTROL "", IDC_INCLUDEPATH, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 72, 244, 12, 0
+ CONTROL "Output path", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 88, 60, 8, 0
+ CONTROL "", IDC_OUTPUTPATH, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 96, 244, 12, 0
+ CONTROL "Align Stack", IDC_ALIGNSTACK, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 52, 73, 9, 0
+}
+DEBUGPROPDLG DIALOG 0, 0, 263, 120
+EXSTYLE WS_EX_CONTEXTHELP
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Debug"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Break at DLL entry point", IDC_BREAKDLL, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 12, 100, 9, 0
+ CONTROL "Stop Before Exception Handler", IDC_DEBUGEXCEPTION, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 22, 116, 9, 0
+ CONTROL "Tool tips", IDC_DEBUGTOOLTIPS, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 32, 100, 9, 0
+ CONTROL "Show Return Code", IDC_SHOWRETURNCODE, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 43, 109, 6, 0
+ CONTROL "Command Line:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 88, 104, 9, 0
+ CONTROL "", IDC_EDITCMDLINE, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 100, 248, 13, 0
+}
+TOOLOPTPROPDLG DIALOG 0, 0, 263, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Tool Options"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Compiler", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 29, 60, 8, 0
+ CONTROL "", IDC_TOCOMPILER, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 28, 164, 12, 0
+ CONTROL "Assembler", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 44, 60, 8, 0
+ CONTROL "", IDC_TOASSEMBLER, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 44, 164, 12, 0
+ CONTROL "Linker", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 60, 60, 8, 0
+ CONTROL "", IDC_TOLINKER, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 60, 164, 12, 0
+ CONTROL "Librarian", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 16, 76, 60, 8, 0
+ CONTROL "", IDC_TOLIBRARIAN, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 60, 76, 164, 12, 0
+}
+PREBUILDPROPDLG DIALOG 0, 0, 263, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Pre Build"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Label:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 8, 28, 8, 0
+ CONTROL "", IDC_PREBUILDLABEL, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 44, 8, 212, 12, 0
+ CONTROL "Build Steps", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 28, 52, 8, 0
+ CONTROL "", IDC_PREBUILDSTEPS, "edit", ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_WANTRETURN | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 40, 248, 72, 0
+}
+POSTBUILDPROPDLG DIALOG 0, 0, 263, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Post Build"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Label:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 8, 28, 8, 0
+ CONTROL "", IDC_POSTBUILDLABEL, "edit", ES_AUTOHSCROLL | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 44, 8, 212, 12, 0
+ CONTROL "Build Steps", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 28, 52, 8, 0
+ CONTROL "", IDC_POSTBUILDSTEPS, "edit", ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOVSCROLL | ES_WANTRETURN | ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 40, 248, 72, 0
+}
+DEFINEPROPDLG DIALOG 0, 0, 263, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Defines"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Current Definition:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 9, 56, 8, 0
+ CONTROL "Value:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 40, 26, 24, 8, 0
+ CONTROL "", IDC_DEFINENAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_BORDER | WS_TABSTOP, 64, 8, 128, 12
+ CONTROL "", IDC_DEFINEVALUE, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 64, 24, 128, 12, 0
+ CONTROL "ListBox1", IDC_DEFINELIST, "listbox", LBS_STANDARD | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 64, 37, 128, 78, 0
+ CONTROL "Add", IDC_DEFINEADD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 8, 40, 12, 0
+ CONTROL "Remove", IDC_DEFINEREMOVE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 208, 24, 40, 12, 0
+// CONTROL "Pass To Nasm", IDC_DEFINEPASSTONASM, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 196, 56, 68, 12, 0
+}
+ADDWATCHDIALOG DIALOG 0, 0, 176, 56
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Watch"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 32, 36, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 92, 36, 50, 14
+ CONTROL "", IDC_EDWATCH, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 4, 17, 168, 60, 0
+ CONTROL "Enter variable to watch:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 4, 108, 9, 0
+}
+LANGUAGE LANG_NEUTRAL,SUBLANG_NEUTRAL
+
+
+FINDDLG DIALOG 30, 73, 236, 62
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find"
+FONT 8, "Helv"
+{
+ CONTROL "Fi&nd what:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 8, 42, 8
+ CONTROL "", 1152, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP, 47, 7, 128, 60
+ CONTROL "Match &whole word only", 1040, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 4, 28, 100, 9
+ CONTROL "Match &case", 1041, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 36, 64, 9
+ CONTROL "Regular &expressions", 990, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 44, 80, 9, 0
+ CONTROL "Direction", 1072, "BUTTON", BS_GROUPBOX | WS_CHILD | WS_VISIBLE, 107, 26, 68, 28
+ CONTROL "&Up", 1056, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 111, 38, 25, 12
+ CONTROL "&Down", 1057, "BUTTON", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 138, 38, 35, 12
+ CONTROL "&Find Next", 1, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 182, 5, 50, 14
+ CONTROL "Cancel", 2, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 182, 23, 50, 14
+ CONTROL "&Help", 1038, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 182, 45, 50, 14
+}
+
+
+REPLACEDLG DIALOG 36, 44, 230, 94
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Replace"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Fi&nd what:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 9, 48, 8
+ CONTROL "", 1152, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP, 54, 7, 114, 60
+ CONTROL "Re&place with:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 26, 48, 8
+ CONTROL "", 1153, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP, 54, 24, 114, 60
+ CONTROL "Context", 101, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 5, 46, 71, 37, 0
+ CONTROL "All Text", IDC_RADIO_ALL_TEXT, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 57, 59, 9, 0
+ CONTROL "Selection", IDC_RADIO_SELECTED_TEXT, "button", BS_AUTORADIOBUTTON | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 69, 56, 8, 0
+ CONTROL "Match &whole word only", 1040, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 79, 50, 91, 9
+ CONTROL "Match &case", 1041, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 79, 61, 59, 9
+ CONTROL "Regular &expressions", 990, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 79, 73, 88, 9, 0
+ CONTROL "&Find Next", 1, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 174, 4, 50, 14
+ CONTROL "&Replace", 1024, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 174, 21, 50, 14
+ CONTROL "Replace &All", 1025, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 174, 38, 50, 14
+ CONTROL "Cancel", 2, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 174, 55, 50, 14
+ CONTROL "&Help", 1038, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 174, 75, 50, 14
+}
+
+FINDINFILESDLG DIALOG 37, 44, 284, 98
+EXSTYLE WS_EX_DLGMODALFRAME
+STYLE DS_MODALFRAME | DS_3DLOOK | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Find in Files"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Fi&nd what:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 9, 48, 8
+ CONTROL "", 1152, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP, 54, 7, 114, 60
+ CONTROL "File &type:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 26, 48, 8
+ CONTROL "", 1154, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 54, 24, 114, 60, 0
+ CONTROL "&In directory:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 43, 48, 8
+ CONTROL "", 1153, "combobox", CBS_DROPDOWN | CBS_OEMCONVERT | CBS_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_GROUP | WS_TABSTOP, 54, 41, 114, 60
+ CONTROL "&Browse", 100, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 40, 50, 14, 0
+ CONTROL "Match &whole word only", 1044, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 61, 96, 10, 0
+ CONTROL "Match &case", 1041, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 4, 72, 59, 9
+ CONTROL "Regular &expressions", 1040, "BUTTON", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 4, 83, 104, 9
+ CONTROL "Recurse &subidrectories", 1043, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 132, 60, 95, 10, 0
+ CONTROL "&Output to window 2", 1042, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 132, 70, 76, 12, 0
+ CONTROL "&Find", 1, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 232, 4, 50, 14
+ CONTROL "Cancel", 2, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 232, 24, 50, 14
+}
+
+DIRDLG DIALOG 36, 24, 268, 154
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Directory"
+FONT 8, "MS Shell Dlg"
+{
+ CONTROL "File &name:", 1090, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 6, 6, 76, 9
+ CONTROL "", 1152, "EDIT", ES_LEFT | ES_AUTOHSCROLL | ES_OEMCONVERT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 6, 16, 90, 12
+ CONTROL "", 1120, "LISTBOX", LBS_STANDARD | LBS_HASSTRINGS | LBS_EXTENDEDSEL | LBS_DISABLENOSCROLL | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 6, 32, 90, 88
+ CONTROL "&Folders:", -1, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 110, 6, 96, 9
+ CONTROL "", 1088, "STATIC", SS_LEFT | SS_NOPREFIX | WS_CHILD | WS_VISIBLE | WS_GROUP, 110, 16, 96, 9
+ CONTROL "", 1121, "LISTBOX", LBS_STANDARD | LBS_HASSTRINGS | LBS_DISABLENOSCROLL | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 110, 16, 96, 72
+ CONTROL "Dri&ves:", 1091, "STATIC", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 110, 96, 52, 9
+ CONTROL "", 1137, "COMBOBOX", CBS_DROPDOWNLIST | CBS_AUTOHSCROLL | CBS_SORT | CBS_HASSTRINGS | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 110, 108, 96, 68
+ CONTROL "Current Directory:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 12, 134, 60, 9, 0
+ CONTROL "", 1138, "edit", ES_LEFT | ES_AUTOHSCROLL | ES_OEMCONVERT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 72, 132, 172, 14, 0
+ CONTROL "OK", 1, "BUTTON", BS_DEFPUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 212, 6, 50, 14
+ CONTROL "Cancel", 2, "BUTTON", BS_PUSHBUTTON | WS_CHILD | WS_VISIBLE | WS_GROUP | WS_TABSTOP, 212, 24, 50, 14
+}
+GENERALPROPDLG DIALOG 0, 0, 240, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "General"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Include Browse Information", IDC_BROWSEINFO, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 17, 100, 13, 0
+ CONTROL "Code Completion", IDC_CODECOMP, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 12, 30, 98, 10, 0
+ CONTROL "Parenthesis Checking", IDC_PARENCHECK, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 11, 39, 80, 14, 0
+}
+BOOKMARKDLG DIALOG 0, 0, 413, 196
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Bookmarks"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Select Bookmark to Position To:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE | WS_GROUP, 8, 8, 120, 9, 0
+ CONTROL "", IDC_BMLISTBOX, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 20, 396, 148, WS_EX_STATICEDGE | WS_EX_CLIENTEDGE
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 181, 176, 50, 14
+}
+DLG_PROGRESS DIALOG 0, 0, 197, 87
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION ""
+FONT 8, "MS Sans Serif"
+{
+// CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 64, 60, 50, 14
+ CONTROL "", IDC_PBNAME, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 17, 148, 8
+ CONTROL "progress32", IDC_PROGRESSBAR, PROGRESS_CLASS, WS_CHILD | WS_VISIBLE | WS_BORDER, 12, 32, 148, 14
+ CONTROL "", IDC_PBPERCENT, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 164, 36, 32, 13
+}
+DLG_FILESAVE DIALOG 0, 0, 240, 136
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Files"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView", IDC_FILELIST, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SORTASCENDING | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 36, 160, 92, 0
+ CONTROL "Save", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 32, 50, 14
+ CONTROL "Select All", IDC_SELECTALL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 52, 50, 14
+ CONTROL "Deselect All", IDC_DESELECTALL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 72, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 92, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 112, 50, 14
+ CONTROL "One or more files have been modified.", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 12, 132, 8, 0
+ CONTROL "Select files to save:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 28, 104, 8, 0
+}
+
+DLG_FILECHANGE DIALOG 0, 0, 240, 136
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Reload Files"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView", IDC_FILELIST, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SORTASCENDING | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 36, 160, 92, 0
+ CONTROL "Reload", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 32, 50, 14
+ CONTROL "Select All", IDC_SELECTALL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 52, 50, 14
+ CONTROL "Deselect All", IDC_DESELECTALL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 72, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 92, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 186, 112, 50, 14
+ CONTROL "One or more files have been modified outside the editor", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 12, 164, 8, 0
+ CONTROL "Select files to reload:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 28, 104, 8, 0
+}
+DLG_MANYWINDOWS DIALOG 0, 0, 160, 136
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Window"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "ListView", IDC_FILELIST, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 12, 20, 136, 92, 0
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 52, 116, 50, 14
+ CONTROL "Choose Window to Select:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 12, 8, 104, 8, 0
+}
+
+
+
+HDWEBPPROP DIALOG 0, 0, 331, 120
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Hardware Breakpoints"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "", IDC_BPEDIT1, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 32, 92, 12
+ CONTROL "combobox1", IDC_BPMODE1, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 32, 52, 44, 0
+ CONTROL "combobox2", IDC_BPSIZE1, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 112, 32, 52, 44, 0
+ CONTROL "Enable", IDC_BPENABLE1, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 36, 36, 8, 0
+ CONTROL "#1", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 32, 12, 12, 0
+ CONTROL "", IDC_BPEDIT2, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 48, 92, 12, 0
+ CONTROL "combobox9", IDC_BPMODE2, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 48, 52, 44, 0
+ CONTROL "combobox10", IDC_BPSIZE2, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 112, 48, 52, 44, 0
+ CONTROL "Enable", IDC_BPENABLE2, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 52, 36, 8, 0
+ CONTROL "#2", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 48, 12, 12, 0
+ CONTROL "", IDC_BPEDIT3, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 64, 92, 12, 0
+ CONTROL "combobox11", IDC_BPMODE3, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 64, 52, 44, 0
+ CONTROL "combobox12", IDC_BPSIZE3, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 112, 64, 52, 44, 0
+ CONTROL "Enable", IDC_BPENABLE3, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 68, 36, 8, 0
+ CONTROL "#3", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 64, 12, 12, 0
+ CONTROL "", IDC_BPEDIT4, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 16, 80, 92, 12, 0
+ CONTROL "combobox13", IDC_BPMODE4, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 168, 80, 52, 44, 0
+ CONTROL "combobox14", IDC_BPSIZE4, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 112, 80, 52, 44, 0
+ CONTROL "Enable", IDC_BPENABLE4, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 224, 84, 36, 8, 0
+ CONTROL "#4", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 4, 80, 12, 12, 0
+ CONTROL "Enable HBP Subsystem", IDC_BPSSENABLE, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 172, 104, 88, 8, 0
+}
+
+HBPDLG DIALOG 0, 0, 303, 72
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Hardware Breakpoint Setup"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "#1", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 12, 12, 8, 0
+ CONTROL "", IDC_BPEDIT1, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 12, 76, 12, WS_EX_STATICEDGE
+ CONTROL "ComboBox2", IDC_BPMODE1, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 148, 12, 44, 36, WS_EX_STATICEDGE
+ CONTROL "ComboBox3", IDC_BPSIZE1, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 100, 12, 44, 36, WS_EX_STATICEDGE
+ CONTROL "Enabled", IDC_BPENABLE1, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 196, 12, 44, 8, 0
+ CONTROL "#2", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 24, 12, 8, 0
+ CONTROL "", IDC_BPEDIT2, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 24, 76, 12, WS_EX_STATICEDGE
+ CONTROL "ComboBox11", IDC_BPMODE2, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 148, 24, 44, 36, WS_EX_STATICEDGE
+ CONTROL "ComboBox12", IDC_BPSIZE2, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 100, 24, 44, 36, WS_EX_STATICEDGE
+ CONTROL "Enabled", IDC_BPENABLE2, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 196, 24, 44, 8, 0
+ CONTROL "#3", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 36, 12, 8, 0
+ CONTROL "", IDC_BPEDIT3, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 36, 76, 12, WS_EX_STATICEDGE
+ CONTROL "ComboBox14", IDC_BPMODE3, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 148, 36, 44, 36, WS_EX_STATICEDGE
+ CONTROL "ComboBox15", IDC_BPSIZE3, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 100, 36, 44, 36, WS_EX_STATICEDGE
+ CONTROL "Enabled", IDC_BPENABLE3, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 196, 36, 44, 8, 0
+ CONTROL "#4", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 48, 12, 8, 0
+ CONTROL "", IDC_BPEDIT4, "edit", ES_LEFT | ES_AUTOHSCROLL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 48, 76, 12, WS_EX_STATICEDGE
+ CONTROL "ComboBox17", IDC_BPMODE4, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 148, 48, 44, 28, WS_EX_STATICEDGE
+ CONTROL "ComboBox18", IDC_BPSIZE4, "combobox", CBS_DROPDOWN | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_VSCROLL | WS_TABSTOP, 100, 48, 44, 28, WS_EX_STATICEDGE
+ CONTROL "Enabled", IDC_BPENABLE4, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 196, 48, 44, 8, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 8, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 28, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 244, 48, 50, 14
+}
+EXPADDIN DIALOG 0, 0, 320, 44
+STYLE DS_3DLOOK | DS_CONTROL | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+CAPTION ""
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Recent Directories:", -1, "static", SS_RIGHT | WS_CHILD | WS_VISIBLE, 4, 2, 64, 10, 0
+ CONTROL "ComboBox1", IDC_EAI_DIRCOMBO, "combobox", CBS_DROPDOWNLIST | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 70, 0, 100, 40
+}
+DEFINEADDDLG DIALOG 0, 0, 186, 57
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Add Define"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Enter Item To Add:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 20, 8, 60, 16, 0
+ CONTROL "", IDC_DFADD, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 20, 20, 88, 11, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 120, 8, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 120, 28, 50, 14
+}
+PRINTFORMATPROPDLG DIALOG 0, 0, 240, 120
+STYLE DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Printer Format"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Margins", -1, "button", BS_GROUPBOX | WS_CHILD | WS_VISIBLE | WS_GROUP, 29, 51, 182, 54, 0
+ CONTROL "Header:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 37, 12, 33, 11, 0
+ CONTROL "", IDC_PRINTHEADER, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 70, 12, 120, 12, 0
+ CONTROL "", IDC_PRINTHEADERBUTTON, "button", BS_PUSHBUTTON | BS_BITMAP | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 190, 12, 17, 12, 0
+ CONTROL "Footer:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 37, 26, 26, 9, 0
+ CONTROL "", IDC_PRINTFOOTER, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 70, 27, 120, 12, 0
+ CONTROL "", IDC_PRINTFOOTERBUTTON, "button", BS_PUSHBUTTON | BS_BITMAP | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 190, 27, 17, 12, 0
+ CONTROL "Left:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 40, 69, 28, 10, 0
+ CONTROL "", IDC_LEFTMARGIN, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 71, 67, 32, 12, 0
+ CONTROL "Right:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 40, 84, 28, 10, 0
+ CONTROL "", IDC_RIGHTMARGIN, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 71, 82, 32, 12, 0
+ CONTROL "Top:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 128, 68, 28, 10, 0
+ CONTROL "", IDC_TOPMARGIN, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 157, 67, 32, 12, 0
+ CONTROL "Bottom:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 128, 84, 28, 10, 0
+ CONTROL "", IDC_BOTTOMMARGIN, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 157, 82, 32, 12, 0
+ CONTROL "Frame2", -1, "static", SS_ETCHEDFRAME | WS_CHILD | WS_VISIBLE, 29, 9, 182, 34, 0
+ CONTROL "mm", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 104, 69, 15, 9, 0
+ CONTROL "mm", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 104, 84, 15, 9, 0
+ CONTROL "mm", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 189, 69, 15, 10, 0
+ CONTROL "mm", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 189, 84, 15, 9, 0
+}
+
+DLG_PROJECTDEPS DIALOG 0, 0, 240, 190
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Project Dependencies"
+FONT 8, "MS Sans Serif"
+{
+ CONTROL "Select Target:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 24, 56, 17, 0
+ CONTROL "", IDC_PDCOMBO, "combobox", CBS_DROPDOWNLIST | CBS_SORT | CBS_HASSTRINGS | WS_CHILD | WS_VISIBLE | WS_VSCROLL | WS_TABSTOP, 64, 20, 170, 17, 0
+ CONTROL "", IDC_PDLIST, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 20, 396, 148, WS_EX_STATICEDGE | WS_EX_CLIENTEDGE
+ CONTROL "OK", IDOK, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 29, 169, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 96, 168, 50, 14
+ CONTROL "Help", IDHELP, "BUTTON", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 164, 168, 50, 14
+}
+DLG_EXTOOLS DIALOG 101, 5, 238, 170
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "External Tools"
+FONT 10, "MS Sans Serif"
+{
+ CONTROL "Tools:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 9, 44, 11, 0
+ CONTROL "ListView", IDC_EXTOOLCUSTOM, WC_LISTVIEW, LVS_REPORT | LVS_NOCOLUMNHEADER | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 8, 20, 168, 141, 0
+ CONTROL "Add", IDC_EXTOOLSADD, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 20, 51, 11, 0
+ CONTROL "Edit", IDC_EXTOOLSEDIT, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 36, 51, 11, 0
+ CONTROL "Remove", IDC_EXTOOLSREMOVE, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 52, 51, 12, 0
+ CONTROL "Move Up", IDC_EXTOOLSMOVEUP, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 68, 51, 11, 0
+ CONTROL "Move Down", IDC_EXTOOLSMOVEDOWN, "button", BS_PUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 84, 51, 11, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 124, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 144, 50, 14
+}
+DLG_EXTOOLSEDIT DIALOG 101, 5, 238, 151
+EXSTYLE WS_EX_DLGMODALFRAME | WS_EX_CONTEXTHELP
+STYLE DS_MODALFRAME | DS_3DLOOK | DS_CONTEXTHELP | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Customize"
+FONT 10, "MS Sans Serif"
+{
+ CONTROL "Menu Name:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 12, 69, 8, 0
+ CONTROL "Edit1", IDC_EXT_NAME, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 52, 12, 176, 12, 0
+ CONTROL "Command:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 28, 40, 8, 0
+ CONTROL "Edit2", IDC_EXT_COMMAND, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 52, 28, 176, 12, 0
+ CONTROL "Arguments:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 44, 40, 8, 0
+ CONTROL "Edit4", IDC_EXT_ARG, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 52, 44, 176, 36, 0
+ CONTROL "Working Directory:", -1, "static", SS_LEFT | WS_CHILD | WS_VISIBLE, 8, 84, 69, 8, 0
+ CONTROL "Edit3", IDC_EXT_WD, "edit", ES_LEFT | WS_CHILD | WS_VISIBLE | WS_BORDER | WS_TABSTOP, 72, 84, 156, 12, 0
+ CONTROL "Open Command Window", IDC_EXT_CW, "button", BS_AUTOCHECKBOX | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 8, 108, 93, 11, 0
+ CONTROL "OK", IDOK, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 124, 128, 50, 14
+ CONTROL "Cancel", IDCANCEL, "BUTTON", BS_DEFPUSHBUTTON | BS_CENTER | WS_CHILD | WS_VISIBLE | WS_TABSTOP, 180, 128, 50, 14
+}

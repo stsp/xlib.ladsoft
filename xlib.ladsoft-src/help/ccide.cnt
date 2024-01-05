@@ -1,0 +1,109 @@
+;This help file was created with HelpScribble 7.6.1
+;Licensed to: LADSoft
+
+:BASE ccide.hlp
+:TITLE CCIDE Help
+1 General Information
+2 Welcome=Scribble10
+2 Getting Started=Scribble20
+2 Using With NASM=Scribble730
+2 GNU CopyLeft Statement=Scribble30
+1 Bookmarks
+2 Bookmarks=Scribble370
+2 Bookmark Dialog=Scribble360
+1 Breakpoints
+2 Breakpoints=Scribble380
+2 Hardware Breakpoints Dialog=IDH_HARDWARE_BREAKPOINTS_DIALOG
+1 Browse Information
+2 Browse information=Scribble400
+2 General Configuration=IDH_GENERAL_CONFIGURATION
+1 Dialogs
+2 Add To Watch Dialog=Scribble340
+2 Bookmark Dialog=Scribble360
+2 Browse To Dialog=Scribble350
+2 Color Dialog=IDH_CHOOSE_COLOR_DIALOG
+2 Find Dialog=Scribble310
+2 Find in Files Dialog=Scribble280
+2 Font Dialog=IDH_CHOOSE_FONT_DIALOG
+2 General Properties Dialog=Scribble490
+2 Goto Line Dialog=Scribble300
+2 Open File Dialog=Scribble330
+2 Reload File Dialog=IDH_RELOAD_FILE_DIALOG
+2 Replace Dialog=Scribble320
+2 Save File Dialog=IDH_SAVE_FILE_DIALOG
+2 Select Window Dialog=Scribble290
+2 Target Properties Dialog=Scribble510
+2 Toolbar Customization Dialog=Scribble430
+1 Editor
+2 Editor Window=Scribble50
+2 Editor Configuration=IDH_EDITOR_CONFIGURATION
+2 Edit Toolbar=IDH_EDIT_TOOLBAR
+2 Edit Menu=Scribble80
+2 Editor Context Menu=Scribble110
+1 Help
+2 Integrated Platform Help=Scribble390
+2 Install Configuration=IDH_INSTALL_CONFIGURATION
+2 Help Menu=Scribble210
+1 Information Windows
+2 Information Window=IDM_INFORMATION_WINDOW
+2 Information Context Menu=Scribble240
+1 Integrated Debugger
+2 Integrated Debugger=Scribble250
+2 Debug Target Properties=IDH_DEBUG_CONFIGURATION
+2 Debug Toolbar=IDH_DEBUG_TOOLBAR
+2 Debug Menu=Scribble260
+2 Expressions=Scribble690
+2 Debug Windows
+3 Debugging Windows=Scribble270
+3 Assembly Window=IDH_ASSEMBLY_WINDOW
+3 Hardware Breakpoints=IDH_HARDWARE_BREAKPOINTS_DIALOG
+3 Memory Window=IDH_MEMORY_WINDOW
+3 Register Window=IDH_REGISTER_WINDOW
+3 Stack Window=IDH_STACK_WINDOW
+3 Threads Window=IDH_THREAD_WINDOW
+3 Watch Window=IDH_WATCH_WINDOW
+1 Menus
+2 Menus=Scribble40
+2 Main Menu
+3 File Menu=Scribble60
+3 New Menu=Scribble70
+3 Edit Menu=Scribble80
+3 Edit Tools Menu=Scribble90
+3 View Menu=Scribble160
+3 View Bookmarks Menu=Scribble120
+3 View Browse Menu=Scribble150
+3 View Debug Windows Menu=Scribble130
+3 View Toolbars Menu=Scribble140
+3 Build Menu=Scribble200
+3 Debug Menu=Scribble260
+3 Window Menu=Scribble100
+3 Help Menu=Scribble210
+2 Context Menus
+3 Client Context Menu=Scribble180
+3 Editor Context Menu=Scribble110
+3 Information Context Menu=Scribble240
+3 Watch Context Menu=Scribble580
+3 Workspace Context Menu=Scribble190
+1 Workspace Window
+2 Workspace Window=Scribble170
+2 Build Toolbar=IDH_BUILD_TOOLBAR
+2 Build Menu=Scribble200
+2 Workspace Context Menu=Scribble190
+2 General Target Properties=IDH_COMPILER_CONFIGURATION
+2 DebugTarget Properties=IDH_DEBUG_CONFIGURATION
+2 Define Properties=IDH_DEFINE_CONFIGURATION
+2 Tool Option Properties=IDH_TOOL_CONFIGURATION
+2 Pre-Build Step=IDH_PREBUILD_CONFIGURATION
+2 Post-Build Step=IDH_POSTBUILD_CONFIGURATION
+1 Support Functions
+2 Find and Replace=Scribble310
+2 Find in Files=Scribble280
+2 Hot Keys=Scribble650
+2 Printing=Scribble410
+2 Regular Expressions=Scribble700
+1 Toolbars
+2 Toolbars=Scribble420
+2 Toolbar Customization Dialog=Scribble430
+2 Build Toolbar=IDH_BUILD_TOOLBAR
+2 Debug Toolbar=IDH_DEBUG_TOOLBAR
+2 Edit Toolbar=IDH_EDIT_TOOLBAR

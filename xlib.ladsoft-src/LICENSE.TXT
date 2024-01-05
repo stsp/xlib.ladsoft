@@ -1,0 +1,43 @@
+By installing and or using this software you agree to be bound by the
+following licensing restrictions.
+
+Copyrights for the dos extenders are held by the author of each extender.  When
+choosing a dos extender to use in an application, you agree to be bound by the
+author's original licensing.  The license for the default extender 'DOS32A' is
+found in the file 'DOS32A.LIC'.  Check the author's install package for other
+extenders to get the licensing terms.
+
+The windows 32 header files are GNU GPL-d.  It is unclear what the impact of that
+license is on header files, since there is little or no executable code involved,
+but be prepared to deal with the full consequences of the GNU-GPL if you intend 
+to use them.  See the file 'copying' for details.
+
+The remainder of the runtime library is now BSD-licensed as outlined in the file
+'bsd.lic'.  You agree to be bound by the BSD license if you distribute the 
+library or parts of the library.
+
+Copyrights for NASM are held by Simon Tatham and Julian Hall.  This seems to be
+GNU-GPL based for the version of NASM I am distributing, but I have included 
+their license file for reference in 'nasm.lic'.
+
+The remainder of the applications are currently GNU-GPL licensed.  See the file
+'copying' for details.
+
+Following is a brief list of the individual contributors to the project
+
+anakin@pobox.com and jules@earthcorp.com        - NASM assembler
+David Troendle      - VAL linker
+Kirill Joss         - CL386 program
+Kirill Joss         - MK386 program
+Kirill Joss         - Watcom support
+Kirill Joss         - DPMI stub programs for various DPMI packages
+TRAN (thomas pytel) - PMODE307 and PMODE/W for DPMI support
+Charles Scheffold   - PMODE/W for DPMI support
+Matthew Brandt	    - portions of the C compiler
+Scott Christley	    - WIN32 header files
+Lance Taylor        - portions of the resource compiler (GPL'd)
+Narech Koumar       - dos32a run-time files (see dos32a.lic)
+(supernar)
+Dibyendu Majumdar	- secondary C99 parser used by the editor
+Franck Uberto       - miscellaneous testing, bug fixes, and enhancements
+David Lindauer      - remaining code & run time libraries

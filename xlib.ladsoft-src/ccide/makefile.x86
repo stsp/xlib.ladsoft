@@ -1,0 +1,349 @@
+#
+#  Generated make file for workspace C:\tools\cc\cciden\makefile.x86
+#
+all: c:\orangec\test\winvi\winvi.exe 
+
+#
+# Tools Definitions
+#
+
+CC=CC386
+LINK=VALX
+ASM=NASM
+RC=XRC
+LIB=XLIB
+
+#
+# Default paths
+#
+INSTALLDIR=c:\program files (x86)\cc386
+PROJECTDIR=C:\tools\cc\cciden
+SYSTEMDIR=C:\Windows\system32
+WINDIR=C:\Windows
+#
+# Build rules for target WinVI.exe
+#
+#
+# Options
+#
+
+CFLAGS_WINVI_EXE =  /c +v /9   /w-all /Wg
+AFLAGS_WINVI_EXE = -fobj -Fls -g
+RCFLAGS_WINVI_EXE = -r
+LFLAGS_WINVI_EXE =  /32 /nci /PE /WIN  /DEB
+LIBFLAGS_WINVI_EXE = 
+
+INCLUDE_WINVI_EXE = C:\orangec\test\winvi
+LIBS_WINVI_EXE = "$(INSTALLDIR)\lib\climp.lib" "$(INSTALLDIR)\lib\clwin.lib" 
+START_WINVI_EXE = "$(INSTALLDIR)\lib\c0win.obj" 
+OUTPUTDIR_WINVI_EXE=C:\orangec\test\winvi
+#
+# Rules
+#
+
+WINVI_EXE =  \
+	c:\orangec\test\winvi\assert.obj  \
+	c:\orangec\test\winvi\bmp.obj  \
+	c:\orangec\test\winvi\charflags.obj  \
+	c:\orangec\test\winvi\clipbrd.obj  \
+	c:\orangec\test\winvi\colors.obj  \
+	c:\orangec\test\winvi\command.obj  \
+	c:\orangec\test\winvi\ctl3d.obj  \
+	c:\orangec\test\winvi\exec.obj  \
+	c:\orangec\test\winvi\externs.obj  \
+	c:\orangec\test\winvi\file.obj  \
+	c:\orangec\test\winvi\filelist.obj  \
+	c:\orangec\test\winvi\font.obj  \
+	c:\orangec\test\winvi\input.obj  \
+	c:\orangec\test\winvi\insdel.obj  \
+	c:\orangec\test\winvi\intercom.obj  \
+	c:\orangec\test\winvi\map.obj  \
+	c:\orangec\test\winvi\misc.obj  \
+	c:\orangec\test\winvi\mouse.obj  \
+	c:\orangec\test\winvi\page.obj  \
+	c:\orangec\test\winvi\paint.obj  \
+	c:\orangec\test\winvi\pathexp.obj  \
+	c:\orangec\test\winvi\position.obj  \
+	c:\orangec\test\winvi\print.obj  \
+	c:\orangec\test\winvi\profile.obj  \
+	c:\orangec\test\winvi\search.obj  \
+	c:\orangec\test\winvi\settings.obj  \
+	c:\orangec\test\winvi\srchdlg.obj  \
+	c:\orangec\test\winvi\status.obj  \
+	c:\orangec\test\winvi\tabctrl.obj  \
+	c:\orangec\test\winvi\tags.obj  \
+	c:\orangec\test\winvi\toolbar.obj  \
+	c:\orangec\test\winvi\undo.obj  \
+	c:\orangec\test\winvi\version.obj  \
+	c:\orangec\test\winvi\winvi.obj 
+
+#
+# User defines
+#
+
+DEFINES_WINVI_EXE = 	-D_WIN32=1 \
+	-DWIN32=1
+
+
+c:\orangec\test\winvi\winvi.exe : $(WINVI_EXE) c:\orangec\test\winvi\winvi.res 
+	$(LINK) $(LFLAGS_WINVI_EXE) @&&|
+$(START_WINVI_EXE) $(WINVI_EXE),C:\orangec\test\winvi\WinVI.exe,C:\orangec\test\winvi\WinVI,$(LIBS_WINVI_EXE),c:\orangec\test\winvi\winvi.res ,,
+|
+
+c:\orangec\test\winvi\assert.obj : c:\orangec\test\winvi\assert.c c:\orangec\test\winvi\myassert.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Assert.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Assert.c"
+|
+
+c:\orangec\test\winvi\bmp.obj : c:\orangec\test\winvi\bmp.c c:\orangec\test\winvi\winvi.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Bmp.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Bmp.c"
+|
+
+c:\orangec\test\winvi\charflags.obj : c:\orangec\test\winvi\charflags.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\CharFlags.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\CharFlags.c"
+|
+
+c:\orangec\test\winvi\clipbrd.obj : c:\orangec\test\winvi\clipbrd.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Clipbrd.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Clipbrd.c"
+|
+
+c:\orangec\test\winvi\colors.obj : c:\orangec\test\winvi\colors.c c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\colors.h c:\orangec\test\winvi\status.h  \
+	c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\ctl3d.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Colors.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Colors.c"
+|
+
+c:\orangec\test\winvi\command.obj : c:\orangec\test\winvi\command.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h  \
+	c:\orangec\test\winvi\status.h c:\orangec\test\winvi\toolbar.h c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\exec.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Command.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Command.c"
+|
+
+c:\orangec\test\winvi\ctl3d.obj : c:\orangec\test\winvi\ctl3d.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\ctl3d.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Ctl3d.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Ctl3d.c"
+|
+
+c:\orangec\test\winvi\exec.obj : c:\orangec\test\winvi\exec.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\exec.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Exec.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Exec.c"
+|
+
+c:\orangec\test\winvi\externs.obj : c:\orangec\test\winvi\externs.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\colors.h  \
+	c:\orangec\test\winvi\status.h c:\orangec\test\winvi\toolbar.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Externs.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Externs.c"
+|
+
+c:\orangec\test\winvi\file.obj : c:\orangec\test\winvi\file.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\map.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\File.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\File.c"
+|
+
+c:\orangec\test\winvi\filelist.obj : c:\orangec\test\winvi\filelist.c c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\pathexp.h c:\orangec\test\winvi\myassert.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Filelist.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Filelist.c"
+|
+
+c:\orangec\test\winvi\font.obj : c:\orangec\test\winvi\font.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Font.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Font.c"
+|
+
+c:\orangec\test\winvi\input.obj : c:\orangec\test\winvi\input.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h  \
+	c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\intercom.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\toolbar.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Input.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Input.c"
+|
+
+c:\orangec\test\winvi\insdel.obj : c:\orangec\test\winvi\insdel.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Insdel.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Insdel.c"
+|
+
+c:\orangec\test\winvi\intercom.obj : c:\orangec\test\winvi\intercom.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\intercom.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Intercom.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Intercom.c"
+|
+
+c:\orangec\test\winvi\map.obj : c:\orangec\test\winvi\map.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\map.h  \
+	c:\orangec\test\winvi\exec.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Map.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Map.c"
+|
+
+c:\orangec\test\winvi\misc.obj : c:\orangec\test\winvi\misc.c c:\orangec\test\winvi\winvi.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Misc.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Misc.c"
+|
+
+c:\orangec\test\winvi\mouse.obj : c:\orangec\test\winvi\mouse.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\status.h  \
+	c:\orangec\test\winvi\toolbar.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Mouse.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Mouse.c"
+|
+
+c:\orangec\test\winvi\page.obj : c:\orangec\test\winvi\page.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Page.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Page.c"
+|
+
+c:\orangec\test\winvi\paint.obj : c:\orangec\test\winvi\paint.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\page.h  \
+	c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\toolbar.h c:\orangec\test\winvi\ctl3d.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Paint.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Paint.c"
+|
+
+c:\orangec\test\winvi\pathexp.obj : c:\orangec\test\winvi\pathexp.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\pathexp.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Pathexp.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Pathexp.c"
+|
+
+c:\orangec\test\winvi\position.obj : c:\orangec\test\winvi\position.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Position.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Position.c"
+|
+
+c:\orangec\test\winvi\print.obj : c:\orangec\test\winvi\print.c c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\printh.h c:\orangec\test\winvi\map.h  \
+	c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Print.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Print.c"
+|
+
+c:\orangec\test\winvi\profile.obj : c:\orangec\test\winvi\profile.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\colors.h c:\orangec\test\winvi\page.h  \
+	c:\orangec\test\winvi\map.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Profile.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Profile.c"
+|
+
+c:\orangec\test\winvi\search.obj : c:\orangec\test\winvi\search.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Search.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Search.c"
+|
+
+c:\orangec\test\winvi\settings.obj : c:\orangec\test\winvi\settings.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\colors.h c:\orangec\test\winvi\printh.h c:\orangec\test\winvi\paint.h  \
+	c:\orangec\test\winvi\tabctrl.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\map.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Settings.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Settings.c"
+|
+
+c:\orangec\test\winvi\srchdlg.obj : c:\orangec\test\winvi\srchdlg.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\resource.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Srchdlg.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Srchdlg.c"
+|
+
+c:\orangec\test\winvi\status.obj : c:\orangec\test\winvi\status.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\status.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Status.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Status.c"
+|
+
+c:\orangec\test\winvi\tabctrl.obj : c:\orangec\test\winvi\tabctrl.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\tabctrl.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\resource.h  \
+	c:\orangec\test\winvi\ctl3d.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Tabctrl.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Tabctrl.c"
+|
+
+c:\orangec\test\winvi\tags.obj : c:\orangec\test\winvi\tags.c c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Tags.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Tags.c"
+|
+
+c:\orangec\test\winvi\toolbar.obj : c:\orangec\test\winvi\toolbar.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h  \
+	c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\toolbar.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Toolbar.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Toolbar.c"
+|
+
+c:\orangec\test\winvi\undo.obj : c:\orangec\test\winvi\undo.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\page.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Undo.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Undo.c"
+|
+
+c:\orangec\test\winvi\version.obj : c:\orangec\test\winvi\version.c 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Version.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Version.c"
+|
+
+c:\orangec\test\winvi\winvi.obj : c:\orangec\test\winvi\winvi.c c:\orangec\test\winvi\myassert.h c:\orangec\test\winvi\ctl3d.h c:\orangec\test\winvi\winvi.h c:\orangec\test\winvi\colors.h  \
+	c:\orangec\test\winvi\paint.h c:\orangec\test\winvi\resource.h c:\orangec\test\winvi\page.h c:\orangec\test\winvi\intercom.h c:\orangec\test\winvi\printh.h  \
+	c:\orangec\test\winvi\toolbar.h c:\orangec\test\winvi\status.h c:\orangec\test\winvi\exec.h c:\orangec\test\winvi\tabctrl.h c:\orangec\test\winvi\map.h 
+	$(CC) -f&&|
+$(CFLAGS_WINVI_EXE) "-oC:\orangec\test\winvi\Winvi.obj" -I$(INCLUDE_WINVI_EXE)
+ $(DEFINES_WINVI_EXE)
+ "C:\orangec\test\winvi\Winvi.c"
+|
+
+c:\orangec\test\winvi\winvi.res : c:\orangec\test\winvi\winvi.rc 
+	$(RC) $(RCFLAGS_WINVI_EXE) "-foC:\orangec\test\winvi\Winvi.res" -i$(INCLUDE_WINVI_EXE) @&&|
+$(DEFINES_WINVI_EXE)
+| C:\orangec\test\winvi\Winvi.rc
+

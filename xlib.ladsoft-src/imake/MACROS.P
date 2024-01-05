@@ -1,0 +1,9 @@
+
+/* Protogen Version 1.07 Wednesday November 01, 1995  15:46:12 */
+
+                              /* Macros.c */
+
+void BadRepExt(void);                                             /* STATIC */
+REGISTRY *FindMacro(short *name);
+short *ExpandString(short *string);
+short *ExpandSelf(short *mac, short *string);

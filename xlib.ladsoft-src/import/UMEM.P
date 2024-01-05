@@ -1,0 +1,32 @@
+
+/* Protogen Version 1.07 Wednesday October 25, 1995  04:27:19 */
+
+                              /* Emsmem.c */
+
+EMSMEM *AllocateEMSMemory(long size, BYTE fill);
+void DeallocateEMSMemory(EMSMEM *mem);
+void ResizeEMSMemory(EMSMEM *mem, long size);
+BYTE *PtrToEMSMem(EMSMEM *mem, long offset);
+
+                               /* Hash.c */
+
+uint ComputeHash(char *string,int size);                          /* STATIC */
+HASHREC *AddHash(HASHREC **table, HASHREC *item);
+HASHREC **LookupHash(HASHREC **table, char *key);
+HASHREC **CreateHashTable(int size);
+void RemoveHashTable(HASHREC ** t);
+
+                             /* Allocate.c */
+
+void MemoryInit(uint size);
+void MemoryRundown(void);
+void release (void *buf);                                         /* STATIC */
+void *allocate(long size);                                        /* STATIC */
+void *ReallocateMemory(void *buf, uint size);
+void *AllocateMemory(uint size);
+void DeallocateMemory(void *pos);
+
+                               /* List.c */
+
+void AppendToList(LIST **list, void *data);
+void *UnlinkFromList(LIST **list, LIST *loc);

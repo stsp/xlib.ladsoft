@@ -1,0 +1,601 @@
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                              /* Analyze.c */
+
+int equalnode(ENODE *node1, ENODE *node2);
+CSE *searchnode(ENODE *node);
+CSE *enternode(ENODE *node, int duse, int size);
+CSE *voidauto(ENODE *node);
+CSE *voidlref(ENODE *node);
+void voidall(void);
+void scan_for_inline(ENODE *node);
+void scanexpr(ENODE *node, int duse, int size);
+void scan(SNODE *block);
+void exchange(CSE **c1);
+int desire(CSE *csp);
+int bsort(CSE **list);
+void repexpr(ENODE *node, int size);
+void repcse(SNODE *block);
+void repvoidassign(ENODE *node, int size);
+void voidAssign(SNODE *block, int state);
+void allocstack(void);
+void opt1(SNODE *block);
+
+                               /* Cmain.c */
+
+void bool_setup(char select, char *string); /* PROTOTYPE */
+void err_setup(char select, char *string); /* PROTOTYPE */
+void incl_setup(char select, char *string); /* PROTOTYPE */
+void def_setup(char select, char *string); /* PROTOTYPE */
+void codegen_setup(char select, char *string); /* PROTOTYPE */
+void optimize_setup(char select, char *string); /* PROTOTYPE */
+void warning_setup(char select, char *string); /* PROTOTYPE */
+void parsefile(char select, char *string); /* PROTOTYPE */
+void output_setup(char select, char *string); /* PROTOTYPE */
+void winmode_setup(char select, char *string); /* PROTOTYPE */
+void winmode_setup(char select, char *string);
+void bool_setup(char select, char *string);
+void codegen_setup(char select, char *string);
+void optimize_setup(char select, char *string);
+void err_setup(char select, char *string);
+void incl_setup(char select, char *string);
+void def_setup(char select, char *string);
+void output_setup(char select, char *string);
+void setglbdefs(void);
+void InsertAnyFile(FILE *inf, FILE *outf, char *filename, char *path, int drive);
+void dumperrs(FILE *file); /* PROTOTYPE */
+void setfile(char *buf, char *orgbuf, char *ext);
+void outputfile(char *buf, char *orgbuf, char *ext);
+void scan_env(char *output, char *string);
+int parse_arbitrary(char *string);
+void parsefile(char select, char *string);
+void addinclude(void);
+int parseenv(char *name);
+int parseconfigfile(char *name);
+void dumperrs(FILE *file);
+void summary(void);
+void ctrlchandler(int aa);
+void internalError(int a);
+int main(int argc, char *argv[]);
+
+                               /* Decl.c */
+
+void templateWade(void); /* PROTOTYPE */
+void declini(void);
+int isfunc(TYP *tp);
+char *litlate(char *s);
+TYP *maketype(int bt, int siz);
+TYP *cponetype(TYP *t);
+TYP *copytype(TYP *itp, int flags);
+SYM *parsetype(SYM *typesp, int pass);
+int decl(TABLE *table, int cppflags);
+SYM *makesym(enum e_sc sc);
+void overloadoperator(enum e_sc sc, SYM *sp);
+SYM *decl1(enum e_sc sc, SYM *sp);
+int isclassarg(SYM *sp);
+void CheckOverloadedArgs(SYM *sp);
+ENODE *do_constructor(SYM *sp_in, TYP *tp, TYP *head1, ENODE *node, int
+    size, int offset, int assn, int implicit);
+ENODE *do_destructor(SYM *sp_in, TYP *tp, TYP *head1, ENODE *xnode, int
+    size, int offset, int assn);
+ENODE **actualexpr(ENODE **qnode);
+int conspair(SYM *sp, enum e_sc al, int flag, TYP *tp1, ENODE *qnode, int
+    assn, int offs, int implicit);
+void decl2(enum e_sc sc, SYM *sp);
+void decl3(enum e_sc sc);
+int bitsize(int type);
+int oksize(void);
+void checkDefaults(SYM *oldf, SYM *newf);
+int basedeclare(TABLE *table, int al, long ilc, int ztype, int flags, int
+    xcppflags);
+void declenum(TABLE *table, int cppflags);
+SYM *enumbody(SYM *sp_in, TABLE *table);
+void declstruct(TABLE *table, int ztype, int flags, int cppflags);
+void structbody(SYM *sp, int ztype);
+void insertTemplateChar(short t);
+void createTemplate(TABLE *tbl, enum e_sc sc);
+void dodecl(int defclass);
+
+
+                              /* Declass.c */
+
+void defclassini(void);
+void SetExtFlag(SYM *sp, int state);
+SYM *copysym(SYM *sp);
+int loadclassdata(SYM *sp, SYM *spc, int mode, int virtual);
+	int insertVirtualData(SYM *sp);
+void addvtabentry(SYM *cl, SYM *sp);
+void classerrs(SYM *sp);
+ENODE *conscall(ENODE *tcnode, SYM *sp, ENODE *ep);
+void setthunkflags(SYM *sp_in, int state);
+void curcons(SYM *sp_in, SYM *vtabsp, ENODE **exps, CLASSLIST *l, ENODE
+    *thisn, int checkaccess, int ofs);
+void prevcons(SYM *sp_in, ENODE **exps, CLASSLIST *l, ENODE *thisn, int
+    checkaccess, int ofs);
+void embeddedcons(SYM *sp_in, SNODE *snp3, ENODE **exps, ENODE *thisn);
+SYM *lookupcopycons(SYM *sp_in, SYM **spr);
+void prevcopycons(SYM *sp_in, ENODE *argn, ENODE **exps, CLASSLIST *l,
+    ENODE *thisn, int checkaccess, int ofs);
+void embeddedcopycons(SYM *sp_in, ENODE *argn, SNODE *snp3, ENODE **exps,
+    ENODE *thisn);
+void thunkConstructors(SNODE *snp3, SYM *sp_in, int ofs, int checkaccess);
+void thunkCopyConstructors(SNODE *snp3, SYM *sp_in, SYM *arg, int ofs, int
+    checkaccess);
+void thunkDestructors(SNODE *snp3, SYM *sp_in, int ofs, int checkaccess,
+    int skipself);
+void CreateBaseConstructor(SYM *sp_in);
+void classbaseasn(SYM *sp, SYM *func);
+void setRefFlags(SYM *sp);
+void RefErrs(SYM *sp);
+void gen_vtab(SYM *sp);
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                               /* Error.c */
+
+void initerr(void);
+void warning_setup(char select, char *string);
+void diag(char *s);
+char *getpunct (int punct);
+int printerr(char *buf, ERRORS *err);
+void lferror(void);
+void basicskim(int *skimlist);
+BALANCE *newbalance(BALANCE *bal);
+void setbalance(BALANCE **bal);
+void expskim(int *skimlist, int tpl);
+void tplskm(int *skmlist);
+void basicerror(int n, void *data);
+void Error(char *string);
+void generror(int n, int data, int *skimlist);
+void gensymerror(int n, char *data);
+void genfuncerror(int n, char *func, char *data);
+void genfunc2error(int n, char *func, char *func2);
+void genclasserror(int n, char *name);
+void genclass2error(int n, char *struc, char *elem);
+void genmismatcherror(TYP *tp1, TYP *tp2);
+void doubleerr(int n, char *s1, char *s2);
+void expecttoken(int n, int *skimlist);
+void generrorexp(int n, int data, int *skimlist);
+void gensymerrorexp(int n, char *data);
+void expecttokenexp(int n, int *skimlist);
+
+                               /* Expr.c */
+
+void exprini(void);
+TYP *basictype(TYP *t);
+int retvalsize(TYP *t);
+ENODE *makenode(enum e_node nt, void *v1, void *v2);
+ENODE *makeintnode(enum e_node type, LLONG_TYPE val);
+TYP *deref(ENODE **node, TYP *tp);
+int checkstructconst(TYP *tp);
+ENODE *sbll(SYM *sp_in, ENODE *en, ENODE *ep1);
+ENODE *cbll(ENODE *ep1, ENODE *ep2, TYP *tp);
+ENODE *make_callblock(ENODE *ep1, ENODE *ep2, TYP *tp, int size);
+ENODE *immed_callblock(ENODE *ep1, ENODE *ep2, TYP *tp, int size);
+ENODE *repcallb(ENODE *ep2);
+ENODE *dummyvar(int size, TYP *type, char *name);
+int isintconst(int type);
+int isfloatconst(int type);
+int isimaginaryconst(int type);
+int iscomplexconst(int type);
+int matchreflvalue(ENODE **node, TYP *tp1, TYP *tp2);
+ENODE *declRef(SYM *sp_in, TYP *tp1, TYP *tp2, ENODE *ep1, ENODE *ep2, int sc);
+SYM *unnamed_search(char *na, SYM *cosym, int *offset);
+TYP *nameref(ENODE **node, TYP *tin);
+int cppcast(TYP *newtype, TYP *oldtype, ENODE **node, int alwayserr);
+void promote_type(TYP *typ, ENODE **node);
+TYP *gatherparms(ENODE **node, int isvoid);
+int checkparmconst(TYP *tp , TYP *tpi /*left*/);
+ENODE *copynode(ENODE *node);
+ENODE *copy_enode(ENODE *node);
+ENODE *copy_default(ENODE *node);
+TYP *FindMemberPointer(TYP *tp1, TYP *tp2, ENODE **ep2);
+void parameter_rundown(TABLE *tbl);
+int checkexactpointer(TYP *tp1, TYP *tp2);
+void parmlist(ENODE **node, TYP *tpi, TYP *tp);
+int floatrecurse(ENODE *node);
+void floatcheck(ENODE *node);
+int castbegin(int st);
+int tostring(int *elems);
+ENODE *onefunc(ENODE *pnode, TYP **tptr, ENODE *qnode, TYP *tp1);
+ENODE *complex_functions(ENODE *pnode, TYP **tptr, ENODE *qnode, TYP *tp1);
+TYP *doalloca(ENODE **node);
+TYP *donew(ENODE **node);
+TYP *dodelete(ENODE **node);
+TYP *docppcasts(enum e_st st, ENODE **node);
+TYP *dotypeid(ENODE **node);
+TYP *dooperator(ENODE **node);
+void dothrow(ENODE **node);
+TYP *primary(ENODE **node);
+int isstructured(TYP *tp);
+int castvalue(ENODE *node);
+int lvalue(ENODE *node);
+int pointermode(TYP *tp1, TYP *tp2);
+TYP *unary(ENODE **node);
+ENODE *makeparam(ENODE *in, ENODE *link, TYP *tp);
+TYP *mathoverload(enum e_bt lst, TYP *tp1, TYP *tp2, ENODE **ep1, ENODE
+    **ep2);
+int absrank(TYP *tp);
+TYP *ambigcontext(TYP *tp, int *rv);
+TYP *inttype(enum e_bt t1);
+TYP *forcefit(ENODE **node1, TYP *tp1, ENODE **node2, TYP *tp2, int allowpointers, int multop);
+TYP *asnfit(ENODE **node1, TYP *tp1, ENODE **node2, TYP *tp2, int matchref);
+int isscalar(TYP *tp);
+int scalarnoncomplex(TYP *tp);
+int scalarnonfloat(TYP *tp);
+void checknp(TYP *tp1, TYP *tp2, ENODE *ep1, ENODE *ep2);
+int isunsignedresult(TYP *tp1, TYP *tp2, ENODE *ep1, ENODE *ep2);
+TYP *multops(ENODE **node);
+TYP *addops(ENODE **node);
+TYP *shiftop(ENODE **node);
+TYP *relation(ENODE **node);
+TYP *equalops(ENODE **node);
+TYP *binop(ENODE **node, TYP *(*xfunc)(), int nt, int sy);
+TYP *bitand(ENODE **node);
+TYP *bitxor(ENODE **node);
+TYP *bitor(ENODE **node);
+TYP *andop(ENODE **node);
+TYP *orop(ENODE **node);
+TYP *conditional(ENODE **node);
+TYP *autoasnop(ENODE **node, SYM *sp, int defalt);
+void asncombine(ENODE **node);
+void checkConstClass(ENODE *node);
+TYP *asnop(ENODE **node, TYP *tptr);
+TYP *exprnc(ENODE **node);
+TYP *commaop(ENODE **node);
+TYP *expression(ENODE **node, int tocheck);
+
+                               /* Float.c */
+
+void SetFPFZero(FPF *dest,
+                        uchar sign);
+void SetFPFInfinity(FPF *dest,
+                        uchar sign);
+void SetFPFNaN(FPF *dest);
+int ValueIsOne(FPF *value);
+int FPFEQ(FPF *left, FPF *right);
+int FPFGT(FPF *left, FPF *right);
+int FPFGTE(FPF *left, FPF *right);
+int IsMantissaZero(u16 *mant);
+int IsMantissaOne(u16 *mant);
+void Add16Bits(u16 *carry,
+                u16 *a,
+                u16 b,
+                u16 c);
+void Sub16Bits(u16 *borrow,
+                u16 *a,
+                u16 b,
+                u16 c);
+void ShiftMantLeft1(u16 *carry,
+                        u16 *mantissa);
+void ShiftMantRight1(u16 *carry,
+                        u16 *mantissa);
+void StickyShiftRightMant(FPF *ptr,
+                        int amount);
+void normalize(FPF *ptr);
+void denormalize(FPF *ptr,
+                int minimum_exponent);
+void RoundFPF(FPF *ptr);
+void choose_nan(FPF *x,
+                FPF *y,
+                FPF *z,
+                int intel_flag);
+void AddSubFPF(uchar operation,
+                FPF *x,
+                FPF *y,
+                FPF *z);
+void MultiplyFPF(FPF *x,
+                        FPF *y,
+                        FPF *z);
+void DivideFPF(FPF *x, 
+                        FPF *y, 
+                        FPF *z);
+void LongLongToFPF(FPF *dest, LLONG_TYPE myllong);
+void UnsignedLongLongToFPF(FPF *dest, LLONG_TYPE myllong);
+int FPFTensExponent(FPF *value);
+void FPFMultiplyPowTen(FPF *value, int power);
+char * FPFToString(char *dest,
+                FPF *src);
+LLONG_TYPE FPFToLongLong(FPF *src);
+int FPFToFloat(unsigned char *dest, FPF *src);
+int FPFToDouble(unsigned char *dest, FPF *src);
+int FPFToLongDouble(unsigned char *dest, FPF *src);
+void FPFTruncate(FPF *value, int bits, int maxexp, int minexp);
+int LongDoubleToFPF(FPF *dest, unsigned char *src);
+
+                             /* Floatexp.c */
+
+FPF floatexpr(void);
+
+                               /* Func.c */
+
+void funcini(void);
+void declfuncarg(int isint, int isfar, SYM *sp);
+void check_funcused(TABLE *oldlsym, TABLE *lsyms);
+void dump_instantiates(void);
+void funcbody(SYM *sp);
+SYM *makeint(char *name, TABLE *table);
+void addrundown(SNODE *snp);
+void addblocklist(SYM *sp, SYM *old);
+void block(SNODE *vlainit);
+void gather_labels(TABLE *oldlsym, TABLE *lsyms);
+SNODE *compoundblock(void);
+
+                              /* Mangle.c */
+
+extern char *cpponearg(char *buf, TYP *tp); /* PROTOTYPE */
+char *unmang1(char *buf, char *name, int firsttime); /* PROTOTYPE */
+#define IT_SIZE (sizeof(cpp_funcname_tab)/sizeof(char *));
+char *cppargs(char *buf, SYM *sp); /* PROTOTYPE */
+char *cpponearg(char *buf, TYP *tp); /* PROTOTYPE */
+char *unmang1(char *buf, char *name, int firsttime); /* PROTOTYPE */
+void cpp_unmang_intrins(char **buf, char **name, char *last);
+void funcrefinsert(char *name, SYM *refsym, TABLE *tbl, SYM *insp);
+int matchone(SYM *sp1, SYM *sp2, ENODE *node, int nodefault, int any);
+int funciterate(SYM *sp1, TYP *tp, ENODE *node, int nodefault, int any, SYM
+    **sp2, SYM **sp3, SYM **sp4);
+SYM *funcovermatch2(SYM *tbsym, TYP *tp, ENODE *node, int exact, int nodefault,
+    int any);
+SYM *funcovermatch(SYM *tbsym, TYP *tp, ENODE *ep, int exact, int nodefault);
+SYM *castmatch(SYM *sp, TYP *tp, TABLE *tb);
+int lookupname(char *name);
+char *cppval(char *buf, TYP *tp);
+void tplPlaceholder(char *buf, char *nm, LIST *tn);
+char *cpponearg(char *buf, TYP *tp);
+char *cppargs(char *buf, SYM *sp);
+char *cppmangle(char *name, TYP *tp);
+void mangleclass(char *buf, SYM *sl);
+char *fullcppmangle(SYM *class , char *name, TYP *tp);
+char *unmang1(char *buf, char *name, int firsttime);
+void unmangle(char *buf, char *name);
+char *funcwithns(SYM *sp);
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                              /* Getsym.c */
+
+void initsym(void);
+void lineToCpp(void);
+int getstring(char *s, int len, int file);
+int getline(int listflag);
+int getch(void);
+void getid(void);
+int getsch(int bytes) ;
+int radix36(int c);
+LLONG_TYPE getbase(int b, char **ptr);
+int getexp(int radix, char **ptr);
+void getnum(void);
+int getsym2(void);
+void getsym(void);
+int needpunc(enum e_sym p, int *skimlist);
+int needpuncexp(enum e_sym p, int *skimlist);
+void backup(int st);
+
+                               /* Init.c */
+
+void insertSpace(SYM *sp, int *bytes); /* PROTOTYPE */
+void initini(void);
+void initrundown(void);
+void cppinitinsert(ENODE *node);
+void cpprundowninsert(ENODE *node);
+void cppinitassign(ENODE *node);
+void insert_decl_sp(SYM *sp);
+void ReshuffleDeclsp(SYM *sp);
+void insertSpace(SYM *sp, int *bytes);
+int doinit(SYM *sp);
+int inittype(TYP *tp);
+int initarray(TYP *tp);
+int initunion(TYP *tp);
+int initstruct(TYP *tp);
+int makelabel(int id);
+int makeref(int ispc, SYM *sp, int offset);
+int makestorage(long val);
+int agflush(int size, LLONG_TYPE val);
+int agbits(int size, LLONG_TYPE value);
+FPF cppfloat(int size, int imaginary);
+int arr(ENODE *ep);
+int intconstinit(int type, LLONG_TYPE *val);
+long cppint(int size);
+int initfcomplex(void);
+int initlrcomplex(void);
+int initrcomplex(void);
+int initfloat(int imaginary);
+int initlongdouble(int imaginary);
+int initdouble(int imaginary);
+int initchar(void);
+int initbool(void);
+int initshort(void);
+int inituchar(void);
+int initushort(void);
+int initint(void);
+int inituint(void);
+int initlong(void);
+int initulong(void);
+int initlonglong(void);
+int initulonglong(void);
+int initenum(void);
+int initmemberptr(TYP *tp, SYM *btypequal);
+int initref(TYP *tp);
+void dopointer(int makextern);
+int initpointer(void);
+int initfarpointer(void);
+int initpointerfunc(void);
+void endinit(void);
+
+						/* inline.c */
+SNODE *inlinestmt(SNODE *block);
+ENODE *doinline(ENODE *node);
+
+                              /* Intexpr.c */
+
+LLONG_TYPE intexpr(TYP **tp);
+
+                               /* List.c */
+
+void put_sc(int scl);
+void put_ty(TYP *tp);
+void list_var(SYM *sp, int i);
+void list_table(TABLE *t, int j);
+
+                              /* Memmgt.c */
+
+void release_local(void); /* PROTOTYPE */
+void release_global(void); /* PROTOTYPE */
+void release_opt(void); /* PROTOTYPE */
+void release_oc(void); /* PROTOTYPE */
+void mem_summary(void); /* PROTOTYPE */
+void memini(void);
+char *xalloc(int siz);
+char *oalloc(int siz);
+char *ocalloc(int siz);
+void release_local(void);
+void release_global(void);
+void release_opt(void);
+void release_oc(void);
+void mem_summary(void);
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                             /* Optimize.c */
+
+ULLONG_TYPE reint(ENODE *node); /* PROTOTYPE */
+LLONG_TYPE mod_mask(int i); /* PROTOTYPE */
+void constoptinit(void);
+ULLONG_TYPE CastToInt(int size, LLONG_TYPE value);
+FPF CastToFloat(int size, FPF *value);
+FPF *IntToFloat(FPF* temp, int size, LLONG_TYPE value);
+FPF refloat(ENODE *node);
+void dooper(ENODE **node, int mode);
+int pwrof2(LLONG_TYPE i);
+LLONG_TYPE mod_mask(int i);
+void addaside(ENODE *node);
+int opt0(ENODE **node);
+void enswap(ENODE **one, ENODE **two);
+int fold_const(ENODE *node);
+int typedconsts(ENODE *node1);
+void optimize_for_constants(ENODE **expr);
+
+                              /* Preproc.c */
+
+void filemac(short *string); /* PROTOTYPE */
+void datemac(short *string); /* PROTOTYPE */
+void timemac(short *string); /* PROTOTYPE */
+void linemac(short *string); /* PROTOTYPE */
+void pushif(void); /* PROTOTYPE */
+void preprocini(void);
+short *allocateMacroReplaceBuffer(void);
+void freeMacroReplaceBuffer(short *buf);
+int preprocess(void);
+int doerror(int n);
+char *getauxname(short *ptr, char **bufp);
+int dopragma(void);
+void Compile_Pragma(void);
+void setalias(SYM *sp);
+void dumpstartups(void);
+int doline(void);
+int srchpth2(char *name, char *path, int attrib);
+int srchpth(char *name, char *path, int attrib, int sys);
+int doinclude(void);
+short *plitlate(short *string);
+void glbdefine(char *name, char *value);
+int dodefine(void);
+int doundef(void);
+int undef2(void);
+void getdefsym(void);
+void nodefines(void);
+int indefine(SYM *sp);
+void enterdefine(SYM *sp);
+void exitdefine(void);
+int defid(short *name, short **p, char *q);
+int definsert(short *macro, short *end, short *begin, short *text, short *etext, int len, int replen);
+int defstringize(short *macro, short *end, short *begin, short *text, int len, int replen);
+int defreplaceargs(short *macro, int count, short **oldargs, short **newargs, short **expandedargs, short *varargs);
+void deftokenizing(short *macro);
+void cnvt(short *out, char *in);
+char *fullqualify(char *string);
+void filemac(short *string);
+void datemac(short *string);
+void timemac(short *string);
+void linemac(short *string);
+void defmacroreplace(short *macro, char *name);
+int replacesegment(short *start, short *end, int *inbuffer, int totallen, short **pptr);
+int defcheck(short *line);
+void pushif(void);
+void popif(void);
+void ansieol(void);
+int doifdef(int flag);
+int doif(int flag);
+int doelif(void);
+int doelse(void);
+int doendif(void);
+
+                             /* Searchkw.c */
+
+void kwini(void);
+int searchkw(void);
+
+/* Protogen Version 1.00 Friday April 20, 2007  15:10:03 */
+
+                               /* Stmt.c */
+
+void stmtini(void);
+TYP *doassign(ENODE **exp, int canerror, int *skm);
+SNODE *whilestmt(void);
+SNODE *dostmt(void);
+SNODE *forstmt(void);
+SNODE *ifstmt(void);
+SNODE *casestmt(void);
+SNODE *switchstmt(void);
+ENODE *do_ret_constructor(TYP *tp, TYP *head1, ENODE *node, int size, int
+    offset, int implicit);
+SNODE *breakcontrundowns(SNODE *snp);
+ENODE *retrundowns(void);
+SNODE *retstmt(void);
+SNODE *breakstmt(void);
+SNODE *contstmt(void);
+SNODE *_genwordstmt(void);
+SNODE *exprstmt(void);
+SNODE *snp_line(int tocode);
+void dodefaultinit(SYM *sp);
+void evaluateVLAtypedef(SYM *sp);
+ENODE *createVarArray(SYM *sp, TYP *tp, int global, int alloc);
+void doautoinit(SYM *sym);
+SNODE *compound(void);
+SNODE *labelstmt(int fetchnext);
+SNODE *gotostmt(void);
+SNODE *catchstmt(TRYBLOCK *a);
+SNODE *trystmt(void);
+SNODE *asm_statement(int shortfin); /* PROTOTYPE */
+SNODE *statement(void);
+SNODE *cppblockedstatement(int breakdest);
+
+                              /* Symbol.c */
+
+void symini(void);
+HASHREC *AddHash(HASHREC *item, HASHREC **table, int size);
+HASHREC **LookupHash(char *key, HASHREC **table, int size);
+void pushusing(SYM *sp, int tag);
+void aliasnamespace(char *name);
+void switchtonamespace(char *name);
+void switchfromnamespace(void);
+void inject_namespace(int ns);
+SYM *namespace_search(char *name, NAMESPACE *data, int tags);
+int isaccessible(SYM *sp);
+SYM *basesearch(char *na, TABLE *table, int checkaccess);
+SYM *search2(char *na, TABLE *table, int checkaccess, int definition);
+SYM *search(char *na, TABLE *table);
+SYM *losearch(char *na);
+SYM *tcsearch(char *na, int checkaccess);
+SYM *gsearch(char *na);
+SYM *typesearch(char *na);
+void insert(SYM *sp, TABLE *table);
+int unlinkTag(SYM *sp);
+
+                               /* Types.c */
+
+int exactype(TYP *typ1, TYP *typ2, int asn);
+int checktype(TYP *typ1, TYP *typ2, int scalarok);
+int checktypeassign(TYP *typ1, TYP *typ2);
+TYP *typenum2(char *buf, TYP *tp);
+char *typenum(char *buf, TYP *typ);

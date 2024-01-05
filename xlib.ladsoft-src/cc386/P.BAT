@@ -1,0 +1,1 @@
+protogen -f..\include\cc386.p gcode386.c gstmt386.c outco386.c peep386.c an386.c conf386.c reg386.c

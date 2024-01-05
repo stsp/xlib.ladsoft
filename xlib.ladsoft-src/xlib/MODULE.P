@@ -1,0 +1,50 @@
+
+/* Protogen Version 1.05 Monday September 18, 1995  06:51:55 */
+
+                              /* Module.c */
+
+void ReadHeader(void); /* PROTOTYPE */
+void CheckSum(void); /* PROTOTYPE */
+void ModEnd(void); /* PROTOTYPE */
+void SetMAUs(void); /* PROTOTYPE */
+void Assign(void); /* PROTOTYPE */
+void DateTime(void); /* PROTOTYPE */
+void Comment(void); /* PROTOTYPE */
+void EnumeratedData(void); /* PROTOTYPE */
+void ReadFixup(void); /* PROTOTYPE */
+void PublicDefinitions(void); /* PROTOTYPE */
+void ExternDefinitions(void); /* PROTOTYPE */
+void SectionAlignment(void); /* PROTOTYPE */
+void SectionStart(void); /* PROTOTYPE */
+void SectionDefinitions(void); /* PROTOTYPE */
+void PublicSetAttribs(void); /* PROTOTYPE */
+long theoffset (void);
+void BadObjectFile(void);
+void CheckForPeriod(void);
+BOOL CheckForComma(BOOL musthave);
+void WadeToPeriod(void);
+void ReadHeader(void);                                            /* STATIC */
+void ModEnd(void);                                                /* STATIC */
+void Comment(void);                                               /* STATIC */
+void CheckSum(void);                                              /* STATIC */
+void SetMAUs(void);                                               /* STATIC */
+void Assign(void);                                                /* STATIC */
+void DateTime(void);                                              /* STATIC */
+void EnumeratedData(void);
+void ReadFixup(void);
+void PublicDefinitions(void);
+void ExternDefinitions(void);
+void SectionAlignment(void);
+void SectionStart(void);
+void SectionDefinitions(void);
+void PublicSetAttribs(void);
+void ReadFile(void);
+BYTE ReadCharNOCS(void);
+BYTE ReadChar(void);
+void putback(BYTE ch);
+long ReadNumber(uint digits);
+void ReadString(char *buf,int len);
+uint ReadObjectRecord(void);                                      /* STATIC */
+void SetForRead(FILE *infile);
+void UnsetForRead(void);
+uint ReadModule(FILE *infile, BOOL sof);

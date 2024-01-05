@@ -1,0 +1,48 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+SRCDIR ?= $(abspath xlib.ladsoft-src)
+BUILDDIR ?= $(abspath build)
+DESTDIR ?= $(abspath debian/xlib.ladsoft)
+PREFIX ?= /usr
+INSTALL = install -c
+
+%:
+	exec dh $@
+
+override_dh_auto_clean:
+	$(RM) -r '$(BUILDDIR)'
+
+override_dh_auto_configure:
+	# Nothing to do here.
+
+override_dh_auto_build:
+	$(RM) -r '$(BUILDDIR)'
+	cp -a '$(SRCDIR)' '$(BUILDDIR)'
+	set -e; \
+	cd '$(BUILDDIR)'/xlib; \
+	for f1 in *.[cHP]; do \
+		f2="`echo "$$f1" | tr ABCDEFGHIJKLMNOPQRSTUVWXYZ \
+				      abcdefghijklmnopqrstuvwxyz`"; \
+		sed -e 's,\.\.\\,../,g' -e '/\/\* STATIC \*\// s,^,//,' \
+		    -e '/^static BOOL ReadArgs/ '` \
+		       `'s/^/static BOOL ReadResponse(char *, int *, int *);/'\
+		    -e '/^void BoolSetup/ s/^/static /' \
+		    -e '/^#include <dos\.h>/ s,^,//,' \
+		    -e '/^#include <windows\.h>/ s,^,//,' \
+		    -e 's/\*p++ = (char)toupper(\*p)/p++/' \
+		    "$$f1" >"$$f2".tmp; \
+		mv "$$f2".tmp "$$f2"; \
+	done
+	set -e; \
+	cd '$(BUILDDIR)'/xlib; \
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -DMSDOS allocate.c args.c \
+	    dict.c error.c ext.c fatal.c hash.c import.c lib.c list.c \
+	    module.c unmangle.c usage.c xlib.c -o xlib.ladsoft $(LDLIBS)
+
+override_dh_auto_test:
+	# Unimplemented.
+
+override_dh_auto_install:
+	$(INSTALL) -d '$(DESTDIR)$(PREFIX)'/bin
+	$(INSTALL) '$(BUILDDIR)'/xlib/xlib.ladsoft '$(DESTDIR)$(PREFIX)'/bin
