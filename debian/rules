@@ -36,7 +36,9 @@ override_dh_auto_build:
 	done
 	set -e; \
 	cd '$(BUILDDIR)'/xlib; \
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -DMSDOS allocate.c args.c \
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) -DMSDOS \
+	    -Wno-error=incompatible-pointer-types \
+	    allocate.c args.c \
 	    dict.c error.c ext.c fatal.c hash.c import.c lib.c list.c \
 	    module.c unmangle.c usage.c xlib.c -o xlib.ladsoft $(LDLIBS)
 
